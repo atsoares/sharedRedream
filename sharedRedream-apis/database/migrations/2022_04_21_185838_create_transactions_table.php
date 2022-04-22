@@ -16,8 +16,8 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('incident_id')-nullable(); 
-            $table->unsignedInteger('redeem_voucher_id')-nullable(); 
+            $table->unsignedInteger('incident_id')->nullable(); 
+            $table->unsignedInteger('redeem_voucher_id')->nullable(); 
             $table->enum('operation', ['voucher_redeem', 'incident_help', 'incident_refund']);
             $table->timestamps();
 
