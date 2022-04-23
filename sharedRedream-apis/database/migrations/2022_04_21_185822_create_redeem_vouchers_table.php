@@ -16,7 +16,7 @@ class CreateRedeemVouchersTable extends Migration
         Schema::create('redeem_vouchers', function (Blueprint $table) {
             $table->id();
             $table->string('token', 20);
-            $table->int('value');
+            $table->integer('value');
             $table->boolean('active')->default(true);
             $table->unsignedInteger('user_id')->nullable();
             $table->date('refunded_at')->nullable(); 

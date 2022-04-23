@@ -11,7 +11,7 @@ class IncidentService
      *
      * @var incidentRepository
      */
-    protected $incidentRepository;
+    private $incidentRepository;
 
     /**
      * Constructor
@@ -29,7 +29,7 @@ class IncidentService
      */
     public function getAll()
     {
-        return $this->incidentRepository->getAll();
+        return $this->incidentRepository->where('refunded', false)->get();
     }
 
     /**
@@ -37,7 +37,7 @@ class IncidentService
      *
      * @param int $id
      */
-    public function findById(int $id)
+    public function getById(int $id)
     {
         return $this->incidentRepository->findById($id);
     }
@@ -50,6 +50,7 @@ class IncidentService
     public function create(array $data)
     {
         return $this->incidentRepository->create($data);
+        return response()->json(['message' => 'Incident Created'], 201);
     }
 
     /**

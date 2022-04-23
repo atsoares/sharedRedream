@@ -8,5 +8,5 @@ interface RedeemVoucherRepositoryInterface
     public function findById(int $id);
     public function findByToken(string $token);
     public function create(array $data);
-    public function redeemUpdate(int $id, array $data);
+    public function redeemUpdate(int $id, int $user_id);
 }

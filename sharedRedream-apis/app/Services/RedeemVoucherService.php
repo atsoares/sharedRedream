@@ -11,7 +11,7 @@ class RedeemVoucherService
      *
      * @var redeemVoucherRepository
      */
-    protected $redeemVoucherRepository;
+    private $redeemVoucherRepository;
 
     /**
      * Constructor

@@ -4,82 +4,52 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\RedeemVoucherService;
+use App\Http\Requests\RedeemVoucher;
+use App\Http\Resources\CreateVoucherResource;
+use App\Http\Resources\RedeemVoucherResource;
 
 class RedeemVoucherController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Variable to hold injected dependency
      *
-     * @return \Illuminate\Http\Response
+     * @var redeemVoucherService
      */
-    public function index()
-    {
-        //
-    }
+    protected $redeemVoucherService;
 
     /**
-     * Show the form for creating a new resource.
+     * Constructor
      *
-     * @return \Illuminate\Http\Response
+     * @param RedeemVoucherService $redeemVoucherService
      */
-    public function create()
+    public function __construct(RedeemVoucherService $redeemVoucherService)
     {
-        //
+        $this->redeemVoucherService = $redeemVoucherService;
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $count
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeInBatch(int $count)
     {
-        //
+        $vouchers = $this->redeemVoucherService->generateNewVouchers($count);
+        return new CreateVoucherResource($vouchers);
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Redeem and update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function redeem(RedeemVoucher $request)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $voucher = $this->redeemVoucherService->redeem($request);
+        return new RedeemVoucherResource($voucher);
     }
 }

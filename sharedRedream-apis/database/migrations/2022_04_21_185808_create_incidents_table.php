@@ -18,8 +18,7 @@ class CreateIncidentsTable extends Migration
             $table->string('title', 50)->unique(); 
             $table->string('description', 200); 
             $table->unsignedInteger('user_id'); 
-            $table->int('total_raised')->nullable();
-            $table->boolean('active')->default(true);
+            $table->integer('total_raised')->nullable();
             $table->boolean('refunded')->default(false);
             $table->date('refunded_at')->nullable(); 
             $table->timestamps();

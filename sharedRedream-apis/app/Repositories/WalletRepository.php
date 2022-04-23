@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Repositories\Impl\WalletRepositoryInterface;
-use App\Models\User;
+use App\Models\Wallet;
 
 class WalletRepository implements WalletRepositoryInterface
 {

@@ -11,7 +11,7 @@ class TransactionService
      *
      * @var transactionRepository
      */
-    protected $transactionRepository;
+    private $transactionRepository;
 
     /**
      * Constructor

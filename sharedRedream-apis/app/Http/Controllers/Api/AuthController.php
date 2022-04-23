@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use Validator;
 use App\Models\User;
+use App\Models\Wallet;
 
 class AuthController extends Controller
 {
@@ -29,7 +30,12 @@ class AuthController extends Controller
             'password' => Hash::make($request->password)
          ]);
 
-        $token = $user->createToken('auth_token')->accessToken;
+        Wallet::create([
+            'user_id' => $user->id,
+            'balance' => 0
+        ]);
+
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()
             ->json(['data' => $user,'access_token' => $token, 'token_type' => 'Bearer', ], 201);
@@ -45,7 +51,7 @@ class AuthController extends Controller
 
         $user = User::where('email', $request['email'])->firstOrFail();
 
-        $token = $user->createToken('auth_token')->accessToken;
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()
             ->json(['message' => 'Hi '.$user->name.', welcome to sharedRedream','access_token' => $token, 'token_type' => 'Bearer', ], 200);

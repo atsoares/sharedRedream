@@ -11,7 +11,7 @@ class UserService
      *
      * @var userRepository
      */
-    protected $userRepository;
+    private $userRepository;
 
     /**
      * Constructor

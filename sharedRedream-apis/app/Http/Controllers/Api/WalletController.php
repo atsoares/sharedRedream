@@ -4,9 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\WalletService;
+use App\Http\Requests\WalletBalance;
+use App\Http\Resources\WalletBalanceResource;
 
 class WalletController extends Controller
 {
+    /**
+     * Variable to hold injected dependency
+     *
+     * @var walletService
+     */
+    protected $walletService;
+
+    /**
+     * Constructor
+     *
+     * @param WalletService $walletService
+     */
+    public function __construct(WalletService $walletService)
+    {
+        $this->walletService = $walletService;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getBalance(WalletBalance $request)
+    {
+        $balance = $this->walletService->balance($request->validated());
+        return new WalletBalanceResource($balance);
+    }
+
     /**
      * Display a listing of the resource.
      *
