@@ -11,7 +11,7 @@ class WalletService
      *
      * @var walletRepository
      */
-    protected $walletRepository;
+    private $walletRepository;
 
     /**
      * Constructor
@@ -30,8 +30,7 @@ class WalletService
      */
     public function balance(int $user_id)
     {
-        $w = $this->walletRepository->findByUserId($user_id);
-        return $w->balance;
+        return $this->walletRepository->findByUserId($user_id);
     }
 
 }
