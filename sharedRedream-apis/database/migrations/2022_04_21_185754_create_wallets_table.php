@@ -15,8 +15,8 @@ class CreateWalletsTable extends Migration
     {
         Schema::create('wallets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id'); // Usuário que fez a compra
-            $table->double('balance', 10, 2);
+            $table->unsignedInteger('user_id'); 
+            $table->int('balance');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

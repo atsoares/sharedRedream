@@ -26,4 +26,12 @@ class RedeemVoucher extends Model
         'refunded' => 'boolean',
         'refunded_at' => 'datetime',
     ];
+
+    /**
+     * Get the user associated with the redeem voucher.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

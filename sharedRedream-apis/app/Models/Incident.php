@@ -17,16 +17,21 @@ class Incident extends Model
     protected $fillable = [
         'title',
         'description',
-        'goal_value',
         'user_id',
-        'active',
         'refunded',
     ];
 
     protected $casts = [
-        'active' => 'boolean',
         'refunded' => 'boolean',
         'refunded_at' => 'datetime',
     ];
+
+    /**
+     * Get the user associated with the incident.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

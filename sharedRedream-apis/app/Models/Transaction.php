@@ -21,4 +21,11 @@ class Transaction extends Model
        'operation',
    ];
 
+   /**
+     * Get the user associated with the transaction.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

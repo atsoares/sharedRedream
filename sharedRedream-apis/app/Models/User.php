@@ -41,4 +41,36 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    /**
+     * Get the wallet associated with the user.
+     */
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
+    /**
+     * Get the incidents associated with the user.
+     */
+    public function incidents()
+    {
+        return $this->hasMany(Incident::class);
+    }
+
+    /**
+     * Get the vouchers associated with the user.
+     */
+    public function vouchers()
+    {
+        return $this->hasMany(RedeemVoucher::class);
+    }
+
+    /**
+     * Get the transactions associated with the user.
+     */
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
