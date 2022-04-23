@@ -45,9 +45,9 @@ class RedeemVoucherService
     /**
      * Create a Voucher
      *
-     * @param array $data
+     * @param object $data
      */
-    public function create(array $data)
+    public function create(object $data)
     {
         return $this->redeemVoucherRepository->create($data);
         return response()->json(['message' => 'Voucher created'], 201);
@@ -56,9 +56,9 @@ class RedeemVoucherService
     /**
      * Redeem a Voucher
      *
-     * @param array $data
+     * @param object $data
      */
-    public function redeem(array $data)
+    public function redeem(object $data)
     {
         $voucher = $this->redeemVoucherRepository->findByToken($data['token']);
 
@@ -79,7 +79,7 @@ class RedeemVoucherService
         if($count > 0){
             for ($x = 0; $x <= $count; $x++) {
                 $data = [
-                    'token' => getUniqueToken(),
+                    'token' => $this->getUniqueToken(),
                     'value' => random_int(10,100)
                 ];
                 $this->redeemVoucherRepository->create($data);
@@ -96,8 +96,27 @@ class RedeemVoucherService
         $token = "";
         $combinationString = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         for($i=0;$i<20;$i++){
-            $token .= $combinationString[uniqueSecureHelper(0,strlen($combinationString))];
+            $token .= $combinationString[$this->uniqueSecureHelper(0,strlen($combinationString))];
         }
         return $token;
+    }
+
+    /** 
+     * This helper function will return unique and secure string...
+     */
+    public function uniqueSecureHelper($minVal, $maxVal) {
+        $range = $maxVal - $minVal;
+        if ($range < 0) return $minVal;//not so random...
+
+        $log = log($range, 2);
+        $bytes = (int) ($log/8) + 1;//length in bytes
+        $bits = (int) $log + 1;//length in bits
+        $filter = (int) (1 << $bits) - 1;//set all lower bits to 1
+
+        do {
+            $rnd = hexdec(bin2hex(openssl_random_pseudo_bytes($bytes)));
+            $rnd = $rnd & $filter;//discard irrelevant bits
+        } while ($rnd >= $range);
+        return $minVal + $rnd;
     }
 }

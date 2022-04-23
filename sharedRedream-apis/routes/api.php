@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/redeem', [RedeemVoucherController::class, 'redeem']);
 
     //API route to wallet balance
-    Route::get('/balance', [WalletController::class, 'getBalance']);
+    Route::get('/balance', [WalletController::class, 'balance']);
 
     // API route for logout user
     Route::post('/logout', [AuthController::class, 'logout']);

@@ -33,9 +33,9 @@ class WalletController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getBalance(WalletBalance $request)
+    public function balance(WalletBalance $request)
     {
-        $balance = $this->walletService->balance($request->validated());
+        $balance = $this->walletService->balance($request->user_id);
         return new WalletBalanceResource($balance);
     }
 

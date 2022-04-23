@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Repositories\Impl\RedeemVoucherRepositoryInterface;
 use App\Models\RedeemVoucher;
+use App\Models\Wallet;
+use App\Models\Transaction;
 use Carbon\Carbon;
 
 class RedeemVoucherRepository implements RedeemVoucherRepositoryInterface
@@ -34,11 +36,11 @@ class RedeemVoucherRepository implements RedeemVoucherRepositoryInterface
      *
      * @param RedeemVoucher $voucher
      */
-    public function __construct(RedeemVoucher $voucher)
+    public function __construct(RedeemVoucher $voucher, Wallet $w, Transaction $t)
     {
         $this->entity = $voucher;
-        $this->wallet = new WalletRepository();
-        $this->transaction = new TransactionRepository();
+        $this->wallet = new WalletRepository($w);
+        $this->transaction = new TransactionRepository($t);
     }
 
     /**
@@ -55,9 +57,9 @@ class RedeemVoucherRepository implements RedeemVoucherRepositoryInterface
      * Find by Id
      *
      * @param int $id
-     * @return Voucher
+     * @return RedeemVoucher
      */
-    public function findById(int $id): ?Voucher
+    public function findById(int $id): ?RedeemVoucher
     {
         return $this->entity->findOrFail($id);
     }
@@ -66,20 +68,20 @@ class RedeemVoucherRepository implements RedeemVoucherRepositoryInterface
      * Find by Token
      *
      * @param string $token
-     * @return Voucher
+     * @return RedeemVoucher
      */
-    public function findByToken(string $token): ?Voucher
+    public function findByToken(string $token): ?RedeemVoucher
     {
-        return $this->entity->where('token', $token)->findOrFail();
+        return $this->entity->where('token', $token)->first();
     }
 
     /**
      * Create a Voucher
      *
      * @param array $data
-     * @return Voucher
+     * @return RedeemVoucher
      */
-    public function create(array $data): ?Voucher
+    public function create(array $data): ?RedeemVoucher
     {
         return $this->entity->create($data);
     }
@@ -89,9 +91,9 @@ class RedeemVoucherRepository implements RedeemVoucherRepositoryInterface
      *
      * @param int $id
      * @param int $user_id
-     * @return Voucher
+     * @return RedeemVoucher
      */
-    public function redeemUpdate(int $id, int $user_id): ?Voucher
+    public function redeemUpdate(int $id, int $user_id): ?RedeemVoucher
     {
         $voucher = $this->findById($id);
 

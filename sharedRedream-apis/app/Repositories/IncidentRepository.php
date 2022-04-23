@@ -34,11 +34,11 @@ class IncidentRepository implements IncidentRepositoryInterface
      *
      * @param Incident $incident
      */
-    public function __construct(Incident $incident)
+    public function __construct(Incident $incident, Wallet $w, Transaction $t)
     {
         $this->entity = $incident;
-        $this->wallet = new WalletRepository();
-        $this->transaction = new TransactionRepository();
+        $this->wallet = new WalletRepository($w);
+        $this->transaction = new TransactionRepository($t);
     }
 
     /**

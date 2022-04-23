@@ -43,7 +43,7 @@ class WalletRepository implements WalletRepositoryInterface
      */
     public function findByUserId(int $user_id): ?Wallet
     {
-        return $this->entity->where('user_id', $user_id)->findOrFail();
+        return $this->entity->where('user_id', $user_id)->first();
     }
 
     /**
@@ -67,11 +67,12 @@ class WalletRepository implements WalletRepositoryInterface
      */
     public function deposit(int $user_id, int $value): ?Wallet
     {
-        $wallet = $this->findByUserId($id);
+        $wallet = $this->findByUserId($user_id);
 
         $wallet->balance = $wallet->balance + $value;
+        $wallet->save();
 
-        return $wallet->save();
+        return $wallet;
     }
 
     /**
@@ -83,11 +84,12 @@ class WalletRepository implements WalletRepositoryInterface
      */
     public function withdrawal(int $user_id, int $value)
     {
-        $wallet = $this->findByUserId($id);
+        $wallet = $this->findByUserId($user_id);
 
         if(checkAvailableBalance($wallet, $value)){
             $wallet->balance = $wallet->balance - $value;
-            return $wallet->save();
+            $wallet->save();
+            return $wallet;
         }
     }
 
