@@ -27,7 +27,7 @@ class StoreUpdateIncident extends FormRequest
             'title' => 'required|max:50',
             'description' => 'required|max:200',
             'user_id' => 'required',
-            'refunded' => 'required|boolean',
+            'refunded' => 'boolean',
         ];
 
         return $rules;

@@ -37,8 +37,7 @@ class RedeemVoucherController extends Controller
      */
     public function storeInBatch(int $count)
     {
-        $vouchers = $this->redeemVoucherService->generateNewVouchers($count);
-        return $vouchers;
+        return $this->redeemVoucherService->generateNewVouchers($count);
     }
 
     /**

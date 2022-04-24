@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Repositories\Impl\IncidentRepositoryInterface;
 use App\Models\Incident;
+use App\Models\Wallet;
+use App\Models\Transaction;
 use Carbon\Carbon;
 
 class IncidentRepository implements IncidentRepositoryInterface
@@ -69,8 +71,7 @@ class IncidentRepository implements IncidentRepositoryInterface
      */
     public function create(array $data): ?Incident
     {
-        $incident = $this->entity->create($data);
-        return $incident->fresh();
+        return $this->entity->create($data);
     }
 
     /**

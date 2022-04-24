@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Repositories\Impl\UserRepositoryInterface;
 use App\Models\User;
+use App\Models\Wallet;
 
 class UserRepository implements UserRepositoryInterface
 {
