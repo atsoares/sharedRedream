@@ -6,6 +6,7 @@ use App\Repositories\Impl\IncidentRepositoryInterface;
 use App\Models\Incident;
 use App\Models\Wallet;
 use App\Models\Transaction;
+use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
 
 class IncidentRepository implements IncidentRepositoryInterface
@@ -95,18 +96,20 @@ class IncidentRepository implements IncidentRepositoryInterface
     public function support(int $id, array $data): ?Incident
     {
         $incident = $this->findById($id);
+        if($this->wallet->withdrawal($data['user_id'], $data['value']))
+        {        
+            $incident->total_raised = $incident->total_raised + $data['value'];
+            $incident->save();
 
-        $this->wallet->withdrawal($data['user_id'], $data['value']);
-
-        $incident->total_raised = $incident->total_raised + $data['value'];
-        $incident->save();
-
-        $this->transaction->create([
-            'user_id' => $data['user_id'],
-            'incident_id' => $incident->id,
-            'operation' => 'incident_help'
-        ]);
-        return $incident;
+            $this->transaction->create([
+                'user_id' => $data['user_id'],
+                'incident_id' => $incident->id,
+                'operation' => 'incident_help'
+            ]);
+            return $incident;
+        }
+        else
+            return null;
     }
 
     /**

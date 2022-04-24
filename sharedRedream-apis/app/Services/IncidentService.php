@@ -59,7 +59,12 @@ class IncidentService
      */
     public function support(int $id, array $data)
     {
-        return $this->incidentRepository->support($id, $data);
+        $supported = $this->incidentRepository->support($id, $data);
+        if($supported != null)
+            return $supported;
+        else
+            return response()->json(['message' => 'Not enought balance'], 400);
+
     }
 
     /**

@@ -80,16 +80,18 @@ class WalletRepository implements WalletRepositoryInterface
      *
      * @param int $user_id
      * @param int $value
-     * @return Wallet
+     * @return bool
      */
     public function withdrawal(int $user_id, int $value)
     {
         $wallet = $this->findByUserId($user_id);
 
-        if(checkAvailableBalance($wallet, $value)){
+        if($this->checkAvailableBalance($wallet, $value)){
             $wallet->balance = $wallet->balance - $value;
             $wallet->save();
-            return $wallet;
+            return true;
+        }else{
+            return false;
         }
     }
 
