@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Impl\RedeemVoucherRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class RedeemVoucherService
 {
@@ -35,11 +36,11 @@ class RedeemVoucherService
     /**
      * Find by Id
      *
-     * @param int $id
+     * @param string $token
      */
-    public function findById(int $id)
+    public function findByToken(string $token)
     {
-        return $this->redeemVoucherRepository->findById($id);
+        return $this->redeemVoucherRepository->findByToken($token);
     }
 
     /**
@@ -50,7 +51,6 @@ class RedeemVoucherService
     public function create(object $data)
     {
         return $this->redeemVoucherRepository->create($data);
-        return response()->json(['message' => 'Voucher created'], 201);
     }
 
     /**
@@ -58,15 +58,9 @@ class RedeemVoucherService
      *
      * @param object $data
      */
-    public function redeem(object $data)
+    public function redeem(object $voucher, int $user_id)
     {
-        $voucher = $this->redeemVoucherRepository->findByToken($data['token']);
-
-        if(!$voucher || !$voucher->active)
-            return response()->json(['message' => 'Token not valid'], 404);
-
-        $this->redeemVoucherRepository->redeemUpdate($voucher->id, $data['user_id']);
-        return response()->json(['message' => 'Redeem voucher with success'], 200);
+        return $this->redeemVoucherRepository->redeemUpdate($voucher, $user_id);
     }
 
     /**

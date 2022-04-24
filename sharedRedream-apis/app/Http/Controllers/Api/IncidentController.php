@@ -10,6 +10,7 @@ use App\Http\Requests\RefundIncident;
 use App\Http\Requests\SupportIncident;
 use App\Http\Resources\IncidentResource;
 use App\Http\Resources\WalletBalanceResource;
+use Illuminate\Support\Facades\Auth;
 
 class IncidentController extends Controller
 {

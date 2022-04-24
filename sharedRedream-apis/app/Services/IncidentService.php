@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Impl\IncidentRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class IncidentService
 {
@@ -50,7 +51,6 @@ class IncidentService
     public function create(array $data)
     {
         return $this->incidentRepository->create($data);
-        return response()->json(['message' => 'Incident Created'], 201);
     }
 
     /**
@@ -59,18 +59,21 @@ class IncidentService
      */
     public function support(int $id, array $data)
     {
-        $this->incidentRepository->support($id, $data);
-        return response()->json(['message' => 'Incident Helped'], 200);
+        return $this->incidentRepository->support($id, $data);
     }
 
     /**
      * Refund existing Incident
      *
      */
-    public function refund(int $id, array $data)
+    public function refund(int $id)
     {
-        $this->incidentRepository->refund($id, $data);
-        return response()->json(['message' => 'Incident Refudend'], 200);
+        $incident = $this->incidentResository->findById($id);
+        if(Auth::user()->id == $incident->user_id){
+            return $this->incidentRepository->refund($id);
+        }else{
+            return response()->json(['message' => 'Not authorized'], 401);
+        }
     }
    
 }

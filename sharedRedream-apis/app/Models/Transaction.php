@@ -17,7 +17,7 @@ class Transaction extends Model
    protected $fillable = [
        'user_id',
        'incident_id',
-       'voucher_id',
+       'redeem_voucher_id',
        'operation',
    ];
 

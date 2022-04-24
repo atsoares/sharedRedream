@@ -8,6 +8,7 @@ use App\Services\RedeemVoucherService;
 use App\Http\Requests\RedeemVoucher;
 use App\Http\Resources\CreateVoucherResource;
 use App\Http\Resources\RedeemVoucherResource;
+use Illuminate\Support\Facades\Auth;
 
 class RedeemVoucherController extends Controller
 {
@@ -49,7 +50,14 @@ class RedeemVoucherController extends Controller
      */
     public function redeem(RedeemVoucher $request)
     {
-        $voucher = $this->redeemVoucherService->redeem($request);
-        return $voucher;
+        if(Auth::user()->id != $request->user_id)
+            return response()->json(['message' => 'Not Authorized'], 401);
+
+        $voucher = $this->redeemVoucherService->findByToken($request->token);
+
+        if(!$voucher)
+            return response()->json(['message' => 'Token not valid'], 401);
+        
+        return $this->redeemVoucherService->redeem($voucher, $request->user_id);
     }
 }
