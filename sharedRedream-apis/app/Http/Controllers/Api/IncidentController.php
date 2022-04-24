@@ -79,10 +79,12 @@ class IncidentController extends Controller
      */
     public function support(SupportIncident $request, $id)
     {
-        $incident = $this->incidentService
-                        ->support($id, $request->validated());
-
-        return new IncidentResource($incident);
+        $incident = $this->incidentService->support($id, $request->validated());
+    
+        if($incident instanceof Incident)
+            return new IncidentResource($incident);
+        else
+            return $incident;
     }
 
     /**
@@ -97,7 +99,10 @@ class IncidentController extends Controller
         $incident = $this->incidentService
                         ->refund($id, $request->validated());
 
-        return new IncidentResource($incident);
+        if($incident instanceof Incident)
+            return new IncidentResource($incident);
+        else
+            return $incident;
     }
 
 
