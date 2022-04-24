@@ -90,13 +90,11 @@ class RedeemVoucherRepository implements RedeemVoucherRepositoryInterface
      * Update a Voucher
      *
      * @param int $id
-     * @param int $user_id
+     * @param object $voucher
      * @return RedeemVoucher
      */
-    public function redeemUpdate(int $id, int $user_id): ?RedeemVoucher
+    public function redeemUpdate(object $voucher, int $user_id): ?RedeemVoucher
     {
-        $voucher = $this->findById($id);
-
         $voucher->active = false;
         $voucher->refunded_at = Carbon::now();
         $voucher->user_id = $user_id;
