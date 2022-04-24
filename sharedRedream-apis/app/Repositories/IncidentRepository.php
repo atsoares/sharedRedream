@@ -71,6 +71,7 @@ class IncidentRepository implements IncidentRepositoryInterface
      */
     public function create(array $data): ?Incident
     {
+        $data['total_raised'] = 0;
         return $this->entity->create($data);
     }
 

@@ -30,7 +30,7 @@ class IncidentService
      */
     public function getAll()
     {
-        return $this->incidentRepository->where('refunded', false)->get();
+        return $this->incidentRepository->getAll();
     }
 
     /**

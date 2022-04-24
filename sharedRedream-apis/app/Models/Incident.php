@@ -18,6 +18,7 @@ class Incident extends Model
         'title',
         'description',
         'user_id',
+        'total_raised',
         'refunded',
     ];
 
