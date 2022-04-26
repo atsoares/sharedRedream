@@ -7,11 +7,33 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use Validator;
-use App\Models\User;
-use App\Models\Wallet;
+use App\Services\UserService;
 
 class AuthController extends Controller
 {
+    /**
+     * Variable to hold injected dependency
+     *
+     * @var userService
+     */
+    protected $userService;
+    
+    /**
+     * Constructor
+     *
+     * @param UserService $userService
+     */
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
+    /**
+     * Register new account
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -24,16 +46,11 @@ class AuthController extends Controller
             return response()->json($validator->errors());       
         }
 
-        $user = User::create([
+        $user = $this->userService->create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
          ]);
-
-        Wallet::create([
-            'user_id' => $user->id,
-            'balance' => 0
-        ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -41,6 +58,12 @@ class AuthController extends Controller
             ->json(['data' => $user,'access_token' => $token, 'token_type' => 'Bearer', ], 201);
     }
 
+    /**
+     * Login
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function login(Request $request)
     {
         if (!Auth::attempt($request->only('email', 'password')))
@@ -49,7 +72,7 @@ class AuthController extends Controller
                 ->json(['message' => 'Unauthorized'], 401);
         }
 
-        $user = User::where('email', $request['email'])->firstOrFail();
+        $user = $this->userService->findUserByEmail($request['email']);
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -57,7 +80,7 @@ class AuthController extends Controller
             ->json(['message' => 'Hi '.$user->name.', welcome to sharedRedream','access_token' => $token, 'token_type' => 'Bearer', ], 200);
     }
 
-    // method for user logout and delete token
+    // Method for user logout and delete token
     public function logout()
     {
         auth()->user()->tokens()->delete();

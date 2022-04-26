@@ -18,6 +18,7 @@ class Transaction extends Model
        'user_id',
        'incident_id',
        'redeem_voucher_id',
+       'value',
        'operation',
    ];
 

@@ -62,10 +62,10 @@ class WalletRepository implements WalletRepositoryInterface
      * Deposit value to a Wallet
      *
      * @param int $user_id
-     * @param int $value
+     * @param float $value
      * @return Wallet
      */
-    public function deposit(int $user_id, int $value): ?Wallet
+    public function deposit(int $user_id, float $value): ?Wallet
     {
         $wallet = $this->findByUserId($user_id);
 
@@ -79,10 +79,10 @@ class WalletRepository implements WalletRepositoryInterface
      * Withdraw value from a Wallet
      *
      * @param int $user_id
-     * @param int $value
+     * @param float $value
      * @return bool
      */
-    public function withdrawal(int $user_id, int $value)
+    public function withdrawal(int $user_id, float $value)
     {
         $wallet = $this->findByUserId($user_id);
 
@@ -99,14 +99,14 @@ class WalletRepository implements WalletRepositoryInterface
      * Check if wallet has enough amount to be withdraw
      *
      * @param int $id
-     * @param int $value
+     * @param float $value
      * @return bool
      */
-    public function checkAvailableBalance(object $wallet, int $value)
+    public function checkAvailableBalance(object $wallet, float $value)
     {
         $actual = $wallet->balance;
         $after = $actual - $value;
-        if($after < 0){
+        if($after <= 0){
             return false;
         }
         return true;

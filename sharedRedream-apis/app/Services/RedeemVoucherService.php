@@ -74,7 +74,7 @@ class RedeemVoucherService
             for ($x = 0; $x <= $count; $x++) {
                 $data = [
                     'token' => $this->getUniqueToken(),
-                    'value' => random_int(10,100)
+                    'value' => random_float(10,100)
                 ];
                 $this->redeemVoucherRepository->create($data);
             }
@@ -88,7 +88,7 @@ class RedeemVoucherService
      */
     public function getUniqueToken(){
         $token = "";
-        $combinationString = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        $combinationString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         for($i=0;$i<20;$i++){
             $token .= $combinationString[$this->uniqueSecureHelper(0,strlen($combinationString))];
         }
@@ -100,7 +100,7 @@ class RedeemVoucherService
      */
     public function uniqueSecureHelper($minVal, $maxVal) {
         $range = $maxVal - $minVal;
-        if ($range < 0) return $minVal;//not so random...
+        if ($range < 0) return $minVal;
 
         $log = log($range, 2);
         $bytes = (int) ($log/8) + 1;//length in bytes

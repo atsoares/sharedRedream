@@ -24,6 +24,16 @@ class UserService
     }
 
     /**
+     * Find user
+     *
+     * @param string $email
+     */
+    public function findUserByEmail(string $email)
+    {
+        return $this->userRepository->findByEmail($email);
+    }   
+
+    /**
      * Create a User
      *
      * @param array $data
@@ -31,7 +41,6 @@ class UserService
     public function create(array $data)
     {
         return $this->userRepository->create($data);
-        return response()->json(['message' => 'User Created'], 201);
     }
 
     /**
@@ -42,7 +51,6 @@ class UserService
     public function update(array $data)
     {
         return $this->userRepository->update($data);
-        return response()->json(['message' => 'User Updated'], 200);
     }
    
 }

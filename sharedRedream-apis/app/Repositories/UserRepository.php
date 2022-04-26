@@ -31,7 +31,7 @@ class UserRepository implements UserRepositoryInterface
     public function __construct(User $user, Wallet $wallet)
     {
         $this->entity = $user;
-        $this->waller = $wallet;
+        $this->wallet = new WalletRepository($wallet);
     }
 
     /**
@@ -46,6 +46,17 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
+     * Find by Email
+     *
+     * @param string $email
+     * @return User
+     */
+    public function findByEmail(string $email): ?User
+    {
+        return $this->entity->where('email', $email)->findOrFail();
+    }
+
+    /**
      * Create a User
      *
      * @param array $data
@@ -55,11 +66,10 @@ class UserRepository implements UserRepositoryInterface
     {
         $user = $this->entity->create($data);
 
-        $w = new Wallet([
+        $this->wallet->create([
             'user_id' => $user->id,
             'balance' => 0
         ]);
-        $w->save();
 
         return $user->fresh();
     }

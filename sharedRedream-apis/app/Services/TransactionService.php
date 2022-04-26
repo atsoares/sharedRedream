@@ -33,4 +33,14 @@ class TransactionService
         return $this->transactionRepository->getAllByUser($user_id);
     }
 
+    /**
+     * Get All Supporters By Incident
+     *
+     * @param int $incident_id
+     */
+    public function getAllByIncident(int $incident_id)
+    {
+        return $this->transactionRepository->getAllSupportersByIncident($incident_id);
+    }
+
 }

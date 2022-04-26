@@ -105,6 +105,7 @@ class RedeemVoucherRepository implements RedeemVoucherRepositoryInterface
         $this->transaction->create([
             'user_id' => $user_id,
             'redeem_voucher_id' => $voucher->id,
+            'value' => $voucher->value,
             'operation' => 'voucher_redeem'
         ]);
 

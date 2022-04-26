@@ -35,6 +35,17 @@ class TransactionRepository
     }
 
     /**
+     * Get All Supporters per Incident
+     *
+     * @param int $incident_id
+     * @return Collection
+     */
+    public function getAllSupportersByIncident(int $incident_id): Collection
+    {
+        return $this->entity->where('incident_id', $incident_id)->get();
+    }
+
+    /**
      * Create new transaction
      *
      * @param array $data

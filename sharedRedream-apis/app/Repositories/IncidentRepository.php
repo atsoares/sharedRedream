@@ -104,6 +104,7 @@ class IncidentRepository implements IncidentRepositoryInterface
             $this->transaction->create([
                 'user_id' => $data['user_id'],
                 'incident_id' => $incident->id,
+                'value' => $data['value'],
                 'operation' => 'incident_help'
             ]);
             return $incident;
@@ -131,6 +132,7 @@ class IncidentRepository implements IncidentRepositoryInterface
         $this->transaction->create([
             'user_id' => $incident->user_id,
             'incident_id' => $incident->id,
+            'value' => $incident->total_raised,
             'operation' => 'incident_refund'
         ]);
 

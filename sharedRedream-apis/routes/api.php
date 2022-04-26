@@ -50,6 +50,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-Route::get('/unauthenticated', function () {
-    return response()->json(["message"=>"unauthenticated"]);
-})->name('api.unauthenticated');
+Route::fallback(function () {
+    return response()->json(['message' => 'Bad request'], 400);
+});
