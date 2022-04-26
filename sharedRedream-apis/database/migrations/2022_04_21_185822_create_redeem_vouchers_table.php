@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 class CreateRedeemVouchersTable extends Migration
 {
@@ -18,11 +19,10 @@ class CreateRedeemVouchersTable extends Migration
             $table->string('token', 20);
             $table->integer('value');
             $table->boolean('active')->default(true);
-            $table->unsignedInteger('user_id')->nullable();
-            $table->date('refunded_at')->nullable(); 
+            $table->foreignIdFor(User::class)->nullable();
+            $table->timestamp('refunded_at')->nullable(); 
             $table->timestamps();
-            
-            $table->foreign('user_id')->references('id')->on('users');
+        
         });
     }
 
