@@ -73,7 +73,7 @@ class IncidentService
      */
     public function refund(int $id)
     {
-        $incident = $this->incidentResository->findById($id);
+        $incident = $this->incidentRepository->findById($id);
         if(Auth::user()->id == $incident->user_id){
             return $this->incidentRepository->refund($id);
         }else{

@@ -94,10 +94,9 @@ class IncidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function refund(RefundIncident $request, $id)
+    public function refund($id)
     {
-        $incident = $this->incidentService
-                        ->refund($id, $request->validated());
+        $incident = $this->incidentService->refund($id);
 
         if($incident instanceof Incident)
             return new IncidentResource($incident);
