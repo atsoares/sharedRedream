@@ -8,7 +8,6 @@ use App\Services\IncidentService;
 use App\Http\Requests\StoreUpdateIncidentRequest;
 use App\Http\Requests\SupportIncidentRequest;
 use App\Http\Resources\IncidentResource;
-use App\Http\Resources\WalletBalanceResource;
 use Illuminate\Support\Facades\Auth;
 
 class IncidentController extends Controller
@@ -49,8 +48,7 @@ class IncidentController extends Controller
      */
     public function store(StoreUpdateIncident $request)
     {
-        $incident = $this->incidentService
-                        ->create($request->validated());
+        $incident = $this->incidentService->create($request->validated());
 
         return new IncidentResource($incident);
     }
@@ -63,8 +61,7 @@ class IncidentController extends Controller
      */
     public function show($id)
     {
-        $incident = $this->incidentService
-                        ->getById($id);
+        $incident = $this->incidentService->getById($id);
 
         return new IncidentResource($incident);
     }
@@ -82,8 +79,8 @@ class IncidentController extends Controller
     
         if($incident instanceof Incident)
             return new IncidentResource($incident);
-        else
-            return $incident;
+        
+        return $incident;
     }
 
     /**
@@ -98,8 +95,8 @@ class IncidentController extends Controller
 
         if($incident instanceof Incident)
             return new IncidentResource($incident);
-        else
-            return $incident;
+        
+        return $incident;
     }
 
 

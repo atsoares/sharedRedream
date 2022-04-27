@@ -4,47 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Services\WalletService;
-use App\Http\Requests\WalletBalanceRequest;
-use App\Http\Resources\WalletBalanceResource;
-use Illuminate\Support\Facades\Auth;
 
-class WalletController extends Controller
+class UserController extends Controller
 {
-    /**
-     * Variable to hold injected dependency
-     *
-     * @var walletService
-     */
-    protected $walletService;
-
-    /**
-     * Constructor
-     *
-     * @param WalletService $walletService
-     */
-    public function __construct(WalletService $walletService)
-    {
-        $this->walletService = $walletService;
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \Illuminate\Http\WalletBalanceRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function balance(WalletBalanceRequest $request)
-    {
-        if(Auth::user()->id == $request->user_id)
-        {
-            $balance = $this->walletService->balance($request->user_id);
-            return new WalletBalanceResource($balance);
-        }
-        else
-            return response()->json(['message' => 'Not Authorized'], 401);
-    }
-
     /**
      * Display a listing of the resource.
      *

@@ -58,9 +58,14 @@ class RedeemVoucherService
      *
      * @param object $data
      */
-    public function redeem(object $voucher, int $user_id)
+    public function redeem(object $data)
     {
-        return $this->redeemVoucherRepository->redeemUpdate($voucher, $user_id);
+        $voucher = $this->redeemVoucherRepository->findByToken($data['token']);
+
+        if(!$voucher)
+            return response()->json(['message' => 'Token not valid'], 400);
+
+        return $this->redeemVoucherRepository->redeemUpdate($voucher, $data['user_id']);
     }
 
     /**

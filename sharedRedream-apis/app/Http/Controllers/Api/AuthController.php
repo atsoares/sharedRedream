@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\UserService;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\LoginUserRequest;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -53,8 +53,7 @@ class AuthController extends Controller
     {
         if (!Auth::attempt($request->only('email', 'password')))
         {
-            return response()
-                ->json(['message' => 'Unauthorized'], 401);
+            abort(401, 'Not Authorized');
         }
 
         $user = $this->userService->findUserByEmail($request['email']->validated());
