@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\Impl\IncidentRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use App\Exceptions\NotEnoughtBalanceException;
 
 class IncidentService
 {
@@ -59,12 +60,7 @@ class IncidentService
      */
     public function support(int $id, array $data)
     {
-        $supported = $this->incidentRepository->support($id, $data);
-        if($supported != null)
-            return $supported;
-        else
-            return response()->json(['message' => 'Not enought balance'], 400);
-
+        return $this->incidentRepository->support($id, $data);
     }
 
     /**
@@ -74,11 +70,10 @@ class IncidentService
     public function refund(int $id)
     {
         $incident = $this->incidentRepository->findById($id);
-        if(Auth::user()->id == $incident->user_id){
-            return $this->incidentRepository->refund($id);
-        }else{
-            return response()->json(['message' => 'Not authorized'], 401);
-        }
+        if(!Auth::user()->id == $incident->user_id)
+            throw new AuthorizationException;
+
+        return $this->incidentRepository->refund($id);
     }
    
 }

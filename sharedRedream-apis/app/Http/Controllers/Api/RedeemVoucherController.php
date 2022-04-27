@@ -48,9 +48,6 @@ class RedeemVoucherController extends Controller
      */
     public function redeem(RedeemVoucherRequest $request)
     {
-        if(Auth::user()->id != $request->user_id)
-            return response()->json(['message' => 'Not Authorized'], 401);
-        
         return $this->redeemVoucherService->redeem($request->validated());
     }
 }

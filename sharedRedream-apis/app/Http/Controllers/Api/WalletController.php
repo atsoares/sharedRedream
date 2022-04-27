@@ -36,13 +36,11 @@ class WalletController extends Controller
      */
     public function balance(WalletBalanceRequest $request)
     {
-        if(Auth::user()->id == $request->user_id)
-        {
-            $balance = $this->walletService->balance($request->user_id);
-            return new WalletBalanceResource($balance);
-        }
-        else
-            return response()->json(['message' => 'Not Authorized'], 401);
+        if(!Auth::user()->id == $request->user_id)
+            throw new AuthorizationException;
+
+        $balance = $this->walletService->balance($request->user_id);
+        return new WalletBalanceResource($balance);   
     }
 
     /**

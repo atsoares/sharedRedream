@@ -52,9 +52,7 @@ class AuthController extends Controller
     public function login(LoginUserRequest $request)
     {
         if (!Auth::attempt($request->only('email', 'password')))
-        {
-            abort(401, 'Not Authorized');
-        }
+            throw new AuthenticationException;
 
         $user = $this->userService->findUserByEmail($request['email']->validated());
 
