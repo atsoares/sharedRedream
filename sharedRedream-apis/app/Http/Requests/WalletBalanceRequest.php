@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUpdateIncident extends FormRequest
+class WalletBalanceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,7 @@ class StoreUpdateIncident extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:50',
-            'description' => 'required|max:200',
-            'user_id' => 'required',
-            'refunded' => 'boolean',
+            'user_id' => 'required'
         ];
 
         return $rules;

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class WalletBalance extends FormRequest
+class LoginUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,7 @@ class WalletBalance extends FormRequest
     public function rules()
     {
         return [
+            'token' => 'required|min:20',
             'user_id' => 'required'
         ];
 

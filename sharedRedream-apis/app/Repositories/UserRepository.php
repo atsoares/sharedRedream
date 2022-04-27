@@ -64,6 +64,8 @@ class UserRepository implements UserRepositoryInterface
      */
     public function create(array $data): ?User
     {
+        $data['password'] = Hash::make($data['password']);
+        
         $user = $this->entity->create($data);
 
         $this->wallet->create([

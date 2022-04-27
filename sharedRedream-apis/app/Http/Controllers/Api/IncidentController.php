@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\IncidentService;
-use App\Http\Requests\StoreUpdateIncident;
-use App\Http\Requests\RefundIncident;
-use App\Http\Requests\SupportIncident;
+use App\Http\Requests\StoreUpdateIncidentRequest;
+use App\Http\Requests\SupportIncidentRequest;
 use App\Http\Resources\IncidentResource;
 use App\Http\Resources\WalletBalanceResource;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +44,7 @@ class IncidentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\StoreUpdateIncident  $request
+     * @param  \Illuminate\Http\StoreUpdateIncidentRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreUpdateIncident $request)
@@ -73,11 +72,11 @@ class IncidentController extends Controller
     /**
      * Support the incident.
      *
-     * @param  \Illuminate\Http\StoreUpdateIncident  $request
+     * @param  \Illuminate\Http\SupportIncidentRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function support(SupportIncident $request, $id)
+    public function support(SupportIncidentRequest $request, $id)
     {
         $incident = $this->incidentService->support($id, $request->validated());
     
@@ -90,7 +89,6 @@ class IncidentController extends Controller
     /**
      * Refund the incident
      *
-     * @param  \Illuminate\Http\StoreUpdateIncident  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

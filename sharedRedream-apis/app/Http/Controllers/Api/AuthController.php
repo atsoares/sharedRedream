@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Auth;
-use Validator;
 use App\Services\UserService;
+use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\LoginUserRequest;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -31,26 +30,12 @@ class AuthController extends Controller
     /**
      * Register new account
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\RegisterUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request)
+    public function register(RegisterUserRequest $request)
     {
-        $validator = Validator::make($request->all(),[
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8'
-        ]);
-
-        if($validator->fails()){
-            return response()->json($validator->errors());       
-        }
-
-        $user = $this->userService->create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-         ]);
+        $user = $this->userService->create($request->validated());
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -61,10 +46,10 @@ class AuthController extends Controller
     /**
      * Login
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\LoginUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function login(Request $request)
+    public function login(LoginUserRequest $request)
     {
         if (!Auth::attempt($request->only('email', 'password')))
         {
@@ -72,21 +57,11 @@ class AuthController extends Controller
                 ->json(['message' => 'Unauthorized'], 401);
         }
 
-        $user = $this->userService->findUserByEmail($request['email']);
+        $user = $this->userService->findUserByEmail($request['email']->validated());
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()
             ->json(['message' => 'Hi '.$user->name.', welcome to sharedRedream','access_token' => $token, 'token_type' => 'Bearer', ], 200);
-    }
-
-    // Method for user logout and delete token
-    public function logout()
-    {
-        auth()->user()->tokens()->delete();
-
-        return [
-            'message' => 'You have successfully logged out and the token was successfully deleted'
-        ];
     }
 }

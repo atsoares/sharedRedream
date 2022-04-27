@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RedeemVoucher extends FormRequest
+class RegisterUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class RedeemVoucher extends FormRequest
     public function rules()
     {
         return [
-            'token' => 'required|min:20',
-            'user_id' => 'required'
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8'
         ];
 
         return $rules;

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SupportIncident extends FormRequest
+class RedeemVoucherRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class SupportIncident extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
-            'value' => 'required|min:1|max:100'
+            'token' => 'required|min:20',
+            'user_id' => 'required'
         ];
 
         return $rules;
