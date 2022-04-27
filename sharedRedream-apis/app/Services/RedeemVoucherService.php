@@ -63,7 +63,7 @@ class RedeemVoucherService
         $voucher = $this->redeemVoucherRepository->findByToken($data['token']);
 
         if(!$voucher)
-            return response()->json(['message' => 'Token not valid'], 400);
+            throw new InvalidTokenException;
 
         return $this->redeemVoucherRepository->redeemUpdate($voucher, $data['user_id']);
     }

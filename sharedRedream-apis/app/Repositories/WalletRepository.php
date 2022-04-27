@@ -43,7 +43,7 @@ class WalletRepository implements WalletRepositoryInterface
      */
     public function findByUserId(int $user_id): ?Wallet
     {
-        return $this->entity->where('user_id', $user_id)->first();
+        return $this->entity->where('user_id', $user_id)->findOrFail();
     }
 
     /**
@@ -61,15 +61,13 @@ class WalletRepository implements WalletRepositoryInterface
     /**
      * Deposit value to a Wallet
      *
-     * @param int $user_id
+     * @param Wallet $wallet
      * @param float $value
      * @return Wallet
      */
-    public function deposit(int $user_id, float $value): ?Wallet
+    public function deposit(Wallet $wallet, float $value): ?Wallet
     {
-        $wallet = $this->findByUserId($user_id);
-
-        $wallet->balance = $wallet->balance + $value;
+        $wallet->balance += $value;
         $wallet->save();
 
         return $wallet;
@@ -78,37 +76,32 @@ class WalletRepository implements WalletRepositoryInterface
     /**
      * Withdraw value from a Wallet
      *
-     * @param int $user_id
+     * @param Wallet $wallet
      * @param float $value
-     * @return bool
+     * @return void
      */
-    public function withdrawal(int $user_id, float $value)
-    {
-        $wallet = $this->findByUserId($user_id);
-
-        if($this->checkAvailableBalance($wallet, $value)){
-            $wallet->balance = $wallet->balance - $value;
-            $wallet->save();
-            return true;
-        }else{
-            return false;
-        }
+    public function withdrawal(Wallet $wallet, float $value)
+    {        
+        $wallet->balance -= $value;
+        $wallet->save();
     }
 
     /**
      * Check if wallet has enough amount to be withdraw
      *
-     * @param int $id
+     * @param int $user_id
      * @param float $value
      * @return bool
      */
-    public function checkAvailableBalance(object $wallet, float $value)
+    public function checkIfUserHasAvailableBalance(int $user_id, float $value)
     {
+        $wallet = $this->wallet->findByUserId($user_id);
+
         $actual = $wallet->balance;
         $after = $actual - $value;
-        if($after <= 0){
+        if($after <= 0)
             return false;
-        }
+
         return true;
     }
 }

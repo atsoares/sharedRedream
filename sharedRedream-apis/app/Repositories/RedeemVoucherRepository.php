@@ -6,7 +6,6 @@ use App\Repositories\Impl\RedeemVoucherRepositoryInterface;
 use App\Models\RedeemVoucher;
 use App\Models\Wallet;
 use App\Models\Transaction;
-use Carbon\Carbon;
 
 class RedeemVoucherRepository implements RedeemVoucherRepositoryInterface
 {
@@ -99,11 +98,13 @@ class RedeemVoucherRepository implements RedeemVoucherRepositoryInterface
     public function redeemUpdate(object $voucher, int $user_id): ?RedeemVoucher
     {
         $voucher->active = false;
-        $voucher->refunded_at = Carbon::now();
+        $voucher->refunded_at = now();
         $voucher->user_id = $user_id;
         $voucher->save();
 
-        $this->wallet->deposit($user_id, $voucher->value);
+        $wallet = $this->wallet->findByUserId($user_id);
+
+        $this->wallet->deposit($wallet, $voucher->value);
 
         $this->transaction->create([
             'user_id' => $user_id,
