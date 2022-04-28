@@ -30,7 +30,7 @@ class WalletController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\WalletBalanceRequest  $request
+     * @param  WalletBalanceRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function balance(WalletBalanceRequest $request)
