@@ -3,7 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 use App\Exceptions\Traits\ExceptionResponseTrait;
 use Throwable;
 
@@ -39,33 +39,32 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            return $this->handleException($e);
+            //
         });
-    }
 
-    public function handleException(Throwable $e){
-        if ($e instanceof HttpException) {
+        $this->reportable(function (HttpException $e) {
             $code = $e->getStatusCode();
             $defaultMessage = Response::$statusTexts[$code];
             $message = $e->getMessage() == "" ? $defaultMessage : $e->getMessage();
             return $this->errorResponse($message, $code);
-        } else if ($e instanceof InvalidTokenException) {
-            return $this->errorResponse("Token is not valid", Response::HTTP_UNPROCESSABLE_ENTITY);
-        } else if ($e instanceof NotEnoughtBalanceException) {
-            return $this->errorResponse("Balance is not enought", Response::HTTP_UNPROCESSABLE_ENTITY);
-        } else if ($e instanceof AuthorizationException) {
-            return $this->errorResponse($e->getMessage(), Response::HTTP_FORBIDDEN);
-        } else if ($e instanceof AuthenticationException) {
-            return $this->errorResponse($e->getMessage(), Response::HTTP_UNAUTHORIZED);
-        } else if ($e instanceof ValidationException) {
+        });
+
+        $this->reportable(function (ValidationException $e) {
             $errors = $e->validator->errors()->getMessages();
             return $this->errorResponse($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
-        } else {
-            if (config('app.debug'))
-                return $this->dataResponse($e->getMessage());
-            else {
-                return $this->errorResponse('Try later', Response::HTTP_INTERNAL_SERVER_ERROR);
-            }
-        }
+        });
+
+        $this->reportable(function (NotEnoughtBalanceException $e) {
+            return $this->errorResponse("Balance is not enought", Response::HTTP_UNPROCESSABLE_ENTITY);
+        });
+
+        $this->reportable(function (AuthorizationException $e) {
+            return $this->errorResponse($e->getMessage(), Response::HTTP_FORBIDDEN);
+        });
+
+        $this->reportable(function (AuthenticationException $e) {
+            return $this->errorResponse("Balance is not enought", Response::HTTP_UNPROCESSABLE_ENTITY);
+        });
     }
+
 }
