@@ -30,14 +30,12 @@ class WalletController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  WalletBalanceRequest  $request
+     * @param  int  $user_id
      * @return \Illuminate\Http\Response
      */
-    public function balance(WalletBalanceRequest $request)
+    public function balance(int $user_id)
     {
-        $validated = $request->validated();
-
-        $balance = $this->walletService->balance($validated['user_id']);
+        $balance = $this->walletService->balance($user_id);
         return new WalletBalanceResource($balance);   
     }
 
