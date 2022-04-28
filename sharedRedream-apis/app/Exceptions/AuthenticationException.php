@@ -6,7 +6,7 @@ use App\Exceptions\Traits\ExceptionResponseTrait;
 use Illuminate\Http\Response;
 use Exception;
 
-class NotEnoughtBalanceException extends Exception
+class AuthenticationException extends Exception
 {
     use ExceptionResponseTrait;
 
@@ -18,6 +18,6 @@ class NotEnoughtBalanceException extends Exception
      */
     public function render($request)
     {
-        return $this->errorResponse("Balance is not enought", Response::HTTP_UNPROCESSABLE_ENTITY);
+        return $this->errorResponse("Wrong credentials", Response::HTTP_UNAUTHORIZED);
     }
 }

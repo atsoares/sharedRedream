@@ -73,8 +73,7 @@ class RedeemVoucherRepository implements RedeemVoucherRepositoryInterface
     {
         return $this->entity
                         ->where('token', $token)
-                        ->where('active', true)
-                        ->findOrFail();
+                        ->first();
     }
 
     /**

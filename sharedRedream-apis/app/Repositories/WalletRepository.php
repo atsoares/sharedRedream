@@ -43,7 +43,7 @@ class WalletRepository implements WalletRepositoryInterface
      */
     public function findByUserId(int $user_id): ?Wallet
     {
-        return $this->entity->where('user_id', $user_id)->findOrFail();
+        return $this->entity->where('user_id', $user_id)->first();
     }
 
     /**

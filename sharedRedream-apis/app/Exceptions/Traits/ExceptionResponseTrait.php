@@ -2,14 +2,16 @@
 
 namespace App\Exceptions\Traits;
 
+use Illuminate\Http\Response;
+
 trait ExceptionResponseTrait
 {
     /**
      * Data Response
      * @param $data
-     * @return JsonResponse
+     * @return Response
      */
-    public function dataResponse($data): JsonResponse
+    public function dataResponse($data)
     {
         return response()->json(['content' => $data], Response::HTTP_OK);
     }
@@ -18,9 +20,9 @@ trait ExceptionResponseTrait
      * Success Response
      * @param string $message
      * @param int $code
-     * @return JsonResponse
+     * @return Response
      */
-    public function successResponse(string $message, $code = Response::HTTP_OK): JsonResponse
+    public function successResponse(string $message, $code = Response::HTTP_OK)
     {
         return response()->json(['success' => $message, 'code' => $code], $code);
     }
@@ -29,10 +31,10 @@ trait ExceptionResponseTrait
      * Error Response
      * @param $message
      * @param int $code
-     * @return JsonResponse
+     * @return Response
      *
      */
-    public function errorResponse($message, $code = Response::HTTP_BAD_REQUEST): JsonResponse
+    public function errorResponse($message, $code = Response::HTTP_BAD_REQUEST)
     {
         return response()->json(['error' => $message, 'code' => $code], $code);
     }

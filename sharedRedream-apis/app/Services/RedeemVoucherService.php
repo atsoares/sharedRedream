@@ -3,10 +3,14 @@
 namespace App\Services;
 
 use App\Repositories\Impl\RedeemVoucherRepositoryInterface;
+use App\Exceptions\InvalidTokenException;
+use App\Exceptions\AuthException;
 use Illuminate\Support\Facades\Auth;
 
 class RedeemVoucherService
 {
+
+
     /**
      * Variable to hold injected dependency
      *
@@ -56,14 +60,17 @@ class RedeemVoucherService
     /**
      * Redeem a Voucher
      *
-     * @param object $data
+     * @param array $data
      */
-    public function redeem(object $data)
+    public function redeem(array $data)
     {
+        if(Auth::user()->id != $data['user_id'])
+            throw new AuthException();
+
         $voucher = $this->redeemVoucherRepository->findByToken($data['token']);
 
-        if(!$voucher)
-            throw new InvalidTokenException;
+        if(!$voucher || !$voucher->active)
+            throw new InvalidTokenException();
 
         return $this->redeemVoucherRepository->redeemUpdate($voucher, $data['user_id']);
     }
@@ -79,7 +86,7 @@ class RedeemVoucherService
             for ($x = 0; $x <= $count; $x++) {
                 $data = [
                     'token' => $this->getUniqueToken(),
-                    'value' => random_float(10,100)
+                    'value' => 100.00
                 ];
                 $this->redeemVoucherRepository->create($data);
             }

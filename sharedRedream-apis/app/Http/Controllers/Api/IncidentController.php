@@ -8,7 +8,6 @@ use App\Services\IncidentService;
 use App\Http\Requests\StoreUpdateIncidentRequest;
 use App\Http\Requests\SupportIncidentRequest;
 use App\Http\Resources\IncidentResource;
-use Illuminate\Support\Facades\Auth;
 
 class IncidentController extends Controller
 {
@@ -43,7 +42,7 @@ class IncidentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\StoreUpdateIncidentRequest  $request
+     * @param  StoreUpdateIncidentRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreUpdateIncident $request)
@@ -69,7 +68,7 @@ class IncidentController extends Controller
     /**
      * Support the incident.
      *
-     * @param  \Illuminate\Http\SupportIncidentRequest  $request
+     * @param  SupportIncidentRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Services\RedeemVoucherService;
 use App\Http\Requests\RedeemVoucherRequest;
 use App\Http\Resources\RedeemVoucherResource;
-use Illuminate\Support\Facades\Auth;
 
 class RedeemVoucherController extends Controller
 {
@@ -42,7 +41,7 @@ class RedeemVoucherController extends Controller
     /**
      * Redeem and update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\RedeemVoucherRequest  $request
+     * @param  RedeemVoucherRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

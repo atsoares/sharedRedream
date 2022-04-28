@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Repositories\Impl\UserRepositoryInterface;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Wallet;
 
@@ -53,7 +54,7 @@ class UserRepository implements UserRepositoryInterface
      */
     public function findByEmail(string $email): ?User
     {
-        return $this->entity->where('email', $email)->findOrFail();
+        return $this->entity->where('email', $email)->first();
     }
 
     /**
@@ -65,7 +66,7 @@ class UserRepository implements UserRepositoryInterface
     public function create(array $data): ?User
     {
         $data['password'] = Hash::make($data['password']);
-        
+
         $user = $this->entity->create($data);
 
         $this->wallet->create([

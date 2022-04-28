@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Impl;
 
+use App\Models\Wallet;
+
 interface WalletRepositoryInterface
 {
     public function findById(int $id);

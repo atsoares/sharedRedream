@@ -25,7 +25,7 @@ class RedeemVoucherRequest extends FormRequest
     {
         return [
             'token' => 'required|min:20',
-            'user_id' => 'required'
+            'user_id' => 'required|int'
         ];
 
         return $rules;

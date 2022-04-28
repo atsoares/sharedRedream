@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\RegisterNewUserRequest;
+use App\Exceptions\AuthenticationException;
+use Auth;
+use Validator;
 use App\Services\UserService;
-use App\Http\Requests\RegisterUserRequest;
-use App\Http\Requests\LoginUserRequest;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -30,12 +33,26 @@ class AuthController extends Controller
     /**
      * Register new account
      *
-     * @param  \Illuminate\Http\RegisterUserRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function register(RegisterUserRequest $request)
+    public function register(Request $request)
     {
-        $user = $this->userService->create($request->validated());
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8'
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors());       
+        }
+
+        $user = $this->userService->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -46,19 +63,20 @@ class AuthController extends Controller
     /**
      * Login
      *
-     * @param  \Illuminate\Http\LoginUserRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function login(LoginUserRequest $request)
+    public function login(Request $request)
     {
         if (!Auth::attempt($request->only('email', 'password')))
-            throw new AuthenticationException;
+            throw new AuthenticationException();
 
-        $user = $this->userService->findUserByEmail($request['email']->validated());
+        $user = $this->userService->findUserByEmail($request['email']);
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()
             ->json(['message' => 'Hi '.$user->name.', welcome to sharedRedream','access_token' => $token, 'token_type' => 'Bearer', ], 200);
     }
+
 }

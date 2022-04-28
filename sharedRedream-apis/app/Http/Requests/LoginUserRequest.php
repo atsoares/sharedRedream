@@ -24,8 +24,8 @@ class LoginUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'token' => 'required|min:20',
-            'user_id' => 'required'
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:8'
         ];
 
         return $rules;

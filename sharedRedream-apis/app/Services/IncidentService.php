@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Impl\IncidentRepositoryInterface;
+use App\Exceptions\AuthException;
 use Illuminate\Support\Facades\Auth;
 use App\Exceptions\NotEnoughtBalanceException;
 
@@ -70,8 +71,8 @@ class IncidentService
     public function refund(int $id)
     {
         $incident = $this->incidentRepository->findById($id);
-        if(!Auth::user()->id == $incident->user_id)
-            throw new AuthorizationException;
+        if(Auth::user()->id != $incident->user_id)
+            throw new AuthException();
 
         return $this->incidentRepository->refund($id);
     }

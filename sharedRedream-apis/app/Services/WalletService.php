@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Repositories\Impl\WalletRepositoryInterface;
+use App\Exceptions\AuthException;
+use Illuminate\Support\Facades\Auth;
 
 class WalletService
 {
@@ -29,8 +31,10 @@ class WalletService
      * @param int $user_id
      */
     public function balance(int $user_id)
-    {
+    {         
+        if(Auth::user()->id != $user_id)
+            throw new AuthException();
+
         return $this->walletRepository->findByUserId($user_id);
     }
-
 }

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Services\WalletService;
 use App\Http\Requests\WalletBalanceRequest;
 use App\Http\Resources\WalletBalanceResource;
-use Illuminate\Support\Facades\Auth;
 
 class WalletController extends Controller
 {
@@ -36,10 +35,9 @@ class WalletController extends Controller
      */
     public function balance(WalletBalanceRequest $request)
     {
-        if(!Auth::user()->id == $request->user_id)
-            throw new AuthorizationException;
+        $validated = $request->validated();
 
-        $balance = $this->walletService->balance($request->user_id);
+        $balance = $this->walletService->balance($validated['user_id']);
         return new WalletBalanceResource($balance);   
     }
 
