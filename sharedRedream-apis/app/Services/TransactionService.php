@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Repositories\Impl\TransactionRepositoryInterface;
+use App\Exceptions\AuthException;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionService
 {
@@ -30,6 +32,9 @@ class TransactionService
      */
     public function getAllByUser(int $user_id)
     {
+        if(Auth::user()->id != $user_id)
+            throw new AuthException();
+
         return $this->transactionRepository->getAllByUser($user_id);
     }
 

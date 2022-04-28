@@ -62,12 +62,13 @@ class IncidentRepository implements IncidentRepositoryInterface
      */
     public function findById(int $id): ?Incident
     {
-        return $this->entity->findOrFail($id);
+        return $this->entity->where('refunded', false)->find($id);
     }
 
     /**
      * Create a Incident
      *
+     * @param array $data
      * @return Incident
      */
     public function create(array $data): ?Incident
@@ -79,6 +80,8 @@ class IncidentRepository implements IncidentRepositoryInterface
     /**
      * Update existing Incident
      *
+     * @param int $id
+     * @param array $data
      * @return Incident
      */
     public function update(int $id, array $data): ?Incident
@@ -91,16 +94,20 @@ class IncidentRepository implements IncidentRepositoryInterface
     /**
      * Support existing Incident
      *
+     * @param object $incident
+     * @param array $data
      * @return Incident
      */
-    public function support(int $id, array $data): ?Incident
+    public function support(object $incident, array $data): ?Incident
     {
-        if(!$this->wallet->checkIfUserHasAvailableBalance($data['user_id'], $data['value']))
+        $wallet = $this->wallet
+                            ->checkIfUserHasAvailableBalance($data['user_id'], $data['value']);
+       
+        if(!$wallet)
             throw new NotEnoughtBalanceException();
 
-        $this->wallet->withdrawal($data['user_id'], $data['value']);
+        $this->wallet->withdrawal($wallet, $data['value']);
         
-        $incident = $this->findById($id);
         $incident->total_raised = $incident->total_raised + $data['value'];
         $incident->save();
 
@@ -116,18 +123,19 @@ class IncidentRepository implements IncidentRepositoryInterface
     /**
      * Refund existing Incident
      *
+     * @param object $incident
      * @return Incident
      */
-    public function refund(int $id): ?Incident
+    public function refund(object $incident): ?Incident
     {
-        $incident = $this->findById($id);
-
         $incident->refunded = true;
         $incident->refunded_at = now();
 
         $incident->save();
 
-        $this->wallet->deposit($incident->user_id, $incident->total_raised);
+        $wallet = $this->wallet->findByUserId($incident->user_id);
+
+        $this->wallet->deposit($wallet, $incident->total_raised);
 
         $this->transaction->create([
             'user_id' => $incident->user_id,

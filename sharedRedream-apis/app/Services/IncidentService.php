@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\Impl\IncidentRepositoryInterface;
 use App\Exceptions\AuthException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use App\Exceptions\NotEnoughtBalanceException;
 
 class IncidentService
@@ -61,7 +62,13 @@ class IncidentService
      */
     public function support(int $id, array $data)
     {
-        return $this->incidentRepository->support($id, $data);
+        $incident = $this->findById($id);
+        if(!$incident)
+            throw new HttpResponseException(response()->json("Incident does not exist", 404));
+
+        if(Auth::user()->id != $data['user_id'])
+            throw new AuthException();
+        return $this->incidentRepository->support($incident, $data);
     }
 
     /**
@@ -71,10 +78,13 @@ class IncidentService
     public function refund(int $id)
     {
         $incident = $this->incidentRepository->findById($id);
+        if(!$incident)
+        throw new HttpResponseException(response()->json("Incident does not exist", 404));
+        
         if(Auth::user()->id != $incident->user_id)
             throw new AuthException();
-
-        return $this->incidentRepository->refund($id);
+        
+        return $this->incidentRepository->refund($incident);
     }
    
 }

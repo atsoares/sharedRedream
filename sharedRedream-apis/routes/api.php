@@ -6,7 +6,8 @@ use App\Http\Controllers\Api\{
     AuthController,
     IncidentController,
     RedeemVoucherController,
-    WalletController
+    WalletController,
+    TransactionController
 };
 
 /*
@@ -46,8 +47,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //API route to wallet balance
     Route::get('/balance', [WalletController::class, 'balance']);
 
-    // API route for logout user
-    Route::post('/logout', [AuthController::class, 'logout']);
+    //API route to extract transactions
+    Route::get('/{user_id}/extract', [TransactionController::class, 'userExtract']);
+
 });
 
 Route::fallback(function () {

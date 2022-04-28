@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Services\WalletService;
-use App\Http\Requests\UserExtractRequest;
-use App\Http\Requests\IncidentExtractRequest;
-use App\Http\Resources\TransactionResource;
+use App\Services\TransactionService;
+use App\Http\Resources\TransactionIncidentResource;
+use App\Http\Resources\TransactionUserResource;
 
 class TransactionController extends Controller
 {
@@ -31,29 +30,25 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  UserExtractRequest  $request
+     * @param  int  $user_id
      * @return \Illuminate\Http\Response
      */
-    public function userExtract(UserExtractRequest $request)
+    public function userExtract($user_id)
     {
-        $validated = $request->validated();
-
-        $transactions = $this->transactionService->getAllByUser($validated['user_id']);
-        return new TransactionResource($transactions);   
+        $transactions = $this->transactionService->getAllByUser($user_id);
+        return TransactionUserResource::collection($transactions);   
     }
     
     /**
      * Display a listing of the resource.
      *
-     * @param  IncidentExtractRequest  $request
+     * @param  int  $incident_id
      * @return \Illuminate\Http\Response
      */
-    public function incidentExtract(IncidentExtractRequest $request)
+    public function incidentExtract($incident_id)
     {
-        $validated = $request->validated();
-
-        $transactions = $this->transactionService->getAllByIncident($validated['incident_id']);
-        return new TransactionResource($transactions);  
+        $transactions = $this->transactionService->getAllByIncident($incident_id);
+        return TransactionIncidentResource::collection($transactions);  
     }
 
     /**

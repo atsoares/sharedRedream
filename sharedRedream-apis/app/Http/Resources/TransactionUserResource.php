@@ -3,9 +3,9 @@
 namespace App\Http\Resources;
 
 use Carbon\Carbon;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class TransactionResource extends ResourceCollection
+class TransactionUserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,7 +16,11 @@ class TransactionResource extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collectionS
+            'operation' => $this->operation,
+            'user_id' => $this->user_id,
+            'incident_id' => $this->incident_id,
+            'redeem_voucher_id' => $this->redeem_voucher_id,
+            'value' => $this->value,
         ];
     }
 }

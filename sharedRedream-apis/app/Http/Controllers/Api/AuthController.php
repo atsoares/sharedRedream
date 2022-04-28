@@ -54,10 +54,7 @@ class AuthController extends Controller
      */
     public function login(LoginUserRequest $request)
     {   
-        dd($request);
-
         $validated = $request->validated();
-
 
         if (!Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']]))
             throw new AuthenticationException();

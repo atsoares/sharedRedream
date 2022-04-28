@@ -35,4 +35,12 @@ class Incident extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Get the transactions associated with the incident.
+     */
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
 }

@@ -45,7 +45,7 @@ class IncidentController extends Controller
      * @param  StoreUpdateIncidentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateIncident $request)
+    public function store(StoreUpdateIncidentRequest $request)
     {
         $incident = $this->incidentService->create($request->validated());
 
