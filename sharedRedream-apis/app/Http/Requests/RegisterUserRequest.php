@@ -3,10 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
-class StoreUpdateIncidentRequest extends FormRequest
+class RegisterUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,15 +26,14 @@ class StoreUpdateIncidentRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:50',
-            'description' => 'required|max:200',
-            'user_id' => 'required',
-            'refunded' => 'boolean',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8'
         ];
 
         return $rules;
     }
-    
+
     /**
      * Return validation errors as json response
      *
