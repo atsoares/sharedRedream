@@ -24,7 +24,7 @@ class StoreUpdateIncidentRequest extends BaseRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:50',
+            'title' => 'required|max:50|unique:incidents',
             'description' => 'required|max:200',
             'user_id' => 'required',
             'refunded' => 'boolean',

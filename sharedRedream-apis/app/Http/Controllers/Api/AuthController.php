@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Services\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\LoginUserRequest;
+use App\Http\Resources\UserResource;
 use App\Exceptions\AuthenticationException;
-use Auth;
-use App\Services\UserService;
 
 class AuthController extends Controller
 {
@@ -65,6 +65,16 @@ class AuthController extends Controller
 
         return response()
             ->json(['message' => 'Hi '.$user->name.', welcome to sharedRedream','access_token' => $token, 'token_type' => 'Bearer', ], 200);
+    }
+
+    /**
+     * Get Profile Info
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function profile()
+    {   
+        return new UserResource(Auth::user());
     }
 
 }

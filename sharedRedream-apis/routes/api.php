@@ -21,37 +21,36 @@ use App\Http\Controllers\Api\{
 |
 */
 
-//API route for register new user
-Route::post('/register', [AuthController::class, 'register']);
-//API route for login user
-Route::post('/login', [AuthController::class, 'login']);
-
-//Protecting Routes
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['namespace' => 'Api', 'as'=> 'api.'], function () {
     
-    //API route to get profile info
-    Route::get('/profile', function(Request $request) {
-        return auth()->user();
+    //API route for register new user
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    //API route for login user
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+    //Protecting Routes
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+        
+        //API route to get profile info
+        Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+
+        //API route to incidents
+        Route::get('/incidents', [IncidentController::class, 'index'])->name('incidents');
+        Route::post('/incident', [IncidentController::class, 'store']);
+        Route::post('/incident/{id}/support', [IncidentController::class, 'support']);
+        Route::post('/incident/{id}/refund', [IncidentController::class, 'refund']);
+
+        //API route to redeem vouchers
+        Route::post('/voucher/create/{count}', [RedeemVoucherController::class, 'storeInBatch']);
+        Route::post('/redeem', [RedeemVoucherController::class, 'redeem']);
+        
+        //API route to extract transactions
+        Route::get('/{user_id}/extract', [TransactionController::class, 'userExtract']);
+
     });
 
-    //API route to incidents
-    Route::get('/incidents', [IncidentController::class, 'index']);
-    Route::post('/incident', [IncidentController::class, 'store']);
-    Route::post('/incident/{id}/support', [IncidentController::class, 'support']);
-    Route::post('/incident/{id}/refund', [IncidentController::class, 'refund']);
+    Route::fallback(function () {
+        return response()->json(['message' => 'Not found'], 404);
+    });
 
-    //API route to redeem vouchers
-    Route::post('/voucher/create/{count}', [RedeemVoucherController::class, 'storeInBatch']);
-    Route::post('/redeem', [RedeemVoucherController::class, 'redeem']);
-
-    //API route to wallet balance
-    Route::get('/{user_id}/balance', [WalletController::class, 'balance']);
-
-    //API route to extract transactions
-    Route::get('/{user_id}/extract', [TransactionController::class, 'userExtract']);
-
-});
-
-Route::fallback(function () {
-    return response()->json(['message' => 'Bad request'], 400);
 });
