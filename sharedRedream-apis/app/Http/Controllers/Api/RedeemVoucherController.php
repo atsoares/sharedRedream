@@ -8,6 +8,9 @@ use App\Services\RedeemVoucherService;
 use App\Http\Requests\RedeemVoucherRequest;
 use App\Http\Resources\RedeemVoucherResource;
 
+/**
+ * @group Voucher endpoints
+ */
 class RedeemVoucherController extends Controller
 {
     /**
@@ -28,8 +31,12 @@ class RedeemVoucherController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Generate new Vouchers (I know, in real world this end point would be available only for admin user type)
      *
+     * @response 200 {
+     *    "message": "Vouchers Created"
+     * }
+     * 
      * @param  int  $count
      * @return \Illuminate\Http\Response
      */
@@ -39,14 +46,36 @@ class RedeemVoucherController extends Controller
     }
 
     /**
-     * Redeem and update the specified resource in storage.
+     * Redeem the voucher passing USER_ID
      *
+     * @response 200 {
+     *    "data": {
+     *        "token": "S49SC89I34BC3S0KJRJM",
+     *        "user_id": 2,
+     *        "value": 100.00,
+     *        "used_at": "28-04-2022 15:46:21"
+     *    }
+     * }
+     * 
+     * @response status=422 scenario="Validation error" { 
+     *    "message": "The given data was invalid.",
+     *    "errors": {
+     *        "token": [
+     *            "The token must be at least 20 characters."
+     *        ]
+     *    }
+     * }
+     * @response status=403 scenario="Not authorized user trying to perform" { 
+     *    "error": "This action is not allowed",
+     *    "code": 403
+     * }
      * @param  RedeemVoucherRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function redeem(RedeemVoucherRequest $request)
     {
-        return $this->redeemVoucherService->redeem($request->validated());
+        $voucher = $this->redeemVoucherService->redeem($request->validated());
+        return new RedeemVoucherResource($voucher);
     }
 }
