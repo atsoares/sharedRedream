@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://sharedredream.com'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        L5Swagger\L5SwaggerServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -175,7 +176,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
     ],
 
     /*
