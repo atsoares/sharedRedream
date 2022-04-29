@@ -31,7 +31,5 @@ class SupportIncidentRequest extends BaseRequest
             'user_id' => 'required',
             'value' => 'required|min:1|max:100'
         ];
-
-        return $rules;
     }
 }

@@ -33,7 +33,5 @@ class StoreUpdateIncidentRequest extends BaseRequest
             'description' => 'required|max:200',
             'user_id' => 'required'
         ];
-
-        return $rules;
     }
 }

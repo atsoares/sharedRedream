@@ -6,6 +6,7 @@ use App\Repositories\Impl\RedeemVoucherRepositoryInterface;
 use App\Models\RedeemVoucher;
 use App\Models\Wallet;
 use App\Models\Transaction;
+use Illuminate\Database\Eloquent\Collection;
 
 class RedeemVoucherRepository implements RedeemVoucherRepositoryInterface
 {

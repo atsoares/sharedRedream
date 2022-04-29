@@ -3,7 +3,6 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\Response;
 use App\Exceptions\Traits\ExceptionResponseTrait;
 use Throwable;
 
@@ -40,30 +39,6 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
-        });
-
-        $this->reportable(function (HttpException $e) {
-            $code = $e->getStatusCode();
-            $defaultMessage = Response::$statusTexts[$code];
-            $message = $e->getMessage() == "" ? $defaultMessage : $e->getMessage();
-            return $this->errorResponse($message, $code);
-        });
-
-        $this->reportable(function (ValidationException $e) {
-            $errors = $e->validator->errors()->getMessages();
-            return $this->errorResponse($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
-        });
-
-        $this->reportable(function (NotEnoughtBalanceException $e) {
-            return $this->errorResponse("Balance is not enought", Response::HTTP_UNPROCESSABLE_ENTITY);
-        });
-
-        $this->reportable(function (AuthorizationException $e) {
-            return $this->errorResponse($e->getMessage(), Response::HTTP_FORBIDDEN);
-        });
-
-        $this->reportable(function (AuthenticationException $e) {
-            return $this->errorResponse("Balance is not enought", Response::HTTP_UNPROCESSABLE_ENTITY);
         });
     }
 

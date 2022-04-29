@@ -103,9 +103,9 @@ class IncidentRepository implements IncidentRepositoryInterface
      *
      * @param int $id
      * @param array $data
-     * @return Incident
+     * @return bool
      */
-    public function update(int $id, array $data): ?Incident
+    public function update(int $id, array $data)
     {
         $incident = $this->findById($id);
 

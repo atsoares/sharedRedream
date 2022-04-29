@@ -31,7 +31,5 @@ class RedeemVoucherRequest extends BaseRequest
             'token' => 'required|min:20',
             'user_id' => 'required|int'
         ];
-
-        return $rules;
     }
 }

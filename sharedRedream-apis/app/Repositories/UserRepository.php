@@ -82,9 +82,9 @@ class UserRepository implements UserRepositoryInterface
      *
      * @param int $id
      * @param array $data
-     * @return User
+     * @return bool
      */
-    public function update(int $id, array $data): ?User
+    public function update(int $id, array $data)
     {
         $user = $this->findById($id);
 

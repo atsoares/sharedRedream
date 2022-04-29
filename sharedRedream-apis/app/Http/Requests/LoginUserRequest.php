@@ -30,7 +30,5 @@ class LoginUserRequest extends BaseRequest
             'email' => 'required|string|email',
             'password' => 'required|string|min:8'
         ];
-
-        return $rules;
     }
 }
