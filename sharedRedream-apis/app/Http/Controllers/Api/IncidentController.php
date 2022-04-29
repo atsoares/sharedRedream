@@ -37,7 +37,7 @@ class IncidentController extends Controller
      *
      * @authenticated
      * 
-     * @response 200 {
+     * @response 201 {
      *    "data": {
      *        "title": "Help my Cats",
      *        "description": "Need help to feed my cats please",
@@ -153,7 +153,7 @@ class IncidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $incident = $this->incidentService->getById($id);
 
@@ -203,7 +203,7 @@ class IncidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function support(SupportIncidentRequest $request, $id)
+    public function support(SupportIncidentRequest $request,int $id)
     {
         $incident = $this->incidentService->support($id, $request->validated());
         
@@ -252,7 +252,7 @@ class IncidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function refund($id)
+    public function refund(int $id)
     {
         $incident = $this->incidentService->refund($id);
 

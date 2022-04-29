@@ -32,7 +32,7 @@ class TransactionService
      */
     public function getAllByUser(int $user_id)
     {
-        if(Auth::user()->id != $user_id)
+        if(!Auth::hasUser() || Auth::user()->id != $user_id)
             throw new AuthException();
 
         return $this->transactionRepository->getAllByUser($user_id);
@@ -45,6 +45,8 @@ class TransactionService
      */
     public function getAllByIncident(int $incident_id)
     {
+        if(!Auth::hasUser())
+            throw new AuthException();
         return $this->transactionRepository->getAllSupportersByIncident($incident_id);
     }
 

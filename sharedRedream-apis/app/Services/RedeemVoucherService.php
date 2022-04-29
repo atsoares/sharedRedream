@@ -34,6 +34,8 @@ class RedeemVoucherService
      */
     public function getAll()
     {
+        if(!Auth::hasUser())
+            throw new AuthException();
         return $this->redeemVoucherRepository->getAll();
     }
 
@@ -44,6 +46,8 @@ class RedeemVoucherService
      */
     public function findByToken(string $token)
     {
+        if(!Auth::hasUser())
+            throw new AuthException();
         return $this->redeemVoucherRepository->findByToken($token);
     }
 
@@ -54,6 +58,8 @@ class RedeemVoucherService
      */
     public function create(object $data)
     {
+        if(!Auth::hasUser())
+            throw new AuthException();
         return $this->redeemVoucherRepository->create($data);
     }
 
@@ -64,7 +70,7 @@ class RedeemVoucherService
      */
     public function redeem(array $data)
     {
-        if(Auth::user()->id != $data['user_id'])
+        if(!Auth::hasUser() || Auth::user()->id != $data['user_id'])
             throw new AuthException();
 
         $voucher = $this->redeemVoucherRepository->findByToken($data['token']);
@@ -82,6 +88,9 @@ class RedeemVoucherService
      */
     public function generateNewVouchers(int $count)
     {
+        if(!Auth::hasUser())
+            throw new AuthException();
+
         if($count > 0){
             for ($x = 0; $x <= $count; $x++) {
                 $data = [

@@ -15,7 +15,7 @@ class RegisterRouteTest extends TestCase
      *
      * @return void
      */
-    public function test_createNewUser_valid_request_should_pass()
+    public function test_create_user_valid_request_should_pass()
     {
         //Prepare
         $user = User::factory()->make();
@@ -42,7 +42,7 @@ class RegisterRouteTest extends TestCase
      *
      * @return void
      */
-    public function test_createNewUser_missingPassword_should_fail()
+    public function test_create_user_missing_password_should_fail()
     {
         //Prepare
         $user = User::factory()->make();

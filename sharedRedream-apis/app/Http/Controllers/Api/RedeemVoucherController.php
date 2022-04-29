@@ -38,7 +38,7 @@ class RedeemVoucherController extends Controller
      * 
      * @authenticated
      * 
-     * @response 200 {
+     * @response 201 {
      *    "message": "Vouchers Created"
      * }
      * 

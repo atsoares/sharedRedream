@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Carbon\Carbon;
-use App\Http\Resources\TransactionResource;
+use App\Http\Resources\TransactionIncidentResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class IncidentResource extends JsonResource
