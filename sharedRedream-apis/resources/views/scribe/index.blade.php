@@ -77,10 +77,10 @@
                 </li>
                                     <ul id="tocify-subheader-auth-endpoints" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="auth-endpoints-POSTregister">
-                        <a href="#auth-endpoints-POSTregister">Handle a registration request for the application.</a>
+                        <a href="#auth-endpoints-POSTregister">Registration request</a>
                     </li>
                                     <li class="tocify-item level-2" data-unique="auth-endpoints-POSTlogin">
-                        <a href="#auth-endpoints-POSTlogin">Handle a login request to the application.</a>
+                        <a href="#auth-endpoints-POSTlogin">Login request</a>
                     </li>
                                     <li class="tocify-item level-2" data-unique="auth-endpoints-GETprofile">
                         <a href="#auth-endpoints-GETprofile">Show authenticated user info</a>
@@ -88,46 +88,47 @@
                                                     </ul>
                             </ul>
                     <ul id="tocify-header-3" class="tocify-header">
-                <li class="tocify-item level-1" data-unique="endpoints">
-                    <a href="#endpoints">Endpoints</a>
-                </li>
-                                    <ul id="tocify-subheader-endpoints" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="endpoints-GETsanctum-csrf-cookie">
-                        <a href="#endpoints-GETsanctum-csrf-cookie">Return an empty response simply to trigger the storage of the CSRF cookie in the browser.</a>
-                    </li>
-                                    <li class="tocify-item level-2" data-unique="endpoints-POSTvoucher-create--count-">
-                        <a href="#endpoints-POSTvoucher-create--count-">Store a newly created resource in storage.</a>
-                    </li>
-                                    <li class="tocify-item level-2" data-unique="endpoints-POSTredeem">
-                        <a href="#endpoints-POSTredeem">Redeem and update the specified resource in storage.</a>
-                    </li>
-                                    <li class="tocify-item level-2" data-unique="endpoints-GET-user_id--extract">
-                        <a href="#endpoints-GET-user_id--extract">Display a listing of the resource.</a>
-                    </li>
-                                    <li class="tocify-item level-2" data-unique="endpoints-GET-fallbackPlaceholder-">
-                        <a href="#endpoints-GET-fallbackPlaceholder-">GET {fallbackPlaceholder}</a>
-                    </li>
-                                                    </ul>
-                            </ul>
-                    <ul id="tocify-header-4" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="incident-endpoints">
                     <a href="#incident-endpoints">Incident endpoints</a>
                 </li>
                                     <ul id="tocify-subheader-incident-endpoints" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="incident-endpoints-GETincidents">
-                        <a href="#incident-endpoints-GETincidents">Display a listing of incidents that are active.</a>
+                        <a href="#incident-endpoints-GETincidents">Get all active incidents</a>
                     </li>
                                     <li class="tocify-item level-2" data-unique="incident-endpoints-GET-user_id--incidents">
-                        <a href="#incident-endpoints-GET-user_id--incidents">Display a listing of incidents by User.</a>
+                        <a href="#incident-endpoints-GET-user_id--incidents">Get all incidents from an USER</a>
                     </li>
                                     <li class="tocify-item level-2" data-unique="incident-endpoints-POSTincident">
-                        <a href="#incident-endpoints-POSTincident">Store a newly created resource in storage.</a>
+                        <a href="#incident-endpoints-POSTincident">Create new incident</a>
                     </li>
                                     <li class="tocify-item level-2" data-unique="incident-endpoints-POSTincident--id--support">
-                        <a href="#incident-endpoints-POSTincident--id--support">Support the incident.</a>
+                        <a href="#incident-endpoints-POSTincident--id--support">Support the incident</a>
                     </li>
                                     <li class="tocify-item level-2" data-unique="incident-endpoints-POSTincident--id--refund">
                         <a href="#incident-endpoints-POSTincident--id--refund">Refund the incident</a>
+                    </li>
+                                                    </ul>
+                            </ul>
+                    <ul id="tocify-header-4" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="transaction-endpoints">
+                    <a href="#transaction-endpoints">Transaction endpoints</a>
+                </li>
+                                    <ul id="tocify-subheader-transaction-endpoints" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="transaction-endpoints-GET-user_id--extract">
+                        <a href="#transaction-endpoints-GET-user_id--extract">Get all transactions from an USER</a>
+                    </li>
+                                                    </ul>
+                            </ul>
+                    <ul id="tocify-header-5" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="voucher-endpoints">
+                    <a href="#voucher-endpoints">Voucher endpoints</a>
+                </li>
+                                    <ul id="tocify-subheader-voucher-endpoints" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="voucher-endpoints-POSTvoucher-create--count-">
+                        <a href="#voucher-endpoints-POSTvoucher-create--count-">Generate new Vouchers</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="voucher-endpoints-POSTvoucher-redeem">
+                        <a href="#voucher-endpoints-POSTvoucher-redeem">Redeem the voucher passing USER_ID</a>
                     </li>
                                                     </ul>
                             </ul>
@@ -159,7 +160,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">http://localhost:8000</code></pre>
 
         <h1 id="authenticating-requests">Authenticating requests</h1>
-<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {ACCESS_TOKEN}"</code></strong>.</p>
+<p>This API is authenticated by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {ACCESS_TOKEN}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by  registering or logging in through <b>API endpoints</b>.</p>
 
@@ -167,7 +168,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
     
 
-            <h2 id="auth-endpoints-POSTregister">Handle a registration request for the application.</h2>
+            <h2 id="auth-endpoints-POSTregister">Registration request</h2>
 
 <p>
 </p>
@@ -244,9 +245,7 @@ print_r(json_decode((string) $body));</code></pre></div>
        &quot;id&quot;: 2,
        &quot;name&quot;: &quot;Demo&quot;,
        &quot;email&quot;: &quot;demo@demo.com&quot;,
-       &quot;email_verified_at&quot;: null,
-       &quot;created_at&quot;: &quot;2022-04-25T06:21:47.000000Z&quot;,
-       &quot;updated_at&quot;: &quot;2022-04-25T06:21:47.000000Z&quot;
+       &quot;balance&quot;: &quot;0.00&quot;
    }
    &quot;token&quot;: &quot;3|tA8Ouhh1CWXJORVPHvUQvN0SFNZVGwvVbx2F3prb&quot;,
    &quot;token_type&quot;: &quot;Bearer&quot;
@@ -339,7 +338,7 @@ print_r(json_decode((string) $body));</code></pre></div>
         </p>
         </form>
 
-            <h2 id="auth-endpoints-POSTlogin">Handle a login request to the application.</h2>
+            <h2 id="auth-endpoints-POSTlogin">Login request</h2>
 
 <p>
 </p>
@@ -418,7 +417,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 }</code>
  </pre>
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary>
@@ -427,14 +426,15 @@ print_r(json_decode((string) $body));</code></pre></div>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 59
+x-ratelimit-remaining: 58
 access-control-allow-origin: *
  </code></pre>
         </details>         <pre>
 
 <code class="language-json">{
-    &quot;error&quot;: &quot;Wrong credentials&quot;,
-    &quot;code&quot;: 401
+    &quot;message&quot;: &quot;Hi Demo, welcome to sharedRedream&quot;,
+    &quot;access_token&quot;: &quot;18|zABuU2DRip3TS5e0CUGGRqxqUvbDD02qr6DZCBws&quot;,
+    &quot;token_type&quot;: &quot;Bearer&quot;
 }</code>
  </pre>
     </span>
@@ -624,655 +624,14 @@ print_r(json_decode((string) $body));</code></pre></div>
         </p>
                 </form>
 
-        <h1 id="endpoints">Endpoints</h1>
-
-    
-
-            <h2 id="endpoints-GETsanctum-csrf-cookie">Return an empty response simply to trigger the storage of the CSRF cookie in the browser.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETsanctum-csrf-cookie">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/sanctum/csrf-cookie" \
-    --header "Content-Type: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/sanctum/csrf-cookie"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;get(
-    'http://localhost:8000/sanctum/csrf-cookie',
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETsanctum-csrf-cookie">
-            <blockquote>
-            <p>Example response (204):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary>
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-access-control-allow-origin: *
-set-cookie: XSRF-TOKEN=eyJpdiI6IjRjMkpuem8vV3Y5NW5OMnlUbVJRNGc9PSIsInZhbHVlIjoiL0syQjA4VWdWUW8vYnhzSDFNemo3Y1Q4UTNQYUtGR0xpeTlmMzZqS3dQbXRYeG1DSDF2cnJRbXNMQnVVeExlSjd5NmNmWXQvOXNZT3p1SjVTN1g4MEtadlcxN1dYWFJPTTZReWNjUzlrVnhZYWwzdW85aXZGd0ZCYTVIbFNOeEEiLCJtYWMiOiJlNDVhMDg2Y2QwMDNjY2MwMjk2NDY3MjgxZGE0MTE1NWY2NmQ4Zjc0MGQ2YmQ2NGQ4YjJlZWRjNTMyNDM3NGMxIiwidGFnIjoiIn0%3D; expires=Fri, 29-Apr-2022 06:30:27 GMT; Max-Age=7200; path=/; samesite=lax; laravel_session=eyJpdiI6IjBIeDIraHhjWmcyak9TbmtvcTI5WHc9PSIsInZhbHVlIjoicHNPTFZ2SFBJMmUrcmpQQ1duVUpINEpxOEEyOVlnU0Z5dnovRFRuRjJWVTZGTEZOSk1Na0xoV0lnOWxCWXFVVDdrd3NQQlEvM0JRY3lqVjMwL042SE9iUmpnWnRWMVIya2hLYVBsVy9iNjMwbFUwa1YrZ3VzcFU1dlArVWE0T1AiLCJtYWMiOiI4ODZkOTVlNGFmNjEzNjEwOGEzMmE5YzY2NjM0MDMwN2Y1MzVlZTAwYmQ1MTZjYjcwOTdjM2M0ZDZjMzU5ZjBiIiwidGFnIjoiIn0%3D; expires=Fri, 29-Apr-2022 06:30:27 GMT; Max-Age=7200; path=/; httponly; samesite=lax
- </code></pre>
-        </details>         <pre>
-<code>[Empty response]</code>
- </pre>
-    </span>
-<span id="execution-results-GETsanctum-csrf-cookie" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETsanctum-csrf-cookie"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETsanctum-csrf-cookie"></code></pre>
-</span>
-<span id="execution-error-GETsanctum-csrf-cookie" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETsanctum-csrf-cookie"></code></pre>
-</span>
-<form id="form-GETsanctum-csrf-cookie" data-method="GET"
-      data-path="sanctum/csrf-cookie"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETsanctum-csrf-cookie', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETsanctum-csrf-cookie"
-                    onclick="tryItOut('GETsanctum-csrf-cookie');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETsanctum-csrf-cookie"
-                    onclick="cancelTryOut('GETsanctum-csrf-cookie');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETsanctum-csrf-cookie" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>sanctum/csrf-cookie</code></b>
-        </p>
-                    </form>
-
-            <h2 id="endpoints-POSTvoucher-create--count-">Store a newly created resource in storage.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-POSTvoucher-create--count-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/voucher/create/delectus" \
-    --header "Content-Type: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/voucher/create/delectus"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;post(
-    'http://localhost:8000/voucher/create/delectus',
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTvoucher-create--count-">
-            <blockquote>
-            <p>Example response (302):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary>
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-location: http://localhost:8000/login
-content-type: text/html; charset=UTF-8
-access-control-allow-origin: *
- </code></pre>
-        </details>         <pre>
-
-<code class="language-json">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;UTF-8&quot; /&gt;
-        &lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url='http://localhost:8000/login'&quot; /&gt;
-
-        &lt;title&gt;Redirecting to http://localhost:8000/login&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        Redirecting to &lt;a href=&quot;http://localhost:8000/login&quot;&gt;http://localhost:8000/login&lt;/a&gt;.
-    &lt;/body&gt;
-&lt;/html&gt;</code>
- </pre>
-    </span>
-<span id="execution-results-POSTvoucher-create--count-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTvoucher-create--count-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTvoucher-create--count-"></code></pre>
-</span>
-<span id="execution-error-POSTvoucher-create--count-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTvoucher-create--count-"></code></pre>
-</span>
-<form id="form-POSTvoucher-create--count-" data-method="POST"
-      data-path="voucher/create/{count}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTvoucher-create--count-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTvoucher-create--count-"
-                    onclick="tryItOut('POSTvoucher-create--count-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTvoucher-create--count-"
-                    onclick="cancelTryOut('POSTvoucher-create--count-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTvoucher-create--count-" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>voucher/create/{count}</code></b>
-        </p>
-                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <p>
-                <b><code>count</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="count"
-               data-endpoint="POSTvoucher-create--count-"
-               value="delectus"
-               data-component="url" hidden>
-    <br>
-
-            </p>
-                    </form>
-
-            <h2 id="endpoints-POSTredeem">Redeem and update the specified resource in storage.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-POSTredeem">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/redeem" \
-    --header "Content-Type: application/json" \
-    --data "{
-    \"token\": \"BW9JREEVNH181H54ISMK\",
-    \"user_id\": 2
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/redeem"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "token": "BW9JREEVNH181H54ISMK",
-    "user_id": 2
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;post(
-    'http://localhost:8000/redeem',
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'token' =&gt; 'BW9JREEVNH181H54ISMK',
-            'user_id' =&gt; 2,
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTredeem">
-            <blockquote>
-            <p>Example response (302):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary>
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-location: http://localhost:8000/login
-content-type: text/html; charset=UTF-8
-access-control-allow-origin: *
- </code></pre>
-        </details>         <pre>
-
-<code class="language-json">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;UTF-8&quot; /&gt;
-        &lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url='http://localhost:8000/login'&quot; /&gt;
-
-        &lt;title&gt;Redirecting to http://localhost:8000/login&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        Redirecting to &lt;a href=&quot;http://localhost:8000/login&quot;&gt;http://localhost:8000/login&lt;/a&gt;.
-    &lt;/body&gt;
-&lt;/html&gt;</code>
- </pre>
-    </span>
-<span id="execution-results-POSTredeem" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTredeem"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTredeem"></code></pre>
-</span>
-<span id="execution-error-POSTredeem" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTredeem"></code></pre>
-</span>
-<form id="form-POSTredeem" data-method="POST"
-      data-path="redeem"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTredeem', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTredeem"
-                    onclick="tryItOut('POSTredeem');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTredeem"
-                    onclick="cancelTryOut('POSTredeem');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTredeem" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>redeem</code></b>
-        </p>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <p>
-            <b><code>token</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="token"
-               data-endpoint="POSTredeem"
-               value="BW9JREEVNH181H54ISMK"
-               data-component="body" hidden>
-    <br>
-<p>The token with 20 characters to be redeem.</p>
-        </p>
-                <p>
-            <b><code>user_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-                <input type="number"
-               name="user_id"
-               data-endpoint="POSTredeem"
-               value="2"
-               data-component="body" hidden>
-    <br>
-<p>The id of the user.</p>
-        </p>
-        </form>
-
-            <h2 id="endpoints-GET-user_id--extract">Display a listing of the resource.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GET-user_id--extract">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/omnis/extract" \
-    --header "Content-Type: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/omnis/extract"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;get(
-    'http://localhost:8000/omnis/extract',
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GET-user_id--extract">
-            <blockquote>
-            <p>Example response (302):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary>
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-location: http://localhost:8000/login
-content-type: text/html; charset=UTF-8
-access-control-allow-origin: *
- </code></pre>
-        </details>         <pre>
-
-<code class="language-json">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;UTF-8&quot; /&gt;
-        &lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url='http://localhost:8000/login'&quot; /&gt;
-
-        &lt;title&gt;Redirecting to http://localhost:8000/login&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        Redirecting to &lt;a href=&quot;http://localhost:8000/login&quot;&gt;http://localhost:8000/login&lt;/a&gt;.
-    &lt;/body&gt;
-&lt;/html&gt;</code>
- </pre>
-    </span>
-<span id="execution-results-GET-user_id--extract" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GET-user_id--extract"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GET-user_id--extract"></code></pre>
-</span>
-<span id="execution-error-GET-user_id--extract" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GET-user_id--extract"></code></pre>
-</span>
-<form id="form-GET-user_id--extract" data-method="GET"
-      data-path="{user_id}/extract"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GET-user_id--extract', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GET-user_id--extract"
-                    onclick="tryItOut('GET-user_id--extract');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GET-user_id--extract"
-                    onclick="cancelTryOut('GET-user_id--extract');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GET-user_id--extract" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>{user_id}/extract</code></b>
-        </p>
-                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <p>
-                <b><code>user_id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="user_id"
-               data-endpoint="GET-user_id--extract"
-               value="omnis"
-               data-component="url" hidden>
-    <br>
-<p>The ID of the user.</p>
-            </p>
-                    </form>
-
-            <h2 id="endpoints-GET-fallbackPlaceholder-">GET {fallbackPlaceholder}</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GET-fallbackPlaceholder-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/ll)l6" \
-    --header "Content-Type: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/ll)l6"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;get(
-    'http://localhost:8000/ll)l6',
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GET-fallbackPlaceholder-">
-            <blockquote>
-            <p>Example response (404):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary>
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-x-ratelimit-limit: 60
-x-ratelimit-remaining: 58
-access-control-allow-origin: *
- </code></pre>
-        </details>         <pre>
-
-<code class="language-json">{
-    &quot;message&quot;: &quot;Not found&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GET-fallbackPlaceholder-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GET-fallbackPlaceholder-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GET-fallbackPlaceholder-"></code></pre>
-</span>
-<span id="execution-error-GET-fallbackPlaceholder-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GET-fallbackPlaceholder-"></code></pre>
-</span>
-<form id="form-GET-fallbackPlaceholder-" data-method="GET"
-      data-path="{fallbackPlaceholder}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GET-fallbackPlaceholder-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GET-fallbackPlaceholder-"
-                    onclick="tryItOut('GET-fallbackPlaceholder-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GET-fallbackPlaceholder-"
-                    onclick="cancelTryOut('GET-fallbackPlaceholder-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GET-fallbackPlaceholder-" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>{fallbackPlaceholder}</code></b>
-        </p>
-                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <p>
-                <b><code>fallbackPlaceholder</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="fallbackPlaceholder"
-               data-endpoint="GET-fallbackPlaceholder-"
-               value="ll)l6"
-               data-component="url" hidden>
-    <br>
-
-            </p>
-                    </form>
-
         <h1 id="incident-endpoints">Incident endpoints</h1>
 
     
 
-            <h2 id="incident-endpoints-GETincidents">Display a listing of incidents that are active.</h2>
+            <h2 id="incident-endpoints-GETincidents">Get all active incidents</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 
@@ -1284,6 +643,7 @@ access-control-allow-origin: *
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost:8000/incidents" \
+    --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
@@ -1293,6 +653,7 @@ access-control-allow-origin: *
 );
 
 const headers = {
+    "Authorization": "Bearer {ACCESS_TOKEN}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1309,6 +670,7 @@ $response = $client-&gt;get(
     'http://localhost:8000/incidents',
     [
         'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
             'Content-Type' =&gt; 'application/json',
         ],
     ]
@@ -1365,10 +727,10 @@ print_r(json_decode((string) $body));</code></pre></div>
 </span>
 <form id="form-GETincidents" data-method="GET"
       data-path="incidents"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json"}'
+      data-headers='{"Authorization":"Bearer {ACCESS_TOKEN}","Content-Type":"application\/json"}'
       autocomplete="off"
       onsubmit="event.preventDefault(); executeTryOut('GETincidents', this);">
     <h3>
@@ -1392,11 +754,20 @@ print_r(json_decode((string) $body));</code></pre></div>
             <small class="badge badge-green">GET</small>
             <b><code>incidents</code></b>
         </p>
-                    </form>
+                <p>
+            <label id="auth-GETincidents" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETincidents"
+                                                                data-component="header"></label>
+        </p>
+                </form>
 
-            <h2 id="incident-endpoints-GET-user_id--incidents">Display a listing of incidents by User.</h2>
+            <h2 id="incident-endpoints-GET-user_id--incidents">Get all incidents from an USER</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 
@@ -1407,22 +778,24 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/in/incidents?user_id=quas" \
+    --get "http://localhost:8000/non/incidents?user_id=eaque" \
+    --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/in/incidents"
+    "http://localhost:8000/non/incidents"
 );
 
 const params = {
-    "user_id": "quas",
+    "user_id": "eaque",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
+    "Authorization": "Bearer {ACCESS_TOKEN}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1436,13 +809,14 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8000/in/incidents',
+    'http://localhost:8000/non/incidents',
     [
         'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
             'Content-Type' =&gt; 'application/json',
         ],
         'query' =&gt; [
-            'user_id'=&gt; 'quas',
+            'user_id'=&gt; 'eaque',
         ],
     ]
 );
@@ -1498,10 +872,10 @@ print_r(json_decode((string) $body));</code></pre></div>
 </span>
 <form id="form-GET-user_id--incidents" data-method="GET"
       data-path="{user_id}/incidents"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json"}'
+      data-headers='{"Authorization":"Bearer {ACCESS_TOKEN}","Content-Type":"application\/json"}'
       autocomplete="off"
       onsubmit="event.preventDefault(); executeTryOut('GET-user_id--incidents', this);">
     <h3>
@@ -1525,13 +899,21 @@ print_r(json_decode((string) $body));</code></pre></div>
             <small class="badge badge-green">GET</small>
             <b><code>{user_id}/incidents</code></b>
         </p>
-                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                <p>
+            <label id="auth-GET-user_id--incidents" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GET-user_id--incidents"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <p>
                 <b><code>user_id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
                 <input type="text"
                name="user_id"
                data-endpoint="GET-user_id--incidents"
-               value="in"
+               value="non"
                data-component="url" hidden>
     <br>
 <p>The ID of the user.</p>
@@ -1542,16 +924,17 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="user_id"
                data-endpoint="GET-user_id--incidents"
-               value="quas"
+               value="eaque"
                data-component="query" hidden>
     <br>
 <p>To filter the incidents by specific user_id</p>
             </p>
                 </form>
 
-            <h2 id="incident-endpoints-POSTincident">Store a newly created resource in storage.</h2>
+            <h2 id="incident-endpoints-POSTincident">Create new incident</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 
@@ -1563,6 +946,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/incident" \
+    --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json" \
     --data "{
     \"title\": \"Need help\",
@@ -1578,6 +962,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 );
 
 const headers = {
+    "Authorization": "Bearer {ACCESS_TOKEN}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1601,6 +986,7 @@ $response = $client-&gt;post(
     'http://localhost:8000/incident',
     [
         'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
             'Content-Type' =&gt; 'application/json',
         ],
         'json' =&gt; [
@@ -1659,10 +1045,10 @@ print_r(json_decode((string) $body));</code></pre></div>
 </span>
 <form id="form-POSTincident" data-method="POST"
       data-path="incident"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json"}'
+      data-headers='{"Authorization":"Bearer {ACCESS_TOKEN}","Content-Type":"application\/json"}'
       autocomplete="off"
       onsubmit="event.preventDefault(); executeTryOut('POSTincident', this);">
     <h3>
@@ -1686,7 +1072,15 @@ print_r(json_decode((string) $body));</code></pre></div>
             <small class="badge badge-black">POST</small>
             <b><code>incident</code></b>
         </p>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+                <p>
+            <label id="auth-POSTincident" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTincident"
+                                                                data-component="header"></label>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <p>
             <b><code>title</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
                 <input type="text"
@@ -1719,12 +1113,13 @@ print_r(json_decode((string) $body));</code></pre></div>
         </p>
         </form>
 
-            <h2 id="incident-endpoints-POSTincident--id--support">Support the incident.</h2>
+            <h2 id="incident-endpoints-POSTincident--id--support">Support the incident</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<p>The user can help donating some value to an incident</p>
 
 <span id="example-requests-POSTincident--id--support">
 <blockquote>Example request:</blockquote>
@@ -1733,6 +1128,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/incident/8/support" \
+    --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json" \
     --data "{
     \"user_id\": 2,
@@ -1747,6 +1143,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 );
 
 const headers = {
+    "Authorization": "Bearer {ACCESS_TOKEN}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1769,6 +1166,7 @@ $response = $client-&gt;post(
     'http://localhost:8000/incident/8/support',
     [
         'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
             'Content-Type' =&gt; 'application/json',
         ],
         'json' =&gt; [
@@ -1829,6 +1227,15 @@ print_r(json_decode((string) $body));</code></pre></div>
     &quot;code&quot;: 422
 }</code>
  </pre>
+            <blockquote>
+            <p>Example response (404, Incident not found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Incident does not exist&quot;
+}</code>
+ </pre>
     </span>
 <span id="execution-results-POSTincident--id--support" hidden>
     <blockquote>Received response<span
@@ -1842,10 +1249,10 @@ print_r(json_decode((string) $body));</code></pre></div>
 </span>
 <form id="form-POSTincident--id--support" data-method="POST"
       data-path="incident/{id}/support"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json"}'
+      data-headers='{"Authorization":"Bearer {ACCESS_TOKEN}","Content-Type":"application\/json"}'
       autocomplete="off"
       onsubmit="event.preventDefault(); executeTryOut('POSTincident--id--support', this);">
     <h3>
@@ -1869,7 +1276,15 @@ print_r(json_decode((string) $body));</code></pre></div>
             <small class="badge badge-black">POST</small>
             <b><code>incident/{id}/support</code></b>
         </p>
-                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                <p>
+            <label id="auth-POSTincident--id--support" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTincident--id--support"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <p>
                 <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
                 <input type="number"
@@ -1906,9 +1321,10 @@ print_r(json_decode((string) $body));</code></pre></div>
             <h2 id="incident-endpoints-POSTincident--id--refund">Refund the incident</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<p>Refunds the total raised to the owner of the incident.</p>
 
 <span id="example-requests-POSTincident--id--refund">
 <blockquote>Example request:</blockquote>
@@ -1917,6 +1333,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/incident/5/refund" \
+    --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
@@ -1926,6 +1343,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 );
 
 const headers = {
+    "Authorization": "Bearer {ACCESS_TOKEN}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1942,6 +1360,7 @@ $response = $client-&gt;post(
     'http://localhost:8000/incident/5/refund',
     [
         'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
             'Content-Type' =&gt; 'application/json',
         ],
     ]
@@ -1990,12 +1409,12 @@ print_r(json_decode((string) $body));</code></pre></div>
 }</code>
  </pre>
             <blockquote>
-            <p>Example response (404, Incident does not exist):</p>
+            <p>Example response (404, Incident not found):</p>
         </blockquote>
                 <pre>
 
 <code class="language-json">{
-   &quot;Incident does not exist&quot;
+    &quot;message&quot;: &quot;Incident does not exist&quot;
 }</code>
  </pre>
     </span>
@@ -2011,10 +1430,10 @@ print_r(json_decode((string) $body));</code></pre></div>
 </span>
 <form id="form-POSTincident--id--refund" data-method="POST"
       data-path="incident/{id}/refund"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json"}'
+      data-headers='{"Authorization":"Bearer {ACCESS_TOKEN}","Content-Type":"application\/json"}'
       autocomplete="off"
       onsubmit="event.preventDefault(); executeTryOut('POSTincident--id--refund', this);">
     <h3>
@@ -2038,7 +1457,15 @@ print_r(json_decode((string) $body));</code></pre></div>
             <small class="badge badge-black">POST</small>
             <b><code>incident/{id}/refund</code></b>
         </p>
-                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                <p>
+            <label id="auth-POSTincident--id--refund" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTincident--id--refund"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <p>
                 <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
                 <input type="number"
@@ -2050,6 +1477,483 @@ print_r(json_decode((string) $body));</code></pre></div>
 <p>The ID of the incident.</p>
             </p>
                     </form>
+
+        <h1 id="transaction-endpoints">Transaction endpoints</h1>
+
+    
+
+            <h2 id="transaction-endpoints-GET-user_id--extract">Get all transactions from an USER</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GET-user_id--extract">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8000/iure/extract?user_id=5" \
+    --header "Authorization: Bearer {ACCESS_TOKEN}" \
+    --header "Content-Type: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/iure/extract"
+);
+
+const params = {
+    "user_id": "5",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer {ACCESS_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost:8000/iure/extract',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'user_id'=&gt; '5',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GET-user_id--extract">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+   &quot;data&quot;: [
+    {
+       &quot;operation&quot;: &quot;voucher_redeem&quot;,
+       &quot;redeem_voucher_id&quot;: 6,
+       &quot;value&quot;: &quot;100.00&quot;
+    },
+    {
+       &quot;operation&quot;: &quot;incident_help&quot;,
+       &quot;incident_id&quot;: 2,
+       &quot;value&quot;: &quot;30.00&quot;
+    },
+    {
+       &quot;operation&quot;: &quot;incident_help&quot;,
+       &quot;incident_id&quot;: 3,
+       &quot;value&quot;: &quot;20.00&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Not authorized user trying to perform):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;error&quot;: &quot;This action is not allowed&quot;,
+    &quot;code&quot;: 403
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GET-user_id--extract" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GET-user_id--extract"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GET-user_id--extract"></code></pre>
+</span>
+<span id="execution-error-GET-user_id--extract" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GET-user_id--extract"></code></pre>
+</span>
+<form id="form-GET-user_id--extract" data-method="GET"
+      data-path="{user_id}/extract"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {ACCESS_TOKEN}","Content-Type":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GET-user_id--extract', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GET-user_id--extract"
+                    onclick="tryItOut('GET-user_id--extract');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GET-user_id--extract"
+                    onclick="cancelTryOut('GET-user_id--extract');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GET-user_id--extract" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>{user_id}/extract</code></b>
+        </p>
+                <p>
+            <label id="auth-GET-user_id--extract" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GET-user_id--extract"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>user_id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="user_id"
+               data-endpoint="GET-user_id--extract"
+               value="iure"
+               data-component="url" hidden>
+    <br>
+<p>The ID of the user.</p>
+            </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                    <p>
+                <b><code>user_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="user_id"
+               data-endpoint="GET-user_id--extract"
+               value="5"
+               data-component="query" hidden>
+    <br>
+<p>The id from the user you want to see the transactions</p>
+            </p>
+                </form>
+
+        <h1 id="voucher-endpoints">Voucher endpoints</h1>
+
+    
+
+            <h2 id="voucher-endpoints-POSTvoucher-create--count-">Generate new Vouchers</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>I know, in real world this end point would be available only for admin user type, but.. yeah..
+Lets keep this way, just to make faster to test</p>
+
+<span id="example-requests-POSTvoucher-create--count-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost:8000/voucher/create/fugit" \
+    --header "Authorization: Bearer {ACCESS_TOKEN}" \
+    --header "Content-Type: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/voucher/create/fugit"
+);
+
+const headers = {
+    "Authorization": "Bearer {ACCESS_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost:8000/voucher/create/fugit',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTvoucher-create--count-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Vouchers Created&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTvoucher-create--count-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTvoucher-create--count-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTvoucher-create--count-"></code></pre>
+</span>
+<span id="execution-error-POSTvoucher-create--count-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTvoucher-create--count-"></code></pre>
+</span>
+<form id="form-POSTvoucher-create--count-" data-method="POST"
+      data-path="voucher/create/{count}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {ACCESS_TOKEN}","Content-Type":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTvoucher-create--count-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTvoucher-create--count-"
+                    onclick="tryItOut('POSTvoucher-create--count-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTvoucher-create--count-"
+                    onclick="cancelTryOut('POSTvoucher-create--count-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTvoucher-create--count-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>voucher/create/{count}</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTvoucher-create--count-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTvoucher-create--count-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>count</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="count"
+               data-endpoint="POSTvoucher-create--count-"
+               value="fugit"
+               data-component="url" hidden>
+    <br>
+
+            </p>
+                    </form>
+
+            <h2 id="voucher-endpoints-POSTvoucher-redeem">Redeem the voucher passing USER_ID</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>The user gets the value in his wallet and can start to help others</p>
+
+<span id="example-requests-POSTvoucher-redeem">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost:8000/voucher/redeem" \
+    --header "Authorization: Bearer {ACCESS_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --data "{
+    \"token\": \"BW9JREEVNH181H54ISMK\",
+    \"user_id\": 2
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/voucher/redeem"
+);
+
+const headers = {
+    "Authorization": "Bearer {ACCESS_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "token": "BW9JREEVNH181H54ISMK",
+    "user_id": 2
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost:8000/voucher/redeem',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'token' =&gt; 'BW9JREEVNH181H54ISMK',
+            'user_id' =&gt; 2,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTvoucher-redeem">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;token&quot;: &quot;S49SC89I34BC3S0KJRJM&quot;,
+        &quot;user_id&quot;: 2,
+        &quot;value&quot;: 100,
+        &quot;used_at&quot;: &quot;28-04-2022 15:46:21&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;token&quot;: [
+            &quot;The token must be at least 20 characters.&quot;
+        ]
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Not authorized user trying to perform):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;error&quot;: &quot;This action is not allowed&quot;,
+    &quot;code&quot;: 403
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTvoucher-redeem" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTvoucher-redeem"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTvoucher-redeem"></code></pre>
+</span>
+<span id="execution-error-POSTvoucher-redeem" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTvoucher-redeem"></code></pre>
+</span>
+<form id="form-POSTvoucher-redeem" data-method="POST"
+      data-path="voucher/redeem"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {ACCESS_TOKEN}","Content-Type":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTvoucher-redeem', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTvoucher-redeem"
+                    onclick="tryItOut('POSTvoucher-redeem');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTvoucher-redeem"
+                    onclick="cancelTryOut('POSTvoucher-redeem');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTvoucher-redeem" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>voucher/redeem</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTvoucher-redeem" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTvoucher-redeem"
+                                                                data-component="header"></label>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>token</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="token"
+               data-endpoint="POSTvoucher-redeem"
+               value="BW9JREEVNH181H54ISMK"
+               data-component="body" hidden>
+    <br>
+<p>The token with 20 characters to be redeem.</p>
+        </p>
+                <p>
+            <b><code>user_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="user_id"
+               data-endpoint="POSTvoucher-redeem"
+               value="2"
+               data-component="body" hidden>
+    <br>
+<p>The id of the user.</p>
+        </p>
+        </form>
 
     
 

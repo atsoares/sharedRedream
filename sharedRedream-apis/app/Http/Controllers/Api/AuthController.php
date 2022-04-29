@@ -34,7 +34,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Handle a registration request for the application.
+     * Registration request
      *
      * @response 200 {
      *    "data": {
@@ -71,7 +71,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Handle a login request to the application.
+     * Login request
      * 
      * @response status=422 scenario="Validation error" {
      *    "message": "The given data was invalid.",

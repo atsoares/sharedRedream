@@ -1,305 +1,55 @@
-name: 'Incident endpoints'
+name: 'Transaction endpoints'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: incidents
+    uri: '{user_id}/extract'
     metadata:
-      title: 'Display a listing of incidents that are active.'
+      title: 'Get all transactions from an USER'
       description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
-      Content-Type: application/json
-    urlParameters: []
-    queryParameters: []
-    bodyParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-             "data": {
-                 "id": 2,
-                 "title": "Help my Cats",
-                 "description": "Need help to feed my cats please",
-                 "owner": "CatFan",
-                 "total_raised": "170.00",
-                 "created_at": "28-04-2022 15:46:21",
-                 "transactions": [
-                   {
-                     "operation": "incident_help",
-                     "user": "John",
-                     "value": "55.00"
-                   },
-                   {
-                     "operation": "incident_help",
-                     "user": "Alex",
-                     "value": "45.00"
-                   },
-                   {
-                     "operation": "incident_help",
-                     "user": "Doug",
-                     "value": "70.00"
-                   }
-                 ]
-             }
-          }
-        headers: []
-        description: '200'
-    responseFields: []
-  -
-    httpMethods:
-      - GET
-    uri: '{user_id}/incidents'
-    metadata:
-      title: 'Display a listing of incidents by User.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
+      Authorization: 'Bearer {ACCESS_TOKEN}'
       Content-Type: application/json
     urlParameters:
       user_id:
         name: user_id
         description: 'The ID of the user.'
         required: true
-        example: in
+        example: iure
         type: string
         custom: []
     queryParameters:
       user_id:
         name: user_id
-        description: 'To filter the incidents by specific user_id'
-        required: false
-        example: quas
-        type: string
-        custom: []
-    bodyParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-             "data": {
-                 "id": 2,
-                 "title": "Help my Cats",
-                 "description": "Need help to feed my cats please",
-                 "owner": "CatFan",
-                 "total_raised": "170.00",
-                 "created_at": "28-04-2022 15:46:21",
-                 "transactions": [
-                   {
-                     "operation": "incident_help",
-                     "user": "John",
-                     "value": "55.00"
-                   },
-                   {
-                     "operation": "incident_help",
-                     "user": "Alex",
-                     "value": "45.00"
-                   },
-                   {
-                     "operation": "incident_help",
-                     "user": "Doug",
-                     "value": "70.00"
-                   }
-                 ]
-             }
-          }
-        headers: []
-        description: '200'
-    responseFields: []
-  -
-    httpMethods:
-      - POST
-    uri: incident
-    metadata:
-      title: 'Store a newly created resource in storage.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-    urlParameters: []
-    queryParameters: []
-    bodyParameters:
-      title:
-        name: title
-        description: 'The title of the incident.'
-        required: true
-        example: 'Need help'
-        type: string
-        custom: []
-      description:
-        name: description
-        description: 'The description of the incident.'
-        required: true
-        example: 'Need help for something..'
-        type: string
-        custom: []
-      user_id:
-        name: user_id
-        description: 'The id of the user trying to create the incident.'
-        required: true
-        example: 2
-        type: integer
-        custom: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-             "data": {
-                 "title": "Help my Cats",
-                 "description": "Need help to feed my cats please",
-                 "owner": "CatFan",
-                 "total_raised": 0,
-                 "created_at": "28-04-2022 15:46:21",
-                 "transactions": []
-              }
-          }
-        headers: []
-        description: '200'
-      -
-        status: 422
-        content: |-
-          {
-             "message": "The given data was invalid.",
-             "errors": {
-                 "description": [
-                     "The description field is required."
-                 ]
-             }
-          }
-        headers: []
-        description: '422, Validation error'
-    responseFields: []
-  -
-    httpMethods:
-      - POST
-    uri: 'incident/{id}/support'
-    metadata:
-      title: 'Support the incident.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the incident.'
-        required: true
-        example: 8
-        type: integer
-        custom: []
-    queryParameters: []
-    bodyParameters:
-      user_id:
-        name: user_id
-        description: 'The id of the user trying to support the incident.'
-        required: true
-        example: 2
-        type: integer
-        custom: []
-      value:
-        name: value
-        description: 'The value amount deposit by the user to help incident.'
-        required: true
-        example: 40
-        type: integer
-        custom: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-             "data": {
-                 "title": "Help my Cats",
-                 "description": "Need help to feed my cats please",
-                 "owner": "CatFan",
-                 "total_raised": 45,
-                 "created_at": "28-04-2022 15:46:21",
-                 "transactions": [
-                   {
-                     "operation": "incident_help",
-                     "user": "Alex",
-                     "value": "45.00"
-                   }
-                 ]
-              }
-          }
-        headers: []
-        description: '200'
-      -
-        status: 422
-        content: |-
-          {
-             "message": "The given data was invalid.",
-             "errors": {
-                 "value": [
-                     "The value field is required."
-                 ]
-             }
-          }
-        headers: []
-        description: '422, Validation error'
-      -
-        status: 422
-        content: |-
-          {
-             "error": "Balance is not enought",
-             "code": 422
-          }
-        headers: []
-        description: '422, Not enouth money'
-    responseFields: []
-  -
-    httpMethods:
-      - POST
-    uri: 'incident/{id}/refund'
-    metadata:
-      title: 'Refund the incident'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the incident.'
+        description: 'The id from the user you want to see the transactions'
         required: true
         example: 5
         type: integer
         custom: []
-    queryParameters: []
     bodyParameters: []
     responses:
       -
         status: 200
         content: |-
           {
-             "data": {
-                 "title": "Help my Cats",
-                 "description": "Need help to feed my cats please",
-                 "owner": "CatFan",
-                 "total_raised": 45,
-                 "created_at": "28-04-2022 15:46:21",
-                 "transactions": [
-                   {
-                     "operation": "incident_help",
-                     "user": "Alex",
-                     "value": "45.00"
-                   },
-                   {
-                     "operation": "incident_refund",
-                     "user": "CatFan",
-                     "value": "45.00"
-                   }
-                 ]
+             "data": [
+              {
+                 "operation": "voucher_redeem",
+                 "redeem_voucher_id": 6,
+                 "value": "100.00"
+              },
+              {
+                 "operation": "incident_help",
+                 "incident_id": 2,
+                 "value": "30.00"
+              },
+              {
+                 "operation": "incident_help",
+                 "incident_id": 3,
+                 "value": "20.00"
               }
           }
         headers: []
@@ -313,12 +63,4 @@ endpoints:
           }
         headers: []
         description: '403, Not authorized user trying to perform'
-      -
-        status: 404
-        content: |-
-          {
-             "Incident does not exist"
-          }
-        headers: []
-        description: '404, Incident does not exist'
     responseFields: []

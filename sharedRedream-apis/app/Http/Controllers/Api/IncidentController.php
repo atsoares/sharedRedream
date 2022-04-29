@@ -33,7 +33,9 @@ class IncidentController extends Controller
     }
     
     /**
-     * Display a listing of incidents that are active.
+     * Get all active incidents
+     * 
+     * @authenticated
      * 
      * @response 200 {
      *    "data": {
@@ -71,8 +73,10 @@ class IncidentController extends Controller
     }
 
     /**
-     * Display a listing of incidents by User.
+     * Get all incidents from an USER
      *
+     * @authenticated
+     * 
      * @queryParam user_id To filter the incidents by specific user_id
      * 
      * @response 200 {
@@ -113,8 +117,10 @@ class IncidentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create new incident
      *
+     * @authenticated
+     * 
      * @response 200 {
      *    "data": {
      *        "title": "Help my Cats",
@@ -157,8 +163,12 @@ class IncidentController extends Controller
     }
 
     /**
-     * Support the incident.
+     * Support the incident
+     * 
+     * The user can help donating some value to an incident
      *
+     * @authenticated
+     * 
      * @response 200 {
      *    "data": {
      *        "title": "Help my Cats",
@@ -207,7 +217,11 @@ class IncidentController extends Controller
 
     /**
      * Refund the incident
+     * 
+     * Refunds the total raised to the owner of the incident.
      *
+     * @authenticated
+     * 
      * @response 200 {
      *    "data": {
      *        "title": "Help my Cats",

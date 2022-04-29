@@ -31,8 +31,13 @@ class RedeemVoucherController extends Controller
     }
 
     /**
-     * Generate new Vouchers (I know, in real world this end point would be available only for admin user type)
-     *
+     * Generate new Vouchers 
+     * 
+     * I know, in real world this end point would be available only for admin user type, but.. yeah.. 
+     * Lets keep this way, just to make faster to test
+     * 
+     * @authenticated
+     * 
      * @response 200 {
      *    "message": "Vouchers Created"
      * }
@@ -47,7 +52,11 @@ class RedeemVoucherController extends Controller
 
     /**
      * Redeem the voucher passing USER_ID
+     * 
+     * The user gets the value in his wallet and can start to help others
      *
+     * @authenticated
+     * 
      * @response 200 {
      *    "data": {
      *        "token": "S49SC89I34BC3S0KJRJM",
