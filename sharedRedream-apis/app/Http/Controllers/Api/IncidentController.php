@@ -21,7 +21,7 @@ class IncidentController extends Controller
      * @var incidentService
      */
     protected $incidentService;
-
+    
     /**
      * Constructor
      *
@@ -30,6 +30,39 @@ class IncidentController extends Controller
     public function __construct(IncidentService $incidentService)
     {
         $this->incidentService = $incidentService;
+    }
+
+    /**
+     * Create new incident
+     *
+     * @authenticated
+     * 
+     * @response 200 {
+     *    "data": {
+     *        "title": "Help my Cats",
+     *        "description": "Need help to feed my cats please",
+     *        "owner": "CatFan",
+     *        "total_raised": 0,
+     *        "created_at": "28-04-2022 15:46:21",
+     *        "transactions": []
+     *     }
+     * }
+     * @response status=422 scenario="Validation error" { 
+     *    "message": "The given data was invalid.",
+     *    "errors": {
+     *        "description": [
+     *            "The description field is required."
+     *        ]
+     *    }
+     * }
+     * @param  StoreUpdateIncidentRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StoreUpdateIncidentRequest $request)
+    {
+        $incident = $this->incidentService->create($request->validated());
+
+        return new IncidentResource($incident);
     }
     
     /**
@@ -112,39 +145,6 @@ class IncidentController extends Controller
     {
         $incidents = $this->incidentService->getAllFromUser($user_id);
         return IncidentResource::collection($incidents);
-    }
-
-    /**
-     * Create new incident
-     *
-     * @authenticated
-     * 
-     * @response 200 {
-     *    "data": {
-     *        "title": "Help my Cats",
-     *        "description": "Need help to feed my cats please",
-     *        "owner": "CatFan",
-     *        "total_raised": 0,
-     *        "created_at": "28-04-2022 15:46:21",
-     *        "transactions": []
-     *     }
-     * }
-     * @response status=422 scenario="Validation error" { 
-     *    "message": "The given data was invalid.",
-     *    "errors": {
-     *        "description": [
-     *            "The description field is required."
-     *        ]
-     *    }
-     * }
-     * @param  StoreUpdateIncidentRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreUpdateIncidentRequest $request)
-    {
-        $incident = $this->incidentService->create($request->validated());
-
-        return new IncidentResource($incident);
     }
 
     /**

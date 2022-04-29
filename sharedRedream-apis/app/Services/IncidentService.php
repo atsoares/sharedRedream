@@ -62,6 +62,8 @@ class IncidentService
      */
     public function create(array $data)
     {
+        if(Auth::user()->id != $data['user_id'])
+            throw new AuthException();
         return $this->incidentRepository->create($data);
     }
 

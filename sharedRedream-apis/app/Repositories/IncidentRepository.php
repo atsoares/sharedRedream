@@ -68,9 +68,9 @@ class IncidentRepository implements IncidentRepositoryInterface
      * Find by User Id
      *
      * @param int $user_id
-     * @return Incident
+     * @return Collection
      */
-    public function findByUserId(int $user_id): ?Incident
+    public function findByUserId(int $user_id): ?Collection
     {
         return $this->entity->where('user_id', $user_id)->get();
     }
