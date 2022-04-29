@@ -22,3 +22,8 @@ The API simulates a crowdfunding bussiness:
 
 - After start the server access [SCRIBE DOCS](http://localhost:8000/docs)
 
+## Feature Tests
+
+- Few tests were created to check if the API behaves as expected as you can see in the results 
+#### Test Results
+![image](https://user-images.githubusercontent.com/17599235/166080373-ddb9d7d1-7ddd-4c48-a41b-5ce99a4e2856.png)
