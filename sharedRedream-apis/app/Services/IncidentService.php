@@ -37,6 +37,15 @@ class IncidentService
     }
 
     /**
+     * Get All from user
+     *
+     */
+    public function getAllFromUser(int $user_id)
+    {
+        return $this->incidentRepository->findByUserId($user_id);
+    }
+
+    /**
      * Find by Id
      *
      * @param int $id

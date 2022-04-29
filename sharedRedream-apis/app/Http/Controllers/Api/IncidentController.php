@@ -35,7 +35,19 @@ class IncidentController extends Controller
      */
     public function index()
     {
-        $incidents = $this->incidentService->getAll();
+        $incidents = $this->incidentService->getAllActive();
+        return IncidentResource::collection($incidents);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param int $user_id
+     * @return \Illuminate\Http\Response
+     */
+    public function myIncidents(int $user_id)
+    {
+        $incidents = $this->incidentService->getAllFromUser($user_id);
         return IncidentResource::collection($incidents);
     }
 

@@ -36,16 +36,17 @@ Route::group(['namespace' => 'Api', 'as'=> 'api.'], function () {
 
         //API route to incidents
         Route::get('/incidents', [IncidentController::class, 'index'])->name('incidents');
-        Route::post('/incident', [IncidentController::class, 'store']);
-        Route::post('/incident/{id}/support', [IncidentController::class, 'support']);
-        Route::post('/incident/{id}/refund', [IncidentController::class, 'refund']);
+        Route::get('/{user_id}/incidents', [IncidentController::class, 'myIncidents'])->name('incidents.personal');
+        Route::post('/incident', [IncidentController::class, 'store'])->name('incident.store');
+        Route::post('/incident/{id}/support', [IncidentController::class, 'support'])->name('incident.support');
+        Route::post('/incident/{id}/refund', [IncidentController::class, 'refund'])->name('incident.refund');
 
         //API route to redeem vouchers
-        Route::post('/voucher/create/{count}', [RedeemVoucherController::class, 'storeInBatch']);
-        Route::post('/redeem', [RedeemVoucherController::class, 'redeem']);
-        
+        Route::post('/voucher/create/{count}', [RedeemVoucherController::class, 'storeInBatch'])->name('vouchers.generate');
+        Route::post('/redeem', [RedeemVoucherController::class, 'redeem'])->name('voucher.redeem');
+
         //API route to extract transactions
-        Route::get('/{user_id}/extract', [TransactionController::class, 'userExtract']);
+        Route::get('/{user_id}/extract', [TransactionController::class, 'userExtract'])->name('user.transactions');
 
     });
 

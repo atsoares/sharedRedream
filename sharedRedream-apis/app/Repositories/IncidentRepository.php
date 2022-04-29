@@ -51,7 +51,28 @@ class IncidentRepository implements IncidentRepositoryInterface
      */
     public function getAll(): Collection
     {
-        return $this->entity->where('refunded', false)->get();
+        return $this->entity->get();
+    }
+
+    /**
+     * Get All Active
+     *
+     * @return Collection
+     */
+    public function getAllActive(): Collection
+    {
+        return $this->entity->where('refunded', true)->get();
+    }
+
+    /**
+     * Find by User Id
+     *
+     * @param int $user_id
+     * @return Incident
+     */
+    public function findByUserId(int $user_id): ?Incident
+    {
+        return $this->entity->where('user_id', $user_id)->get();
     }
 
     /**
