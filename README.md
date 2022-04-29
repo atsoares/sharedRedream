@@ -1,8 +1,7 @@
 # sharedRedream
 POC to study and practice API development with Laravel 8.x
 
-The API simulates a crowdfunding bussiness where you need to reedem to share.
-
+The API simulates a crowdfunding bussiness:
 - The user can ~~create an incident~~ share a dream
 - The user needs to reedem a voucher to get money
 - Once you get the money you can start to help others to realize their dreams
