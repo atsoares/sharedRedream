@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\BaseRequest;
 
+/**
+ * @bodyParam token string required The token with 20 characters to be redeem. Example: BW9JREEVNH181H54ISMK
+ * @bodyParam user_id int required The id of the user. Example: 2
+*/
 class RedeemVoucherRequest extends BaseRequest
 {
     /**

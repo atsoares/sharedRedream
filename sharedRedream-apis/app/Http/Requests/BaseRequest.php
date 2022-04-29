@@ -16,8 +16,6 @@ class BaseRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         $response = [
-            'status' => 'failure',
-            'status_code' => 422,
             'message' => 'The given data was invalid',
             'errors' => $validator->errors(),
         ];

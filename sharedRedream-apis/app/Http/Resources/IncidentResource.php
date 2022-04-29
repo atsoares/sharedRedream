@@ -19,10 +19,12 @@ class IncidentResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'body' => $this->description,
+            'description' => $this->description,
             'owner' => $this->user->name,
             'total_raised' => $this->total_raised,
-            'date' => Carbon::create($this->created_at)->format('d-m-Y'),
+            'created_at' => Carbon::create($this->created_at)->format('d-m-Y H:i:s'),
+            'refunded' => $this->when($this->refunded !== null, $this->refunded),
+            'refunded_at' => $this->when($this->refunded === true, Carbon::create($this->refunded_at)->format('d-m-Y H:i:s')),
             'transactions' => TransactionIncidentResource::collection($this->transactions)
         ];
     }

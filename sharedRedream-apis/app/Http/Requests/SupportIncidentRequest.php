@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\BaseRequest;
 
+/**
+ * @bodyParam user_id int required The id of the user trying to support the incident. Example: 2
+ * @bodyParam value int required The value amount deposit by the user to help incident. Example: 40
+*/
 class SupportIncidentRequest extends BaseRequest
 {
     /**

@@ -11,6 +11,9 @@ use App\Http\Requests\LoginUserRequest;
 use App\Http\Resources\UserResource;
 use App\Exceptions\AuthenticationException;
 
+/**
+ * @group Auth endpoints
+ */
 class AuthController extends Controller
 {
     /**
@@ -31,7 +34,26 @@ class AuthController extends Controller
     }
 
     /**
-     * Register new account
+     * Handle a registration request for the application.
+     *
+     * @response 200 {
+     *    "data": {
+     *        "id": 2,
+     *        "name": "Demo",
+     *        "email": "demo@demo.com",
+     *        "balance": "0.00"
+     *    }
+     *    "token": "3|tA8Ouhh1CWXJORVPHvUQvN0SFNZVGwvVbx2F3prb",
+     *    "token_type": "Bearer"
+     * }
+     * @response status=422 scenario="Validation error" { 
+     *    "message": "The given data was invalid.",
+     *    "errors": {
+     *        "email": [
+     *            "The email field is required."
+     *        ]
+     *    }
+     * }
      *
      * @param  RegisterUserRequest  $request
      * @return \Illuminate\Http\Response
@@ -42,12 +64,23 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        $data = new UserResource($user);
+
         return response()
-            ->json(['data' => $user,'access_token' => $token, 'token_type' => 'Bearer', ], 201);
+            ->json(['data' => $data,'access_token' => $token, 'token_type' => 'Bearer', ], 201);
     }
 
     /**
-     * Login
+     * Handle a login request to the application.
+     * 
+     * @response status=422 scenario="Validation error" {
+     *    "message": "The given data was invalid.",
+     *    "errors": {
+     *        "email": [
+     *            "The email field is required."
+     *        ]
+     *    }
+     * }
      *
      * @param  LoginUserRequest  $request
      * @return \Illuminate\Http\Response
@@ -68,8 +101,19 @@ class AuthController extends Controller
     }
 
     /**
-     * Get Profile Info
+     * Show authenticated user info
      *
+     * @authenticated
+     * 
+     * @response 200 {
+     *     "id": 2,
+     *     "name": "Demo",
+     *     "email": "demo@demo.com",
+     *     "balance": "150.00"
+     * }
+     * @response status=404 scenario="Not Found" {
+     *     "message": "Not Found"
+     * }
      * @return \Illuminate\Http\Response
      */
     public function profile()

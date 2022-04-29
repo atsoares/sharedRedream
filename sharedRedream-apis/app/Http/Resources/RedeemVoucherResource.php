@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class RedeemVoucherResource extends JsonResource
 {
@@ -18,7 +19,7 @@ class RedeemVoucherResource extends JsonResource
             'token' => $this->token,
             'user_id' => $this->user_id,
             'value' => $this->value,
-            'used_at' => Carbon::create($this->refunded_at)->format('d-m-Y')
+            'used_at' => Carbon::create($this->refunded_at)->format('d-m-Y H:i:s')
         ];
     }
 }

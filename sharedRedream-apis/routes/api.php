@@ -21,7 +21,7 @@ use App\Http\Controllers\Api\{
 |
 */
 
-Route::group(['namespace' => 'Api', 'as'=> 'api.'], function () {
+Route::group(['namespace' => 'Api'], function () {
     
     //API route for register new user
     Route::post('/register', [AuthController::class, 'register'])->name('register');
@@ -42,8 +42,8 @@ Route::group(['namespace' => 'Api', 'as'=> 'api.'], function () {
         Route::post('/incident/{id}/refund', [IncidentController::class, 'refund'])->name('incident.refund');
 
         //API route to redeem vouchers
-        Route::post('/voucher/create/{count}', [RedeemVoucherController::class, 'storeInBatch'])->name('vouchers.generate');
-        Route::post('/redeem', [RedeemVoucherController::class, 'redeem'])->name('voucher.redeem');
+        Route::post('/voucher/create/{count}', [RedeemVoucherController::class, 'storeInBatch'])->name('vouchers.create');
+        Route::post('/voucher/redeem', [RedeemVoucherController::class, 'redeem'])->name('voucher.redeem');
 
         //API route to extract transactions
         Route::get('/{user_id}/extract', [TransactionController::class, 'userExtract'])->name('user.transactions');

@@ -9,17 +9,17 @@ return [
     /*
      * The HTML <title> for the generated documentation. If this is empty, Scribe will infer it from config('app.name').
      */
-    'title' => null,
+    'title' => 'Shared Redream API',
 
     /*
      * A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
      */
-    'description' => '',
+    'description' => 'Shared Redream API - Redeem vouchers to help others!',
 
     /*
      * The base URL displayed in the docs. If this is empty, Scribe will use the value of config('app.url').
      */
-    'base_url' => null,
+    'base_url' => "http://localhost:8000",
 
     /*
      * Tell Scribe what routes to generate documentation for.
@@ -36,7 +36,7 @@ return [
                 /*
                  * Match only routes whose paths match this pattern (use * as a wildcard to match any characters). Example: 'users/*'.
                  */
-                'prefixes' => ['api/*'],
+                'prefixes' => ['*'],
 
                 /*
                  * Match only routes whose domains match this pattern (use * as a wildcard to match any characters). Example: 'api.*'.
@@ -74,7 +74,6 @@ return [
                  */
                 'headers' => [
                     'Content-Type' => 'application/json',
-                    'Accept' => 'application/json',
                 ],
 
                 /*
@@ -87,7 +86,7 @@ return [
                      * API calls will be made only for routes in this group matching these HTTP methods (GET, POST, etc).
                      * List the methods here or use '*' to mean all methods. Leave empty to disable API calls.
                      */
-                    'methods' => ['GET'],
+                    'methods' => ['GET', 'POST'],
 
                     /*
                      * Laravel config variables which should be set for the API call.
@@ -138,7 +137,7 @@ return [
      * - "static" will generate a static HTMl page in the /public/docs folder,
      * - "laravel" will generate the documentation as a Blade view, so you can add routing and authentication.
      */
-    'type' => 'static',
+    'type' => 'laravel',
 
     /*
      * Settings for `static` type output.
@@ -184,12 +183,12 @@ return [
          * The base URL for the API tester to use (for example, you can set this to your staging URL).
          * Leave as null to use the current app URL (config(app.url)).
          */
-        'base_url' => null,
+        'base_url' => "http://localhost:8000",
 
         /**
          * Fetch a CSRF token before each request, and add it as an X-XSRF-TOKEN header. Needed if you're using Laravel Sanctum.
          */
-        'use_csrf' => false,
+        'use_csrf' => true,
 
         /**
          * The URL to fetch the CSRF token from (if `use_csrf` is true).
@@ -204,7 +203,7 @@ return [
         /*
          * Set this to true if any endpoints in your API use authentication.
          */
-        'enabled' => false,
+        'enabled' => true,
 
         /*
          * Set this to true if your API should be authenticated by default. If so, you must also set `enabled` (above) to true.
@@ -221,7 +220,7 @@ return [
         /*
          * The name of the auth parameter (eg token, key, apiKey) or header (eg Authorization, Api-Key).
          */
-        'name' => 'key',
+        'name' => 'token',
 
         /*
          * The value of the parameter to be used by Scribe to authenticate response calls.
@@ -234,13 +233,13 @@ return [
          * Placeholder your users will see for the auth parameter in the example requests.
          * Set this to null if you want Scribe to use a random value as placeholder instead.
          */
-        'placeholder' => '{YOUR_AUTH_KEY}',
+        'placeholder' => '{ACCESS_TOKEN}',
 
         /*
          * Any extra authentication-related info for your users. For instance, you can describe how to find or generate their auth credentials.
          * Markdown and HTML are supported.
          */
-        'extra_info' => 'You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.',
+        'extra_info' => 'You can retrieve your token by  registering or logging in through <b>API endpoints</b>.',
     ],
 
     /*
@@ -263,6 +262,7 @@ INTRO
     'example_languages' => [
         'bash',
         'javascript',
+        'php'
     ],
 
     /*

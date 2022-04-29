@@ -61,7 +61,7 @@ class IncidentRepository implements IncidentRepositoryInterface
      */
     public function getAllActive(): Collection
     {
-        return $this->entity->where('refunded', true)->get();
+        return $this->entity->where('refunded', false)->get();
     }
 
     /**

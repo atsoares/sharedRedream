@@ -18,7 +18,6 @@ class TransactionIncidentResource extends JsonResource
         return [
             'operation' => $this->operation,
             'user' => $this->user->name,
-            'incident_id' => $this->incident_id,
             'value' => $this->value,
         ];
     }

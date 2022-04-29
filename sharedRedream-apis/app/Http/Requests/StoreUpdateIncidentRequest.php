@@ -4,6 +4,11 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\BaseRequest;
 
+/**
+ * @bodyParam title string required The title of the incident. Example: Need help
+ * @bodyParam description string required The description of the incident. Example: Need help for something..
+ * @bodyParam user_id int required The id of the user trying to create the incident. Example: 2
+*/
 class StoreUpdateIncidentRequest extends BaseRequest
 {
     /**
@@ -26,8 +31,7 @@ class StoreUpdateIncidentRequest extends BaseRequest
         return [
             'title' => 'required|max:50|unique:incidents',
             'description' => 'required|max:200',
-            'user_id' => 'required',
-            'refunded' => 'boolean',
+            'user_id' => 'required'
         ];
 
         return $rules;

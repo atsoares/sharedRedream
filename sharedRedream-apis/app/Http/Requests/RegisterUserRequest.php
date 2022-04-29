@@ -4,6 +4,11 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\BaseRequest;
 
+/**
+ * @bodyParam name string required The name of the user. Example: Demo
+ * @bodyParam email email required The email of the user. Example: demo@demo.com
+ * @bodyParam password password required The password of the user. Example: password
+*/
 class RegisterUserRequest extends BaseRequest
 {
     /**

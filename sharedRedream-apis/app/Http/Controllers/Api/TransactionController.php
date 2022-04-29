@@ -8,6 +8,9 @@ use App\Services\TransactionService;
 use App\Http\Resources\TransactionIncidentResource;
 use App\Http\Resources\TransactionUserResource;
 
+/**
+ * @group Transaction endpoints
+ */
 class TransactionController extends Controller
 {
     /**
@@ -28,8 +31,33 @@ class TransactionController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Get all transactions from an USER.
      *
+     * @queryParam user_id int required The id from the user you want to see the transactions 
+     * 
+     * @response 200 {
+     *    "data": [
+     *     {
+     *        "operation": "voucher_redeem",
+     *        "redeem_voucher_id": 6,
+     *        "value": "100.00"
+     *     },
+     *     {
+     *        "operation": "incident_help",
+     *        "incident_id": 2,
+     *        "value": "30.00"
+     *     },
+     *     {
+     *        "operation": "incident_help",
+     *        "incident_id": 3,
+     *        "value": "20.00"
+     *     }
+     * }
+     * @response status=403 scenario="Not authorized user trying to perform" { 
+     *    "error": "This action is not allowed",
+     *    "code": 403
+     * }
+     * 
      * @param  int  $user_id
      * @return \Illuminate\Http\Response
      */
@@ -40,8 +68,27 @@ class TransactionController extends Controller
     }
     
     /**
-     * Display a listing of the resource.
+     * Get all transactions from an incident.
      *
+     * @queryParam incident_id int required The id from the incident you want to see the transactions 
+     * 
+     * @response 200 {
+     *    "data": [
+     *     {
+     *        "operation": "incident_help",
+     *        "user": Alex,
+     *        "value": "30.00"
+     *     },
+     *     {
+     *        "operation": "incident_help",
+     *        "user": John,
+     *        "value": "20.00"
+     *     }
+     * }
+     * 
+     * @response status=404 scenario="Incident not found" { 
+     *    "message": "Incident does not exist"
+     * }
      * @param  int  $incident_id
      * @return \Illuminate\Http\Response
      */

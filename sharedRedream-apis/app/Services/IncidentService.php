@@ -31,9 +31,9 @@ class IncidentService
      * Get All
      *
      */
-    public function getAll()
+    public function getAllActive()
     {
-        return $this->incidentRepository->getAll();
+        return $this->incidentRepository->getAllActive();
     }
 
     /**
@@ -71,9 +71,9 @@ class IncidentService
      */
     public function support(int $id, array $data)
     {
-        $incident = $this->findById($id);
+        $incident = $this->getById($id);
         if(!$incident)
-            throw new HttpResponseException(response()->json("Incident does not exist", 404));
+            throw new HttpResponseException(response()->json(["message"=>"Incident does not exist"], 404));
 
         if(Auth::user()->id != $data['user_id'])
             throw new AuthException();
@@ -86,9 +86,9 @@ class IncidentService
      */
     public function refund(int $id)
     {
-        $incident = $this->incidentRepository->findById($id);
+        $incident = $this->getById($id);
         if(!$incident)
-        throw new HttpResponseException(response()->json("Incident does not exist", 404));
+            throw new HttpResponseException(response()->json(["message"=>"Incident does not exist"], 404));
         
         if(Auth::user()->id != $incident->user_id)
             throw new AuthException();
