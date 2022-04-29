@@ -36,7 +36,7 @@ Route::group(['namespace' => 'Api'], function () {
 
         //API route to incidents
         Route::get('/incidents', [IncidentController::class, 'index'])->name('incidents');
-        Route::get('/{user_id}/incidents', [IncidentController::class, 'myIncidents'])->name('incidents.personal');
+        Route::get('/{user_id}/incidents', [IncidentController::class, 'userIncidents'])->name('incidents.personal');
         Route::post('/incident', [IncidentController::class, 'store'])->name('incident.store');
         Route::post('/incident/{id}/support', [IncidentController::class, 'support'])->name('incident.support');
         Route::post('/incident/{id}/refund', [IncidentController::class, 'refund'])->name('incident.refund');

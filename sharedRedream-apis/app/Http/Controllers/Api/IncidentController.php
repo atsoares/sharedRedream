@@ -77,8 +77,6 @@ class IncidentController extends Controller
      *
      * @authenticated
      * 
-     * @queryParam user_id To filter the incidents by specific user_id
-     * 
      * @response 200 {
      *    "data": {
      *        "id": 2,
@@ -110,7 +108,7 @@ class IncidentController extends Controller
      * @param int $user_id
      * @return \Illuminate\Http\Response
      */
-    public function myIncidents(int $user_id)
+    public function userIncidents(int $user_id)
     {
         $incidents = $this->incidentService->getAllFromUser($user_id);
         return IncidentResource::collection($incidents);

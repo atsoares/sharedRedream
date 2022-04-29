@@ -160,7 +160,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">http://localhost:8000</code></pre>
 
         <h1 id="authenticating-requests">Authenticating requests</h1>
-<p>This API is authenticated by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {ACCESS_TOKEN}"</code></strong>.</p>
+<p>Authenticate requests to this API's endpoints by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {ACCESS_TOKEN}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by  registering or logging in through <b>API endpoints</b>.</p>
 
@@ -426,14 +426,14 @@ print_r(json_decode((string) $body));</code></pre></div>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 58
+x-ratelimit-remaining: 59
 access-control-allow-origin: *
  </code></pre>
         </details>         <pre>
 
 <code class="language-json">{
     &quot;message&quot;: &quot;Hi Demo, welcome to sharedRedream&quot;,
-    &quot;access_token&quot;: &quot;18|zABuU2DRip3TS5e0CUGGRqxqUvbDD02qr6DZCBws&quot;,
+    &quot;access_token&quot;: &quot;19|COU1IXICD7HsQv3Z87QoJbHi1GPPKHFLoorBHGyA&quot;,
     &quot;token_type&quot;: &quot;Bearer&quot;
 }</code>
  </pre>
@@ -778,21 +778,15 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/non/incidents?user_id=eaque" \
+    --get "http://localhost:8000/necessitatibus/incidents" \
     --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/non/incidents"
+    "http://localhost:8000/necessitatibus/incidents"
 );
-
-const params = {
-    "user_id": "eaque",
-};
-Object.keys(params)
-    .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
     "Authorization": "Bearer {ACCESS_TOKEN}",
@@ -809,14 +803,11 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8000/non/incidents',
+    'http://localhost:8000/necessitatibus/incidents',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
             'Content-Type' =&gt; 'application/json',
-        ],
-        'query' =&gt; [
-            'user_id'=&gt; 'eaque',
         ],
     ]
 );
@@ -913,23 +904,12 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="user_id"
                data-endpoint="GET-user_id--incidents"
-               value="non"
+               value="necessitatibus"
                data-component="url" hidden>
     <br>
 <p>The ID of the user.</p>
             </p>
-                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-                    <p>
-                <b><code>user_id</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
-                <input type="text"
-               name="user_id"
-               data-endpoint="GET-user_id--incidents"
-               value="eaque"
-               data-component="query" hidden>
-    <br>
-<p>To filter the incidents by specific user_id</p>
-            </p>
-                </form>
+                    </form>
 
             <h2 id="incident-endpoints-POSTincident">Create new incident</h2>
 
@@ -1127,7 +1107,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/incident/8/support" \
+    "http://localhost:8000/incident/14/support" \
     --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json" \
     --data "{
@@ -1139,7 +1119,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/incident/8/support"
+    "http://localhost:8000/incident/14/support"
 );
 
 const headers = {
@@ -1163,7 +1143,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost:8000/incident/8/support',
+    'http://localhost:8000/incident/14/support',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
@@ -1290,7 +1270,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="number"
                name="id"
                data-endpoint="POSTincident--id--support"
-               value="8"
+               value="14"
                data-component="url" hidden>
     <br>
 <p>The ID of the incident.</p>
@@ -1332,14 +1312,14 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/incident/5/refund" \
+    "http://localhost:8000/incident/19/refund" \
     --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/incident/5/refund"
+    "http://localhost:8000/incident/19/refund"
 );
 
 const headers = {
@@ -1357,7 +1337,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost:8000/incident/5/refund',
+    'http://localhost:8000/incident/19/refund',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
@@ -1471,7 +1451,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="number"
                name="id"
                data-endpoint="POSTincident--id--refund"
-               value="5"
+               value="19"
                data-component="url" hidden>
     <br>
 <p>The ID of the incident.</p>
@@ -1496,21 +1476,15 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/iure/extract?user_id=5" \
+    --get "http://localhost:8000/et/extract" \
     --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/iure/extract"
+    "http://localhost:8000/et/extract"
 );
-
-const params = {
-    "user_id": "5",
-};
-Object.keys(params)
-    .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
     "Authorization": "Bearer {ACCESS_TOKEN}",
@@ -1527,14 +1501,11 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8000/iure/extract',
+    'http://localhost:8000/et/extract',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
             'Content-Type' =&gt; 'application/json',
-        ],
-        'query' =&gt; [
-            'user_id'=&gt; '5',
         ],
     ]
 );
@@ -1632,23 +1603,12 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="user_id"
                data-endpoint="GET-user_id--extract"
-               value="iure"
+               value="et"
                data-component="url" hidden>
     <br>
 <p>The ID of the user.</p>
             </p>
-                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-                    <p>
-                <b><code>user_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-                <input type="number"
-               name="user_id"
-               data-endpoint="GET-user_id--extract"
-               value="5"
-               data-component="query" hidden>
-    <br>
-<p>The id from the user you want to see the transactions</p>
-            </p>
-                </form>
+                    </form>
 
         <h1 id="voucher-endpoints">Voucher endpoints</h1>
 
@@ -1669,14 +1629,14 @@ Lets keep this way, just to make faster to test</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/voucher/create/fugit" \
+    "http://localhost:8000/voucher/create/modi" \
     --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/voucher/create/fugit"
+    "http://localhost:8000/voucher/create/modi"
 );
 
 const headers = {
@@ -1694,7 +1654,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost:8000/voucher/create/fugit',
+    'http://localhost:8000/voucher/create/modi',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
@@ -1771,7 +1731,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="count"
                data-endpoint="POSTvoucher-create--count-"
-               value="fugit"
+               value="modi"
                data-component="url" hidden>
     <br>
 

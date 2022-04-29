@@ -20,7 +20,7 @@ endpoints:
         name: count
         description: ''
         required: true
-        example: fugit
+        example: modi
         type: string
         custom: []
     queryParameters: []

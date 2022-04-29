@@ -69,17 +69,10 @@ endpoints:
         name: user_id
         description: 'The ID of the user.'
         required: true
-        example: non
+        example: necessitatibus
         type: string
         custom: []
-    queryParameters:
-      user_id:
-        name: user_id
-        description: 'To filter the incidents by specific user_id'
-        required: false
-        example: eaque
-        type: string
-        custom: []
+    queryParameters: []
     bodyParameters: []
     responses:
       -
@@ -198,7 +191,7 @@ endpoints:
         name: id
         description: 'The ID of the incident.'
         required: true
-        example: 8
+        example: 14
         type: integer
         custom: []
     queryParameters: []
@@ -287,7 +280,7 @@ endpoints:
         name: id
         description: 'The ID of the incident.'
         required: true
-        example: 5
+        example: 19
         type: integer
         custom: []
     queryParameters: []

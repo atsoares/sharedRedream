@@ -18,17 +18,10 @@ endpoints:
         name: user_id
         description: 'The ID of the user.'
         required: true
-        example: iure
+        example: et
         type: string
         custom: []
-    queryParameters:
-      user_id:
-        name: user_id
-        description: 'The id from the user you want to see the transactions'
-        required: true
-        example: 5
-        type: integer
-        custom: []
+    queryParameters: []
     bodyParameters: []
     responses:
       -

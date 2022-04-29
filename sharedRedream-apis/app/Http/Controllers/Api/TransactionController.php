@@ -34,9 +34,7 @@ class TransactionController extends Controller
      * Get all transactions from an USER
      *
      * @authenticated
-     * 
-     * @queryParam user_id int required The id from the user you want to see the transactions 
-     * 
+     *
      * @response 200 {
      *    "data": [
      *     {
@@ -73,8 +71,6 @@ class TransactionController extends Controller
      * Get all transactions from an incident.
      *
      * @authenticated
-     * 
-     * @queryParam incident_id int required The id from the incident you want to see the transactions 
      * 
      * @response 200 {
      *    "data": [
