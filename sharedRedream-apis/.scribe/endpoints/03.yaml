@@ -20,20 +20,20 @@ endpoints:
         name: count
         description: ''
         required: true
-        example: modi
+        example: a
         type: string
         custom: []
     queryParameters: []
     bodyParameters: []
     responses:
       -
-        status: 200
+        status: 201
         content: |-
           {
              "message": "Vouchers Created"
           }
         headers: []
-        description: '200'
+        description: '201'
     responseFields: []
   -
     httpMethods:

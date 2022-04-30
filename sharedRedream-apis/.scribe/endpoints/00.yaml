@@ -109,8 +109,8 @@ endpoints:
         headers: []
         description: '422, Validation error'
       -
-        status: 200
-        content: '{"message":"Hi Demo, welcome to sharedRedream","access_token":"19|COU1IXICD7HsQv3Z87QoJbHi1GPPKHFLoorBHGyA","token_type":"Bearer"}'
+        status: 401
+        content: '{"error":"Wrong credentials","code":401}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

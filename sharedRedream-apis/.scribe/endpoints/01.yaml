@@ -67,7 +67,7 @@ endpoints:
         name: user_id
         description: 'The ID of the user.'
         required: true
-        example: necessitatibus
+        example: rerum
         type: string
         custom: []
     queryParameters: []
@@ -144,7 +144,7 @@ endpoints:
         custom: []
     responses:
       -
-        status: 200
+        status: 201
         content: |-
           {
              "data": {
@@ -157,7 +157,7 @@ endpoints:
               }
           }
         headers: []
-        description: '200'
+        description: '201'
       -
         status: 422
         content: |-
@@ -189,7 +189,7 @@ endpoints:
         name: id
         description: 'The ID of the incident.'
         required: true
-        example: 14
+        example: 10
         type: integer
         custom: []
     queryParameters: []
@@ -278,7 +278,7 @@ endpoints:
         name: id
         description: 'The ID of the incident.'
         required: true
-        example: 19
+        example: 6
         type: integer
         custom: []
     queryParameters: []
