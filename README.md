@@ -9,18 +9,17 @@ The API simulates a crowdfunding bussiness:
 
 ## How to test locally
 
+- Docker / Your favourite IDE / Git
 - Clone the repository with __git clone__
-
 - Go to the sub-folder `cd sharedRedream-apis`
 - Copy __.env.example__ file to __.env__ and edit database credentials there
+- Run __docker-compose up --build -d__
+- Once you have your containers up 
+- Run __docker-compose exec laravel_8 bash__ or __winpty docker-compose exec laravel_8 bash__ for Windows
 - Run __composer install__
 - Run __php artisan key:generate__
 - Run __php artisan migrate__
-- Run __php artisan serve__
-
-## API DOCS 
-
-- After start the server access [SCRIBE DOCS](http://localhost:8000/docs)
+- Access the API methods with [scribe](http://localhost:8180/docs)
 
 ## Feature Tests
 
