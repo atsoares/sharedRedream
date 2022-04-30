@@ -18,6 +18,7 @@ class TransactionIncidentResource extends JsonResource
             'operation' => $this->operation,
             'user' => $this->user->name,
             'value' => $this->value,
+            'date' => (string) $this->created_at
         ];
     }
 }

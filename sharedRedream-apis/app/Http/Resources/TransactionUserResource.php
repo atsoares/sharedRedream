@@ -16,9 +16,10 @@ class TransactionUserResource extends JsonResource
     {
         return [
             'operation' => $this->operation,
-            'incident_id' => $this->when($this->operation !== 'voucher_redeem', $this->incident_id),
+            'incident_id' => $this->when($this->operation != 'voucher_redeem', $this->incident_id),
             'redeem_voucher_id' => $this->when($this->operation === 'voucher_redeem', $this->redeem_voucher_id),
             'value' => $this->value,
+            'date' => (string) $this->created_at
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,10 +27,8 @@ class Incident extends Model
 
     protected $casts = [
         'refunded' => 'boolean',
-        'expires_at' => 'datetime:d-m-Y H:i:s',
-        'refunded_at' => 'datetime:d-m-Y H:i:s',
-        'created_at' => 'datetime:d-m-Y H:i:s',
-        'updated_at' => 'datetime:d-m-Y H:i:s',
+        'expires_at' => 'date:Y-m-d H:i:s',
+        'refunded_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     /**
@@ -47,5 +46,4 @@ class Incident extends Model
     {
         return $this->hasMany(Transaction::class);
     }
-
 }

@@ -20,7 +20,7 @@ class CreateRedeemVouchersTable extends Migration
             $table->decimal('value');
             $table->boolean('active')->default(true);
             $table->foreignIdFor(User::class)->nullable();
-            $table->timestamp('refunded_at')->nullable(); 
+            $table->datetime('refunded_at')->nullable(); 
             $table->timestamps();
         
         });

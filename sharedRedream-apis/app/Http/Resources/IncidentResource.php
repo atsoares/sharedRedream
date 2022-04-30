@@ -21,11 +21,11 @@ class IncidentResource extends JsonResource
             'description' => $this->description,
             'owner' => $this->user->name,
             'total_raised' => $this->total_raised,
-            'expires_at' => $this->expires_at,
+            'expires_at' => (string) $this->expires_at,
             'goal' => $this->goal,
-            'created_at' => $this->created_at,
-            'refunded' => $this->when($this->refunded !== null, $this->refunded),
-            'refunded_at' => $this->when($this->refunded === true, $this->refunded_at),
+            'created_at' => (string) $this->created_at,
+            'refunded' => $this->when($this->refunded != null, $this->refunded),
+            'refunded_at' => $this->when($this->refunded === true, (string) $this->refunded_at),
             'transactions' => TransactionIncidentResource::collection($this->transactions)
         ];
     }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,13 +19,13 @@ class RedeemVoucher extends Model
         'token',
         'value',
         'user_id',
-        'refunded',
+        'active',
+        'refunded_at'
     ];
 
     protected $casts = [
+        'refunded_at' => 'datetime:d-m-Y H:i:s',
         'active' => 'boolean',
-        'refunded' => 'boolean',
-        'refunded_at' => 'datetime:d-m-Y H:i:s'
     ];
 
     /**
@@ -33,5 +34,16 @@ class RedeemVoucher extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Prepare a date for array / JSON serialization.
+     *
+     * @param  \DateTimeInterface  $date
+     * @return string
+     */
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('d-m-Y H:i:s');
     }
 }

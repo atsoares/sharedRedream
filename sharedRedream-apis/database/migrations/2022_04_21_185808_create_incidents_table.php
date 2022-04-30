@@ -23,7 +23,7 @@ class CreateIncidentsTable extends Migration
             $table->decimal('goal');
             $table->date('expires_at');
             $table->boolean('refunded')->default(false);
-            $table->timestamp('refunded_at')->nullable(); 
+            $table->datetime('refunded_at')->nullable(); 
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
