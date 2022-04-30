@@ -17,7 +17,7 @@ services:
             - redis
             - queue
         networks: 
-            - laravel-eti
+            - laravel
     
     # nginx
     nginx:
@@ -29,7 +29,7 @@ services:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
         networks: 
-            - laravel-eti
+            - laravel
 
     # db mysql
     mysql:
@@ -45,7 +45,7 @@ services:
         ports: 
             - 3388:3306
         networks: 
-            - laravel-eti
+            - laravel
 
     # queue
     queue:
@@ -62,14 +62,14 @@ services:
         depends_on: 
             - redis
         networks: 
-            - laravel-eti
+            - laravel
 
     # redis
     redis:
         image: redis:latest
         networks: 
-            - laravel-eti
+            - laravel
 
 networks: 
-    laravel-eti:
+    laravel:
         driver: bridge
