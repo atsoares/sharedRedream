@@ -14,7 +14,8 @@ The API simulates a crowdfunding bussiness:
 - Go to the sub-folder `cd sharedRedream-apis`
 - Copy __.env.example__ file to __.env__ and edit database credentials there
 - Run __docker-compose up --build -d__
-- Once you have your containers up run __docker-compose exec laravel_8 bash__ or if you are using windows __winpty docker-compose exec laravel_8 bash__
+- Once you have your containers up 
+- Run __docker-compose exec laravel_8 bash__ or __winpty docker-compose exec laravel_8 bash__ for Windows
 - Run __composer install__
 - Run __php artisan key:generate__
 - Run __php artisan migrate__
