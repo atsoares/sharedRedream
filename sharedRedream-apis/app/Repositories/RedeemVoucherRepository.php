@@ -6,7 +6,6 @@ use App\Repositories\Impl\RedeemVoucherRepositoryInterface;
 use App\Models\RedeemVoucher;
 use App\Models\Wallet;
 use App\Models\Transaction;
-use Illuminate\Database\Eloquent\Collection;
 
 class RedeemVoucherRepository implements RedeemVoucherRepositoryInterface
 {
@@ -44,13 +43,13 @@ class RedeemVoucherRepository implements RedeemVoucherRepositoryInterface
     }
 
     /**
-     * Get All
+     * Get one active
      *
-     * @return Collection
+     * @return RedeemVoucher
      */
-    public function getAll(): Collection
+    public function getOneAvailable(): ?RedeemVoucher
     {
-        return $this->entity->all();
+        return $this->entity->where('active', true)->first();
     }
 
     /**

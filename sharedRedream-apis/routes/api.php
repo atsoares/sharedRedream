@@ -44,6 +44,7 @@ Route::group(['namespace' => 'Api'], function () {
         //API route to redeem vouchers
         Route::post('/voucher/create/{count}', [RedeemVoucherController::class, 'storeInBatch'])->name('vouchers.create');
         Route::post('/voucher/redeem', [RedeemVoucherController::class, 'redeem'])->name('voucher.redeem');
+        Route::get('/voucher', [RedeemVoucherController::class, 'getOneAvailable'])->name('voucher.get');
 
         //API route to extract transactions
         Route::get('/{user_id}/extract', [TransactionController::class, 'userExtract'])->name('user.transactions');

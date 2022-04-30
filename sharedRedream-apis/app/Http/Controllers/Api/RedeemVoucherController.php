@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Services\RedeemVoucherService;
 use App\Http\Requests\RedeemVoucherRequest;
 use App\Http\Resources\RedeemVoucherResource;
@@ -86,5 +85,29 @@ class RedeemVoucherController extends Controller
     {
         $voucher = $this->redeemVoucherService->redeem($request->validated());
         return new RedeemVoucherResource($voucher);
+    }
+
+    /**
+     * Get one token to redeem
+     * 
+     * Just to test it quick, lets get one token number
+     *
+     * @authenticated
+     * 
+     * @response 200 {
+     *    "data": {
+     *        "token": "S49SC89I34BC3S0KJRJM",
+     *        "value": 100.00
+     *    }
+     * }
+     * 
+     * @response status=404 scenario="Not found" { 
+     *    "message": "We're out of token"
+     * }
+     * @return \Illuminate\Http\Response
+     */
+    public function getOneAvailable()
+    {
+        return new RedeemVoucherResource($this->redeemVoucherService->getOneAvailable());
     }
 }

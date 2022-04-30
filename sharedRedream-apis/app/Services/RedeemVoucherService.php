@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\Impl\RedeemVoucherRepositoryInterface;
 use App\Exceptions\InvalidTokenException;
 use App\Exceptions\AuthException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
 
 class RedeemVoucherService
@@ -32,11 +33,15 @@ class RedeemVoucherService
      * Get All
      *
      */
-    public function getAll()
+    public function getOneAvailable()
     {
         if(!Auth::hasUser())
             throw new AuthException();
-        return $this->redeemVoucherRepository->getAll();
+        $token = $this->redeemVoucherRepository->getOneAvailable();
+        if (!$token)
+            throw new HttpResponseException(response()->json(["message"=>"We're out of token"], 404));
+
+        return $token;
     }
 
     /**

@@ -17,9 +17,9 @@ class RedeemVoucherResource extends JsonResource
     {
         return [
             'token' => $this->token,
-            'user_id' => $this->user_id,
+            'user' => $this->when($this->user !== null, $this->user->id),
             'value' => $this->value,
-            'used_at' => Carbon::create($this->refunded_at)->format('d-m-Y H:i:s')
+            'used_at' => $this->when($this->refunded_at !== null, Carbon::create($this->refunded_at)->format('d-m-Y H:i:s'))
         ];
     }
 }

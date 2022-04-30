@@ -4,7 +4,7 @@ namespace App\Repositories\Impl;
 
 interface RedeemVoucherRepositoryInterface
 {
-    public function getAll();
+    public function getOneAvailable();
     public function findById(int $id);
     public function findByToken(string $token);
     public function create(array $data);

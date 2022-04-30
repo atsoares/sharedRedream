@@ -130,6 +130,9 @@
                                     <li class="tocify-item level-2" data-unique="voucher-endpoints-POSTvoucher-redeem">
                         <a href="#voucher-endpoints-POSTvoucher-redeem">Redeem the voucher passing USER_ID</a>
                     </li>
+                                    <li class="tocify-item level-2" data-unique="voucher-endpoints-GETvoucher">
+                        <a href="#voucher-endpoints-GETvoucher">Get one token to redeem</a>
+                    </li>
                                                     </ul>
                             </ul>
         
@@ -417,7 +420,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 }</code>
  </pre>
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary>
@@ -432,8 +435,9 @@ access-control-allow-origin: *
         </details>         <pre>
 
 <code class="language-json">{
-    &quot;error&quot;: &quot;Wrong credentials&quot;,
-    &quot;code&quot;: 401
+    &quot;message&quot;: &quot;Hi Demo, welcome to sharedRedream&quot;,
+    &quot;access_token&quot;: &quot;4|6wbTdsDNDD7hZXb5ve10sr3Q2LNnJN5UUeU6Xeoy&quot;,
+    &quot;token_type&quot;: &quot;Bearer&quot;
 }</code>
  </pre>
     </span>
@@ -777,14 +781,14 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8180/rerum/incidents" \
+    --get "http://localhost:8180/qui/incidents" \
     --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8180/rerum/incidents"
+    "http://localhost:8180/qui/incidents"
 );
 
 const headers = {
@@ -802,7 +806,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8180/rerum/incidents',
+    'http://localhost:8180/qui/incidents',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
@@ -903,7 +907,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="user_id"
                data-endpoint="GET-user_id--incidents"
-               value="rerum"
+               value="qui"
                data-component="url" hidden>
     <br>
 <p>The ID of the user.</p>
@@ -1311,14 +1315,14 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8180/incident/6/refund" \
+    "http://localhost:8180/incident/1/refund" \
     --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8180/incident/6/refund"
+    "http://localhost:8180/incident/1/refund"
 );
 
 const headers = {
@@ -1336,7 +1340,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost:8180/incident/6/refund',
+    'http://localhost:8180/incident/1/refund',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
@@ -1450,7 +1454,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="number"
                name="id"
                data-endpoint="POSTincident--id--refund"
-               value="6"
+               value="1"
                data-component="url" hidden>
     <br>
 <p>The ID of the incident.</p>
@@ -1475,14 +1479,14 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8180/quae/extract" \
+    --get "http://localhost:8180/qui/extract" \
     --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8180/quae/extract"
+    "http://localhost:8180/qui/extract"
 );
 
 const headers = {
@@ -1500,7 +1504,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8180/quae/extract',
+    'http://localhost:8180/qui/extract',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
@@ -1602,7 +1606,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="user_id"
                data-endpoint="GET-user_id--extract"
-               value="quae"
+               value="qui"
                data-component="url" hidden>
     <br>
 <p>The ID of the user.</p>
@@ -1628,14 +1632,14 @@ Lets keep this way, just to make faster to test</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8180/voucher/create/a" \
+    "http://localhost:8180/voucher/create/accusantium" \
     --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8180/voucher/create/a"
+    "http://localhost:8180/voucher/create/accusantium"
 );
 
 const headers = {
@@ -1653,7 +1657,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost:8180/voucher/create/a',
+    'http://localhost:8180/voucher/create/accusantium',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
@@ -1730,7 +1734,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="count"
                data-endpoint="POSTvoucher-create--count-"
-               value="a"
+               value="accusantium"
                data-component="url" hidden>
     <br>
 
@@ -1913,6 +1917,130 @@ print_r(json_decode((string) $body));</code></pre></div>
 <p>The id of the user.</p>
         </p>
         </form>
+
+            <h2 id="voucher-endpoints-GETvoucher">Get one token to redeem</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Just to test it quick, lets get one token number</p>
+
+<span id="example-requests-GETvoucher">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8180/voucher" \
+    --header "Authorization: Bearer {ACCESS_TOKEN}" \
+    --header "Content-Type: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8180/voucher"
+);
+
+const headers = {
+    "Authorization": "Bearer {ACCESS_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost:8180/voucher',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETvoucher">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;token&quot;: &quot;S49SC89I34BC3S0KJRJM&quot;,
+        &quot;value&quot;: 100
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;We're out of token&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETvoucher" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETvoucher"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETvoucher"></code></pre>
+</span>
+<span id="execution-error-GETvoucher" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETvoucher"></code></pre>
+</span>
+<form id="form-GETvoucher" data-method="GET"
+      data-path="voucher"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {ACCESS_TOKEN}","Content-Type":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETvoucher', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETvoucher"
+                    onclick="tryItOut('GETvoucher');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETvoucher"
+                    onclick="cancelTryOut('GETvoucher');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETvoucher" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>voucher</code></b>
+        </p>
+                <p>
+            <label id="auth-GETvoucher" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETvoucher"
+                                                                data-component="header"></label>
+        </p>
+                </form>
 
     
 

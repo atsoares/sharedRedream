@@ -20,7 +20,7 @@ endpoints:
         name: count
         description: ''
         required: true
-        example: a
+        example: accusantium
         type: string
         custom: []
     queryParameters: []
@@ -100,4 +100,40 @@ endpoints:
           }
         headers: []
         description: '403, Not authorized user trying to perform'
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: voucher
+    metadata:
+      title: 'Get one token to redeem'
+      description: 'Just to test it quick, lets get one token number'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {ACCESS_TOKEN}'
+      Content-Type: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+             "data": {
+                 "token": "S49SC89I34BC3S0KJRJM",
+                 "value": 100.00
+             }
+          }
+        headers: []
+        description: '200'
+      -
+        status: 404
+        content: |-
+          {
+             "message": "We're out of token"
+          }
+        headers: []
+        description: '404, Not found'
     responseFields: []
