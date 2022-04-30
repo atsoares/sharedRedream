@@ -27,8 +27,8 @@ class Incident extends Model
 
     protected $casts = [
         'refunded' => 'boolean',
-        'expires_at' => 'date:Y-m-d H:i:s',
-        'refunded_at' => 'datetime:Y-m-d H:i:s',
+        'expires_at' => 'date:d-m-Y H:i:s',
+        'refunded_at' => 'datetime:d-m-Y H:i:s',
     ];
 
     /**
