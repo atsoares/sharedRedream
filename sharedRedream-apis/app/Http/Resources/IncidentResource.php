@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use Carbon\Carbon;
 use App\Http\Resources\TransactionIncidentResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -22,9 +21,11 @@ class IncidentResource extends JsonResource
             'description' => $this->description,
             'owner' => $this->user->name,
             'total_raised' => $this->total_raised,
-            'created_at' => Carbon::create($this->created_at)->format('d-m-Y H:i:s'),
+            'expires_at' => $this->expires_at,
+            'goal' => $this->goal,
+            'created_at' => $this->created_at,
             'refunded' => $this->when($this->refunded !== null, $this->refunded),
-            'refunded_at' => $this->when($this->refunded === true, Carbon::create($this->refunded_at)->format('d-m-Y H:i:s')),
+            'refunded_at' => $this->when($this->refunded === true, $this->refunded_at),
             'transactions' => TransactionIncidentResource::collection($this->transactions)
         ];
     }

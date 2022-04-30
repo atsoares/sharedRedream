@@ -19,12 +19,17 @@ class Incident extends Model
         'description',
         'user_id',
         'total_raised',
+        'goal',
+        'expires_at',
         'refunded',
     ];
 
     protected $casts = [
         'refunded' => 'boolean',
-        'refunded_at' => 'datetime',
+        'expires_at' => 'datetime:d-m-Y H:i:s',
+        'refunded_at' => 'datetime:d-m-Y H:i:s',
+        'created_at' => 'datetime:d-m-Y H:i:s',
+        'updated_at' => 'datetime:d-m-Y H:i:s',
     ];
 
     /**

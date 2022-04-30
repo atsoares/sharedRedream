@@ -24,7 +24,7 @@ class RedeemVoucher extends Model
     protected $casts = [
         'active' => 'boolean',
         'refunded' => 'boolean',
-        'refunded_at' => 'datetime',
+        'refunded_at' => 'datetime:d-m-Y H:i:s'
     ];
 
     /**
