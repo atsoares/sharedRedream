@@ -110,7 +110,7 @@ endpoints:
         description: '422, Validation error'
       -
         status: 200
-        content: '{"message":"Hi Demo, welcome to sharedRedream","access_token":"4|6wbTdsDNDD7hZXb5ve10sr3Q2LNnJN5UUeU6Xeoy","token_type":"Bearer"}'
+        content: '{"message":"Hi Demo, welcome to sharedRedream","access_token":"3|1bXGsJSE15YsUgNg1nFFA16nCgJ3xdW8wrOhhypN","token_type":"Bearer"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

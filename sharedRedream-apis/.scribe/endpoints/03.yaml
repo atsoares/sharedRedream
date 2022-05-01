@@ -20,7 +20,7 @@ endpoints:
         name: count
         description: ''
         required: true
-        example: accusantium
+        example: doloribus
         type: string
         custom: []
     queryParameters: []

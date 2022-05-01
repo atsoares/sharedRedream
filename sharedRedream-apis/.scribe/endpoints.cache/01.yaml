@@ -29,6 +29,8 @@ endpoints:
                  "description": "Need help to feed my cats please",
                  "owner": "CatFan",
                  "total_raised": "170.00",
+                 "goal": "500.00",
+                 "expires_at": "28-05-2022",
                  "created_at": "28-04-2022 15:46:21",
                  "transactions": [
                    {
@@ -69,7 +71,7 @@ endpoints:
         name: user_id
         description: 'The ID of the user.'
         required: true
-        example: qui
+        example: quia
         type: string
         custom: []
     queryParameters: []
@@ -85,6 +87,8 @@ endpoints:
                  "description": "Need help to feed my cats please",
                  "owner": "CatFan",
                  "total_raised": "170.00",
+                 "goal": "500.00",
+                 "expires_at": "28-05-2022",
                  "created_at": "28-04-2022 15:46:21",
                  "transactions": [
                    {
@@ -137,12 +141,26 @@ endpoints:
         example: 'Need help for something..'
         type: string
         custom: []
+      goal:
+        name: goal
+        description: ''
+        required: true
+        example: 274939.15
+        type: number
+        custom: []
       user_id:
         name: user_id
         description: 'The id of the user trying to create the incident.'
         required: true
         example: 2
         type: integer
+        custom: []
+      expires_at:
+        name: expires_at
+        description: 'Must be a valid date. Must be a date after <code>today</code>.'
+        required: false
+        example: '2029-09-30'
+        type: string
         custom: []
     responses:
       -
@@ -154,6 +172,8 @@ endpoints:
                  "description": "Need help to feed my cats please",
                  "owner": "CatFan",
                  "total_raised": 0,
+                 "goal": "500.00",
+                 "expires_at": "28-05-2022",
                  "created_at": "28-04-2022 15:46:21",
                  "transactions": []
               }
@@ -191,7 +211,7 @@ endpoints:
         name: id
         description: 'The ID of the incident.'
         required: true
-        example: 10
+        example: 3
         type: integer
         custom: []
     queryParameters: []
@@ -280,7 +300,7 @@ endpoints:
         name: id
         description: 'The ID of the incident.'
         required: true
-        example: 1
+        example: 20
         type: integer
         custom: []
     queryParameters: []

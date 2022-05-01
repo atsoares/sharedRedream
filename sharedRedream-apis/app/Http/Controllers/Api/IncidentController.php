@@ -43,6 +43,8 @@ class IncidentController extends Controller
      *        "description": "Need help to feed my cats please",
      *        "owner": "CatFan",
      *        "total_raised": 0,
+     *        "goal": "500.00",
+     *        "expires_at": "28-05-2022",
      *        "created_at": "28-04-2022 15:46:21",
      *        "transactions": []
      *     }
@@ -77,6 +79,8 @@ class IncidentController extends Controller
      *        "description": "Need help to feed my cats please",
      *        "owner": "CatFan",
      *        "total_raised": "170.00",
+     *        "goal": "500.00",
+     *        "expires_at": "28-05-2022",
      *        "created_at": "28-04-2022 15:46:21",
      *        "transactions": [
      *          {
@@ -117,6 +121,8 @@ class IncidentController extends Controller
      *        "description": "Need help to feed my cats please",
      *        "owner": "CatFan",
      *        "total_raised": "170.00",
+     *        "goal": "500.00",
+     *        "expires_at": "28-05-2022",
      *        "created_at": "28-04-2022 15:46:21",
      *        "transactions": [
      *          {

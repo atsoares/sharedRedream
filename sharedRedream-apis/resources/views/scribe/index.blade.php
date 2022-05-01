@@ -163,7 +163,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">http://localhost:8180</code></pre>
 
         <h1 id="authenticating-requests">Authenticating requests</h1>
-<p>This API is authenticated by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {ACCESS_TOKEN}"</code></strong>.</p>
+<p>Authenticate requests to this API's endpoints by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {ACCESS_TOKEN}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by  registering or logging in through <b>API endpoints</b>.</p>
 
@@ -436,7 +436,7 @@ access-control-allow-origin: *
 
 <code class="language-json">{
     &quot;message&quot;: &quot;Hi Demo, welcome to sharedRedream&quot;,
-    &quot;access_token&quot;: &quot;4|6wbTdsDNDD7hZXb5ve10sr3Q2LNnJN5UUeU6Xeoy&quot;,
+    &quot;access_token&quot;: &quot;3|1bXGsJSE15YsUgNg1nFFA16nCgJ3xdW8wrOhhypN&quot;,
     &quot;token_type&quot;: &quot;Bearer&quot;
 }</code>
  </pre>
@@ -696,6 +696,8 @@ print_r(json_decode((string) $body));</code></pre></div>
         &quot;description&quot;: &quot;Need help to feed my cats please&quot;,
         &quot;owner&quot;: &quot;CatFan&quot;,
         &quot;total_raised&quot;: &quot;170.00&quot;,
+        &quot;goal&quot;: &quot;500.00&quot;,
+        &quot;expires_at&quot;: &quot;28-05-2022&quot;,
         &quot;created_at&quot;: &quot;28-04-2022 15:46:21&quot;,
         &quot;transactions&quot;: [
             {
@@ -781,14 +783,14 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8180/qui/incidents" \
+    --get "http://localhost:8180/quia/incidents" \
     --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8180/qui/incidents"
+    "http://localhost:8180/quia/incidents"
 );
 
 const headers = {
@@ -806,7 +808,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8180/qui/incidents',
+    'http://localhost:8180/quia/incidents',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
@@ -832,6 +834,8 @@ print_r(json_decode((string) $body));</code></pre></div>
         &quot;description&quot;: &quot;Need help to feed my cats please&quot;,
         &quot;owner&quot;: &quot;CatFan&quot;,
         &quot;total_raised&quot;: &quot;170.00&quot;,
+        &quot;goal&quot;: &quot;500.00&quot;,
+        &quot;expires_at&quot;: &quot;28-05-2022&quot;,
         &quot;created_at&quot;: &quot;28-04-2022 15:46:21&quot;,
         &quot;transactions&quot;: [
             {
@@ -907,7 +911,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="user_id"
                data-endpoint="GET-user_id--incidents"
-               value="qui"
+               value="quia"
                data-component="url" hidden>
     <br>
 <p>The ID of the user.</p>
@@ -934,7 +938,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     --data "{
     \"title\": \"Need help\",
     \"description\": \"Need help for something..\",
-    \"user_id\": 2
+    \"goal\": 274939.15,
+    \"user_id\": 2,
+    \"expires_at\": \"2029-09-30\"
 }"
 </code></pre></div>
 
@@ -953,7 +959,9 @@ const headers = {
 let body = {
     "title": "Need help",
     "description": "Need help for something..",
-    "user_id": 2
+    "goal": 274939.15,
+    "user_id": 2,
+    "expires_at": "2029-09-30"
 };
 
 fetch(url, {
@@ -975,7 +983,9 @@ $response = $client-&gt;post(
         'json' =&gt; [
             'title' =&gt; 'Need help',
             'description' =&gt; 'Need help for something..',
+            'goal' =&gt; 274939.15,
             'user_id' =&gt; 2,
+            'expires_at' =&gt; '2029-09-30',
         ],
     ]
 );
@@ -996,6 +1006,8 @@ print_r(json_decode((string) $body));</code></pre></div>
         &quot;description&quot;: &quot;Need help to feed my cats please&quot;,
         &quot;owner&quot;: &quot;CatFan&quot;,
         &quot;total_raised&quot;: 0,
+        &quot;goal&quot;: &quot;500.00&quot;,
+        &quot;expires_at&quot;: &quot;28-05-2022&quot;,
         &quot;created_at&quot;: &quot;28-04-2022 15:46:21&quot;,
         &quot;transactions&quot;: []
     }
@@ -1085,6 +1097,16 @@ print_r(json_decode((string) $body));</code></pre></div>
 <p>The description of the incident.</p>
         </p>
                 <p>
+            <b><code>goal</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+                <input type="number"
+               name="goal"
+               data-endpoint="POSTincident"
+               value="274939.15"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
             <b><code>user_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
                 <input type="number"
                name="user_id"
@@ -1093,6 +1115,16 @@ print_r(json_decode((string) $body));</code></pre></div>
                data-component="body" hidden>
     <br>
 <p>The id of the user trying to create the incident.</p>
+        </p>
+                <p>
+            <b><code>expires_at</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="expires_at"
+               data-endpoint="POSTincident"
+               value="2029-09-30"
+               data-component="body" hidden>
+    <br>
+<p>Must be a valid date. Must be a date after <code>today</code>.</p>
         </p>
         </form>
 
@@ -1110,7 +1142,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8180/incident/10/support" \
+    "http://localhost:8180/incident/3/support" \
     --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json" \
     --data "{
@@ -1122,7 +1154,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8180/incident/10/support"
+    "http://localhost:8180/incident/3/support"
 );
 
 const headers = {
@@ -1146,7 +1178,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost:8180/incident/10/support',
+    'http://localhost:8180/incident/3/support',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
@@ -1273,7 +1305,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="number"
                name="id"
                data-endpoint="POSTincident--id--support"
-               value="10"
+               value="3"
                data-component="url" hidden>
     <br>
 <p>The ID of the incident.</p>
@@ -1315,14 +1347,14 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8180/incident/1/refund" \
+    "http://localhost:8180/incident/20/refund" \
     --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8180/incident/1/refund"
+    "http://localhost:8180/incident/20/refund"
 );
 
 const headers = {
@@ -1340,7 +1372,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost:8180/incident/1/refund',
+    'http://localhost:8180/incident/20/refund',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
@@ -1454,7 +1486,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="number"
                name="id"
                data-endpoint="POSTincident--id--refund"
-               value="1"
+               value="20"
                data-component="url" hidden>
     <br>
 <p>The ID of the incident.</p>
@@ -1479,14 +1511,14 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8180/qui/extract" \
+    --get "http://localhost:8180/expedita/extract" \
     --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8180/qui/extract"
+    "http://localhost:8180/expedita/extract"
 );
 
 const headers = {
@@ -1504,7 +1536,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8180/qui/extract',
+    'http://localhost:8180/expedita/extract',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
@@ -1606,7 +1638,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="user_id"
                data-endpoint="GET-user_id--extract"
-               value="qui"
+               value="expedita"
                data-component="url" hidden>
     <br>
 <p>The ID of the user.</p>
@@ -1632,14 +1664,14 @@ Lets keep this way, just to make faster to test</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8180/voucher/create/accusantium" \
+    "http://localhost:8180/voucher/create/doloribus" \
     --header "Authorization: Bearer {ACCESS_TOKEN}" \
     --header "Content-Type: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8180/voucher/create/accusantium"
+    "http://localhost:8180/voucher/create/doloribus"
 );
 
 const headers = {
@@ -1657,7 +1689,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost:8180/voucher/create/accusantium',
+    'http://localhost:8180/voucher/create/doloribus',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {ACCESS_TOKEN}',
@@ -1734,7 +1766,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="count"
                data-endpoint="POSTvoucher-create--count-"
-               value="accusantium"
+               value="doloribus"
                data-component="url" hidden>
     <br>
 

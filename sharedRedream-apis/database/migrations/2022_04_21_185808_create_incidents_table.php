@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon\Carbon;
 use App\Models\User;
 
 class CreateIncidentsTable extends Migration
@@ -21,7 +22,7 @@ class CreateIncidentsTable extends Migration
             $table->foreignIdFor(User::class);
             $table->decimal('total_raised')->nullable()->default(0);
             $table->decimal('goal');
-            $table->date('expires_at');
+            $table->date('expires_at')->default(Carbon::now()->addMonth());
             $table->boolean('refunded')->default(false);
             $table->datetime('refunded_at')->nullable(); 
             $table->timestamps();
