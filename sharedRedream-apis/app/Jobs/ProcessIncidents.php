@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Repositories\Impl\IncidentRepositoryInterface;
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -34,7 +33,7 @@ class ProcessIncidents implements ShouldQueue
         foreach ($incidentRepo->getAllActive() as $incident) {
             if ($incident->total_raised >= $incident->goal){
                 $incidentRepo->refund($incident);
-            } elseif ((string) $incident->expires_at <= Carbon::now()->toDateString()){
+            } elseif ((string) $incident->expires_at < today()->format('d-m-Y')){
                 if ($incident->total_raised > 0)
                     $incidentRepo->refund($incident);
                 else
