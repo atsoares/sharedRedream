@@ -94,7 +94,8 @@ class IncidentRepository implements IncidentRepositoryInterface
      */
     public function create(array $data): ?Incident
     {
-        return $this->entity->create($data);
+        $data['total_raised'] = 0; //since the create response doesn't returns the not requested fields default values, I'm passing this value here to assertions tests
+        return $this->entity->create($data); //tried to use .fresh() but returns 200 instead 201.
     }
 
     /**
