@@ -20,11 +20,11 @@ class IncidentRefundTest extends TestCase
     public function test_refund_incident_authenticated_owner_should_pass()
     {
         //Prepare
-        //prepare.step 1: create incident
+        //prepare.step 1: first user creates incident
         $user = User::factory()->hasWallet()->create();
         $incident = Incident::factory()->for($user)->create();
 
-        //prepare.step 2: support incident
+        //prepare.step 2: second user supports the incident created by the first user
         $user2 = User::factory()->hasWallet()->create();
         Sanctum::actingAs($user2);
         
@@ -37,7 +37,7 @@ class IncidentRefundTest extends TestCase
         $uriSupport = '/incident'.$id.'/support';
         $this->postJson($uriSupport, $data);
         
-        //prepare.step 3: refund incident
+        //prepare.step 3: first user refunds incident
         Sanctum::actingAs($user);
        
         //Act  
@@ -46,7 +46,7 @@ class IncidentRefundTest extends TestCase
         
         //Assert
         $response->assertStatus(200);
-        $response->assertJsonFragment(['refunded' => true]);
+        $response->assertJsonFragment(['active' => false]);
         $response->assertJsonFragment(['owner' => $incident->user->name ]);
         $response->assertJsonFragment(['operation' => 'incident_refund']);
         $response->assertJsonFragment(['user' => $incident->user->name ]);
@@ -85,10 +85,6 @@ class IncidentRefundTest extends TestCase
         $response = $this->postJson($uriRefund);
         
         //Assert
-        $response->assertStatus(200);
-        $response->assertJsonFragment(['refunded' => true]);
-        $response->assertJsonFragment(['owner' => $incident->user->name ]);
-        $response->assertJsonFragment(['operation' => 'incident_refund']);
-        $response->assertJsonFragment(['user' => $incident->user->name ]);
+        $response->assertForbidden();
     }
 }

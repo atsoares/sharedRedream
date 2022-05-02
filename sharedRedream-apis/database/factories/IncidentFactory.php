@@ -17,7 +17,8 @@ class IncidentFactory extends Factory
         return [
             'title' => $this->faker->sentence(2),
             'description' => $this->faker->sentence(5),
-            'user_id' => User::factory()
+            'user_id' => User::factory(),
+            'goal' => $this->faker->numberBetween(30, 40),
         ];
     }
 }

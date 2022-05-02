@@ -28,6 +28,7 @@ class IncidentCreateGetTest extends TestCase
             'title' => $incident->title,
             'description' => $incident->description,
             'user_id' => $incident->user_id,
+            'goal' => $incident->goal,
         ];
 
         //Act
@@ -58,6 +59,7 @@ class IncidentCreateGetTest extends TestCase
             'title' => $incident->title,
             'description' => '',
             'user_id' => $incident->user_id,
+            'goal' => $incident->goal,
         ];
 
         //Act
@@ -82,6 +84,7 @@ class IncidentCreateGetTest extends TestCase
             'title' => $incident->title,
             'description' => $incident->description,
             'user_id' => $incident->user_id,
+            'goal' => $incident->goal,
         ];
 
         //Act

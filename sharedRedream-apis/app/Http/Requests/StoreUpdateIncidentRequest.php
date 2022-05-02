@@ -31,7 +31,7 @@ class StoreUpdateIncidentRequest extends BaseRequest
         return [
             'title' => 'required|max:50|unique:incidents',
             'description' => 'required|max:200',
-            'goal' => 'required|numeric',
+            'goal' => 'required|integer',
             'user_id' => 'required',
             'expires_at' => 'date|after:today'
         ];

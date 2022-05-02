@@ -18,7 +18,7 @@ endpoints:
         name: user_id
         description: 'The ID of the user.'
         required: true
-        example: expedita
+        example: labore
         type: string
         custom: []
     queryParameters: []

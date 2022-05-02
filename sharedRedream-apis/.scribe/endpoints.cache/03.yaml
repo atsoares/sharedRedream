@@ -22,7 +22,7 @@ endpoints:
         name: count
         description: ''
         required: true
-        example: doloribus
+        example: tempore
         type: string
         custom: []
     queryParameters: []

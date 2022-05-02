@@ -6,7 +6,6 @@ use App\Repositories\Impl\IncidentRepositoryInterface;
 use App\Exceptions\AuthException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use App\Exceptions\NotEnoughtBalanceException;
 
 class IncidentService
 {
@@ -105,6 +104,9 @@ class IncidentService
         if(Auth::user()->id != $incident->user_id)
             throw new AuthException();
         
+        if($incident->total_raised <= 0)
+            throw new HttpResponseException(response()->json(["message"=>"Nothing to refund"], 422));
+
         return $this->incidentRepository->refund($incident);
     }
    

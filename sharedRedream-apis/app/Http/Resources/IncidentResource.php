@@ -24,7 +24,7 @@ class IncidentResource extends JsonResource
             'goal' => $this->goal,
             'expires_at' => (string) $this->expires_at,
             'created_at' => (string) $this->created_at,
-            'refunded' => $this->when($this->refunded != null, $this->refunded),
+            'active' => $this->active,
             'refunded_at' => $this->when($this->refunded === true, (string) $this->refunded_at),
             'transactions' => TransactionIncidentResource::collection($this->transactions)
         ];

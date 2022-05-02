@@ -23,7 +23,7 @@ class CreateIncidentsTable extends Migration
             $table->decimal('total_raised')->nullable()->default(0);
             $table->decimal('goal');
             $table->date('expires_at')->default(Carbon::now()->addMonth());
-            $table->boolean('refunded')->default(false);
+            $table->boolean('active')->default(true);
             $table->datetime('refunded_at')->nullable(); 
             $table->timestamps();
 

@@ -61,9 +61,9 @@ class IncidentRepository implements IncidentRepositoryInterface
      */
     public function getAllActive(): Collection
     {
-        return $this->entity->where('refunded', false)->get();
+        return $this->entity->where('active', true)->get();
     }
-
+    
     /**
      * Find by User Id
      *
@@ -83,7 +83,7 @@ class IncidentRepository implements IncidentRepositoryInterface
      */
     public function findById(int $id): ?Incident
     {
-        return $this->entity->where('refunded', false)->find($id);
+        return $this->entity->findOrFail($id);
     }
 
     /**
@@ -94,21 +94,18 @@ class IncidentRepository implements IncidentRepositoryInterface
      */
     public function create(array $data): ?Incident
     {
-        $data['total_raised'] = 0;
         return $this->entity->create($data);
     }
 
     /**
      * Update existing Incident
      *
-     * @param int $id
+     * @param object $incident
      * @param array $data
      * @return bool
      */
-    public function update(int $id, array $data)
+    public function update(object $incident, array $data)
     {
-        $incident = $this->findById($id);
-
         return $incident->update($data);
     }
 
@@ -149,7 +146,7 @@ class IncidentRepository implements IncidentRepositoryInterface
      */
     public function refund(object $incident): ?Incident
     {
-        $incident->refunded = true;
+        $incident->active = false;
         $incident->refunded_at = now();
 
         $incident->save();
