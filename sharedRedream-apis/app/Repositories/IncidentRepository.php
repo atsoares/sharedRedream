@@ -65,6 +65,19 @@ class IncidentRepository implements IncidentRepositoryInterface
     }
     
     /**
+     * Get All Active and Expired
+     *
+     * @return Collection
+     */
+    public function getAllActiveExpired(): Collection
+    {
+        return $this->entity->where('active', true)
+                            ->where('expires_at', '<', today())
+                            ->get();
+    }
+    
+
+    /**
      * Find by User Id
      *
      * @param int $user_id
@@ -108,6 +121,21 @@ class IncidentRepository implements IncidentRepositoryInterface
     public function update(object $incident, array $data)
     {
         return $incident->update($data);
+    }
+
+    /**
+     * Disable Incident
+     *
+     * @param object $incident
+     * @param array $data
+     * @return bool
+     */
+    public function disable(object $incident)
+    {
+        $incident->active = false;
+        $incident->save();
+
+        return $incident;
     }
 
     /**

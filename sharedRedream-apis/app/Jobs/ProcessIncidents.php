@@ -30,15 +30,15 @@ class ProcessIncidents implements ShouldQueue
      */
     public function handle(IncidentRepositoryInterface $incidentRepo)
     {
-        foreach ($incidentRepo->getAllActive() as $incident) {
-            if ($incident->total_raised >= $incident->goal){
+        foreach ($incidentRepo->getAllActive() as $incident) 
+            if ($incident->total_raised >= $incident->goal)
                 $incidentRepo->refund($incident);
-            } elseif ((string) $incident->expires_at < today()->format('d-m-Y')){
-                if ($incident->total_raised > 0)
-                    $incidentRepo->refund($incident);
-                else
-                    $incidentRepo->update($incident, ['active'=>false]);
-            }
+
+        foreach ($incidentRepo->getAllActiveExpired() as $incident){
+            if ($incident->total_raised > 0)
+                $incidentRepo->refund($incident);
+            else
+                $incidentRepo->disable($incident);
         }
     }
 }
