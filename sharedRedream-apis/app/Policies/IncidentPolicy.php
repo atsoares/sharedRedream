@@ -31,6 +31,6 @@ class IncidentPolicy
      */
     public function support(User $user, Incident $incident)
     {
-        return $user->id !== $incident->user_id;
+        return $user->id != $incident->user_id;
     }
 }

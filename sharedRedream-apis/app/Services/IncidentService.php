@@ -4,8 +4,6 @@ namespace App\Services;
 
 use App\Repositories\Impl\IncidentRepositoryInterface;
 use App\Exceptions\AuthException;
-use App\Models\Incident;
-use App\Policies\IncidentPolicy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Exceptions\HttpResponseException;
 

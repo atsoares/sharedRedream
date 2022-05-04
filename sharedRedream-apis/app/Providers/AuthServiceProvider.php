@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Incident;
+use App\Policies\IncidentPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -13,9 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Incident' => 'App\Policies\IncidentPolicy',
-        // 'App\Models\RedeemVoucher' => 'App\Policies\RedeemVoucherPolicy',
-        // 'App\Models\Wallet' => 'App\Policies\WalletPolicy',
+        Incident::class => IncidentPolicy::class,
     ];
 
     /**
