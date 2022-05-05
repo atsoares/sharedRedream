@@ -23,6 +23,7 @@ The API simulates a crowdfunding bussiness:
 
 ## Feature Tests
 
-- Few tests were created to check if the API behaves as expected as you can see in the results 
+- Few tests were created to check if the API behaves as expected.
+ 
 #### Test Results
-![image](https://user-images.githubusercontent.com/17599235/166327624-714ed59a-4c5d-401f-9a8c-cd67055a36da.png)
+![image](https://user-images.githubusercontent.com/17599235/166840797-ae62f6a6-4ff1-4423-910f-b12c06aa411f.png)
