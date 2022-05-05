@@ -16,10 +16,10 @@ class RedeemVoucherResource extends JsonResource
     {
         return [
             'token' => $this->token,
-            'user_id' => $this->when($this->user_id !== null, $this->user_id),
+            'user_id' => $this->when($this->user_id != null, $this->user_id),
             'value' => $this->value,
             'active' => $this->active,
-            'refunded_at' => $this->when($this->refunded_at !== null, (string) $this->refunded_at)
+            'refunded_at' => $this->when($this->refunded_at != null, (string) $this->refunded_at)
         ];
     }
 }
