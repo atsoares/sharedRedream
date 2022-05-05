@@ -20,7 +20,7 @@ endpoints:
         name: count
         description: ''
         required: true
-        example: quia
+        example: ad
         type: string
         custom: []
     queryParameters: []

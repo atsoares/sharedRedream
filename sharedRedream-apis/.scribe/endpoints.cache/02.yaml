@@ -6,7 +6,7 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: '{user_id}/extract'
+    uri: extract
     metadata:
       title: 'Get all transactions from an USER'
       description: ''
@@ -15,14 +15,7 @@ endpoints:
     headers:
       Authorization: 'Bearer {ACCESS_TOKEN}'
       Content-Type: application/json
-    urlParameters:
-      user_id:
-        name: user_id
-        description: 'The ID of the user.'
-        required: true
-        example: et
-        type: string
-        custom: []
+    urlParameters: []
     queryParameters: []
     bodyParameters: []
     responses:

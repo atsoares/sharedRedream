@@ -71,7 +71,7 @@ endpoints:
         name: user_id
         description: 'The ID of the user.'
         required: true
-        example: dolorum
+        example: enim
         type: string
         custom: []
     queryParameters: []
@@ -148,19 +148,19 @@ endpoints:
         example: 13
         type: integer
         custom: []
+      expires_at:
+        name: expires_at
+        description: 'Must be a valid date. Must be a date after <code>today</code>.'
+        required: false
+        example: '2073-08-02'
+        type: string
+        custom: []
       user_id:
         name: user_id
         description: 'The id of the user trying to create the incident.'
         required: true
         example: 2
         type: integer
-        custom: []
-      expires_at:
-        name: expires_at
-        description: 'Must be a valid date. Must be a date after <code>today</code>.'
-        required: false
-        example: '2116-01-23'
-        type: string
         custom: []
     responses:
       -
@@ -211,23 +211,23 @@ endpoints:
         name: id
         description: 'The ID of the incident.'
         required: true
-        example: 20
+        example: 6
         type: integer
         custom: []
     queryParameters: []
     bodyParameters:
-      user_id:
-        name: user_id
-        description: 'The id of the user trying to support the incident.'
-        required: true
-        example: 2
-        type: integer
-        custom: []
       value:
         name: value
         description: 'The value amount deposit by the user to help incident.'
         required: true
         example: 40
+        type: integer
+        custom: []
+      user_id:
+        name: user_id
+        description: 'The id of the user trying to support the incident.'
+        required: true
+        example: 2
         type: integer
         custom: []
     responses:
@@ -302,7 +302,7 @@ endpoints:
         name: id
         description: 'The ID of the incident.'
         required: true
-        example: 8
+        example: 10
         type: integer
         custom: []
     queryParameters: []
