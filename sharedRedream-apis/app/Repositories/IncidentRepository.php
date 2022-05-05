@@ -177,7 +177,6 @@ class IncidentRepository implements IncidentRepositoryInterface
     {
         $incident->active = false;
         $incident->refunded_at = now();
-
         $incident->save();
 
         $wallet = $this->wallet->findByUserId($incident->user_id);

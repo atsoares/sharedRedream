@@ -24,7 +24,6 @@ class RegisterRouteTest extends TestCase
             'email' => $user->email,
             'password' => $user->password,
         ];
-
         
         //Act
         $response = $this->postJson('/register', $data);
