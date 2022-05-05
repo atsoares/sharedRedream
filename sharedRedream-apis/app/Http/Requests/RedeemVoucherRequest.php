@@ -28,8 +28,7 @@ class RedeemVoucherRequest extends BaseRequest
     public function rules()
     {
         return [
-            'token' => 'required|min:20',
-            'user_id' => 'required|int'
+            'token' => 'required|min:20'
         ];
     }
 }

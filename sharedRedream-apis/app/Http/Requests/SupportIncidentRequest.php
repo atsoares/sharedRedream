@@ -28,7 +28,6 @@ class SupportIncidentRequest extends BaseRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
             'value' => 'required|min:1|max:100'
         ];
     }

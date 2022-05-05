@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\Impl\IncidentRepositoryInterface;
 use App\Models\Incident;
 use App\Models\Wallet;
@@ -107,8 +108,13 @@ class IncidentRepository implements IncidentRepositoryInterface
      */
     public function create(array $data): ?Incident
     {
-        $data['total_raised'] = 0; //since the create response doesn't returns the not requested fields default values, I'm passing this value here to assertions tests
-        return $this->entity->create($data); //tried to use .fresh() but returns 200 instead 201.
+        $data['user_id'] = Auth::user()->id;
+     
+        //since the create response doesn't returns the not requested fields default values, I'm passing this value here to assertions tests
+        $data['total_raised'] = 0; 
+
+        //tried to use .fresh() but returns 200 instead 201.
+        return $this->entity->create($data); 
     }
 
     /**
@@ -148,7 +154,7 @@ class IncidentRepository implements IncidentRepositoryInterface
     public function support(object $incident, array $data): ?Incident
     {
         $wallet = $this->wallet
-                            ->checkIfUserHasAvailableBalance($data['user_id'], $data['value']);
+                            ->checkIfUserHasAvailableBalance(Auth::user()->id, $data['value']);
        
         if(!$wallet)
             throw new NotEnoughtBalanceException();
@@ -159,7 +165,7 @@ class IncidentRepository implements IncidentRepositoryInterface
         $incident->save();
 
         $this->transaction->create([
-            'user_id' => $data['user_id'],
+            'user_id' => Auth::user()->id,
             'incident_id' => $incident->id,
             'value' => $data['value'],
             'operation' => 'incident_help'

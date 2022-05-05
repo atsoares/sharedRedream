@@ -45,7 +45,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/voucher', [RedeemVoucherController::class, 'getOneAvailable'])->name('voucher.get');
 
         //API route to extract transactions
-        Route::get('/{user_id}/extract', [TransactionController::class, 'userExtract'])->name('user.transactions');
+        Route::get('/extract', [TransactionController::class, 'userExtract'])->name('user.transactions');
 
     });
 

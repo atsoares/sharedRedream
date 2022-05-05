@@ -67,7 +67,7 @@ class IncidentService
      */
     public function create(array $data)
     {
-        if(!Auth::hasUser() || Auth::user()->id != $data['user_id'])
+        if(!Auth::hasUser())
             throw new AuthException();
         return $this->incidentRepository->create($data);
     }
@@ -78,9 +78,6 @@ class IncidentService
      */
     public function support(int $id, array $data)
     {
-        if(Auth::user()->id != $data['user_id'])
-            throw new AuthException();
-
         $incident = $this->getById($id);
         if(!$incident)
             throw new HttpResponseException(response()->json(["message"=>"Incident does not exist"], 404));

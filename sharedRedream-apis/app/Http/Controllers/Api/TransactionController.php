@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\TransactionService;
@@ -58,12 +59,11 @@ class TransactionController extends Controller
      *    "code": 403
      * }
      * 
-     * @param  int  $user_id
      * @return \Illuminate\Http\Response
      */
-    public function userExtract($user_id)
+    public function userExtract()
     {
-        $transactions = $this->transactionService->getAllByUser($user_id);
+        $transactions = $this->transactionService->getAllByUser(Auth::user()->id);
         return TransactionUserResource::collection($transactions);   
     }
     

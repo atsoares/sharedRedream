@@ -75,7 +75,7 @@ class RedeemVoucherService
      */
     public function redeem(array $data)
     {
-        if(!Auth::hasUser() || Auth::user()->id != $data['user_id'])
+        if(!Auth::hasUser())
             throw new AuthException();
 
         $voucher = $this->redeemVoucherRepository->findByToken($data['token']);
@@ -83,7 +83,7 @@ class RedeemVoucherService
         if(!$voucher || !$voucher->active)
             throw new InvalidTokenException();
 
-        return $this->redeemVoucherRepository->redeemUpdate($voucher, $data['user_id']);
+        return $this->redeemVoucherRepository->redeemUpdate($voucher, Auth::user()->id);
     }
 
     /**
