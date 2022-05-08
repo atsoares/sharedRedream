@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Repositories\Impl\IncidentRepositoryInterface;
+use App\Repositories\Impl\WalletRepositoryInterface;
 use App\Exceptions\AuthException;
+use App\Exceptions\NotEnoughtBalanceException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
@@ -17,13 +19,23 @@ class IncidentService
     private $incidentRepository;
 
     /**
+     * Variable to hold injected dependency
+     *
+     * @var walletRepository
+     */
+    private $walletRepository;
+
+    /**
      * Constructor
      *
      * @param IncidentRepositoryInterface $incidentRepository
+     * @param WalletRepositoryInterface $walletRepository
      */
-    public function __construct(IncidentRepositoryInterface $incidentRepository)
+    public function __construct(IncidentRepositoryInterface $incidentRepository, 
+                                WalletRepositoryInterface $walletRepository)
     {
         $this->incidentRepository = $incidentRepository;
+        $this->walletRepository = $walletRepository;
     }
 
     /**
@@ -81,6 +93,12 @@ class IncidentService
         $incident = $this->getById($id);
         if(!$incident)
             throw new HttpResponseException(response()->json(["message"=>"Incident does not exist"], 404));
+
+        $wallet = $this->walletRepository
+            ->checkIfUserHasAvailableBalance(Auth::user()->id, $data['value']);
+
+        if(!$wallet)
+            throw new NotEnoughtBalanceException();
 
         return $this->incidentRepository->support($incident, $data);
     }

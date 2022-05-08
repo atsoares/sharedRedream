@@ -7,7 +7,6 @@ use App\Repositories\Impl\IncidentRepositoryInterface;
 use App\Models\Incident;
 use App\Models\Wallet;
 use App\Models\Transaction;
-use App\Exceptions\NotEnoughtBalanceException;
 use Illuminate\Database\Eloquent\Collection;
 
 class IncidentRepository implements IncidentRepositoryInterface
@@ -153,13 +152,7 @@ class IncidentRepository implements IncidentRepositoryInterface
      */
     public function support(object $incident, array $data): ?Incident
     {
-        $wallet = $this->wallet
-                            ->checkIfUserHasAvailableBalance(Auth::user()->id, $data['value']);
-       
-        if(!$wallet)
-            throw new NotEnoughtBalanceException();
-
-        $this->wallet->withdrawal($wallet, $data['value']);
+        $this->wallet->withdrawal($this->wallet->findByUserId(Auth::user()->id), $data['value']);
         
         $incident->total_raised = $incident->total_raised + $data['value'];
         $incident->save();
